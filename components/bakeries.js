@@ -41,6 +41,7 @@ export default function Bakeries() {
 
                 .bakery img {
                     max-width: 450px;
+                    border-radius: 4px;
                 }
 
                 @media (max-width: 900px) {
