@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Bakeries from './bakeries';
+import Bakeries from '../components/bakeries';
 
 export default function Home() {
     return (

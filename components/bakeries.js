@@ -27,7 +27,7 @@ export default function Bakeries() {
                 }
 
                 .bakery {
-                    padding: 1rem;
+                    padding: 2rem;
                 }
 
                 .bakery .name {
@@ -35,8 +35,12 @@ export default function Bakeries() {
                     margin: 1rem 0;
                 }
 
+                .bakery .description {
+                    margin: 0;
+                }
+
                 .bakery img {
-                    max-width: 400px;
+                    max-width: 450px;
                 }
 
                 @media (max-width: 900px) {
