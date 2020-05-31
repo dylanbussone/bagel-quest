@@ -12,7 +12,7 @@ export default function Home() {
             <img src="/bagel1.svg" className="bagel-hero" />
 
             <p className="about">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra erat diam,
+                Foo ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra erat diam,
                 et pellentesque nunc iaculis et. Etiam accumsan ac felis finibus egestas. Nullam id
                 felis eget urna vehicula tincidunt. Donec volutpat ligula et sem lobortis, a euismod
                 ligula fringilla. Nullam pulvinar lectus ornare est dapibus, ac gravida felis
