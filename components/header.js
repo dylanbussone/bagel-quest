@@ -1,20 +1,23 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 export default function Header() {
+    const router = useRouter();
+
     return (
         <header>
             <ul>
-                <li>
+                <li className={router.pathname === '/' ? 'active' : ''}>
                     <Link href="/">
                         <a>Home</a>
                     </Link>
                 </li>
-                <li>
+                <li className={router.pathname === '/delivery-info' ? 'active' : ''}>
                     <Link href="/delivery-info">
                         <a>Delivery Info</a>
                     </Link>
                 </li>
-                <li>
+                <li className={router.pathname === '/vote' ? 'active' : ''}>
                     <Link href="/vote">
                         <a>Bagel Voting</a>
                     </Link>
@@ -38,6 +41,10 @@ export default function Header() {
                 }
                 a {
                     text-decoration: none;
+                    color: darkslateblue;
+                }
+                li.active a {
+                    color: darkmagenta;
                 }
                 a:hover {
                     text-decoration: underline;
