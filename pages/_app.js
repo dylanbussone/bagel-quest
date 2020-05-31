@@ -33,6 +33,10 @@ export default class App extends NextApp {
                         color: #654321;
                     }
 
+                    input, textarea {
+                        font-family: sans-serif;
+                    }
+
                     h1,
                     h2,
                     h3,

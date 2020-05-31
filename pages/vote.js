@@ -1,21 +1,43 @@
 import Link from 'next/link';
+import Router from 'next/router'
 import fetch from 'node-fetch';
+import React, { useState } from 'react';
+
+const submitVotes = async ({ username, voteData }) => {
+    const response = await fetch('/api/survey', {
+        method: 'POST',
+        body: JSON.stringify({ username, voteData }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    const json = await response.json();
+
+    if (json && json.affectedRows > 0) {
+        alert('Donions!');
+        Router.push('/');
+    } else {
+        alert('Error, try again or text Sarah');
+    }
+};
 
 export default function Vote() {
-    const submitVote = async (data) => {
-        const response = await fetch('/api/survey', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' },
-        });
-        const json = await response.json();
-        console.log('asdf', json);
-        if (json && json.affectedRows === 1) {
-            alert('Donions!');
-        } else {
-            alert('Error, try again or text Sarah and yell at her');
-        }
-    };
+    const [username, setUsername] = useState('');
+
+    const [voteData, setVoteData] = useState({
+        1: { id: 1 },
+        2: { id: 2 },
+        3: { id: 3 },
+        4: { id: 4 },
+        5: { id: 5 },
+        6: { id: 6 },
+        7: { id: 7 },
+        8: { id: 8 },
+        9: { id: 9 },
+        10: { id: 10 },
+        11: { id: 11 },
+        12: { id: 12 },
+        13: { id: 13 },
+        14: { id: 14 },
+    });
 
     return (
         <main className="vote">
@@ -24,15 +46,90 @@ export default function Vote() {
                 <a>Home</a>
             </Link>
 
-            <button onClick={() => submitVote({
-                username: 'test',
-                bagelId: '18',
-                score: 3,
-                comment: 'asdfasdfasdf',
-            })}>Submit</button>
+            <section>
+                <h3 style={{ display: 'inline-block' }}>Your name:</h3>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => {
+                        setUsername(e.target.value);
+                    }}
+                />
+
+                <div className="vote-sections">
+                    {Object.keys(voteData).map((bagelId) => {
+                        return (
+                            <div className="vote-section" key={`vote-section-${bagelId}`}>
+                                <h3>Bagel #{bagelId}</h3>
+                                <span>
+                                    <label>Your score:</label>
+                                    <input
+                                        type="text"
+                                        placeholder="1-5"
+                                        value={voteData[bagelId].score || ''}
+                                        className="small"
+                                        maxLength="1"
+                                        onChange={(e) => {
+                                            const newVoteData = { ...voteData };
+                                            newVoteData[bagelId].score = e.target.value;
+                                            setVoteData(newVoteData);
+                                        }}
+                                    />
+                                </span>
+                                <span>
+                                    <label>Comments:</label>
+                                    <textarea
+                                        value={voteData[bagelId].comment || ''}
+                                        onChange={(e) => {
+                                            const newVoteData = { ...voteData };
+                                            newVoteData[bagelId].comment = e.target.value;
+                                            setVoteData(newVoteData);
+                                        }}
+                                    />
+                                </span>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <button onClick={() => submitVotes({ username, voteData })}>
+                    Submit Your Votes
+                </button>
+            </section>
 
             <style jsx>{`
                 .vote {
+                }
+
+                section {
+                    margin: 2rem 0;
+                }
+
+                input, textarea {
+                    margin-left: 1rem;
+                    padding: 0.5rem;
+                }
+
+                input.small {
+                    width: 3rem;
+                }
+
+                textarea {
+                    height: 4rem;
+                }
+
+                .vote-sections {
+                    margin: 3rem 0;
+                }
+
+                .vote-section {
+                    margin-bottom: 3rem;
+                }
+
+                .vote-section span {
+                    margin-right: 2rem;
+                    display: inline-flex;
+                    align-items: center;
                 }
             `}</style>
         </main>
