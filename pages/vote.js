@@ -94,7 +94,7 @@ export default function Vote() {
                 </div>
 
                 <button onClick={() => submitVotes({ username, voteData })}>
-                    Submit Your Votes
+                    Submit
                 </button>
             </section>
 
@@ -109,7 +109,7 @@ export default function Vote() {
                 input,
                 textarea {
                     margin-left: 1rem;
-                    padding: 0.5rem;
+                    padding: 0.25rem;
                 }
 
                 h3 {
@@ -123,6 +123,7 @@ export default function Vote() {
                 p.tiny {
                     font-size: 50%;
                     margin-left: 1rem;
+                    margin-top: 0;
                 }
 
                 textarea {
@@ -150,6 +151,15 @@ export default function Vote() {
                     background: #654321;
                     opacity: 0.25;
                     margin: 1rem auto;
+                }
+
+                button {
+                    background-color: #4CAF50;
+                    border: none;
+                    color: white;
+                    padding: 12px 24px;
+                    text-decoration: none;
+                    cursor: pointer;
                 }
             `}</style>
         </main>

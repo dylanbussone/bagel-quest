@@ -6,9 +6,9 @@ export default function Home() {
         <main>
             <h1 className="title">Bagel Quest 2020</h1>
 
-            <img src="/bagel1.svg" className="bagel-hero" />
+            <div className="bagel-hero" />
 
-            <p className="about">
+            <div className="about">
                 <h4>Hi Friends! & Welcome to Bagel Quest!</h4>
                 <br />
                 The Seattle Met recently posted an{' '}
@@ -31,8 +31,8 @@ export default function Home() {
                 <br />
                 <br />
                 Please proceed to the{' '}
-                <Link href="/survey">
-                    <a>Delivery Survey</a>
+                <Link href="/delivery-info">
+                    <a>Delivery Info</a>
                 </Link>{' '}
                 page and enter your information. If we do not have your information by x/x/2020, we
                 will assume you are not participating and find a replacement.
@@ -45,16 +45,24 @@ export default function Home() {
                 <br />
                 When it comes to cost, I will be charging for the bagels, tipping at the bakeries
                 (#supportlocal) and packaging. In order to pay, please venmo me at @sarah-leviton.
-                The cost is $x.xx for singles and $x.xx for doubles and $x.xx if you answered in the
-                survey that you wanted cream cheese, it’s an extra $x.xx.The cost difference comes
+                The cost is $x.xx for singles and $x.xx for doubles and $x.xx if you answered that you wanted cream cheese, it’s an extra $x.xx.The cost difference comes
                 from the reusable foldaway bags I am purchasing.
-            </p>
+            </div>
 
             <h2 className="bakeries-title">The Bakeries</h2>
             <Bakeries />
 
             <style jsx>{`
+                main {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
                 .bagel-hero {
+                    background-image: url('/bagel1.svg');
+                    background-position: top center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    height: 700px;
                 }
 
                 .about {

@@ -1,7 +1,10 @@
-import Head from 'next/head';
+import React, { useEffect } from 'react';
 
-export default function Survey() {
-    if (typeof window !== 'undefined') {
+export default function DeliveryInfo() {
+    useEffect(() => {
+        if (document.querySelector('.smcx-widget')) {
+            document.querySelector('.smcx-widget').style.display = 'inherit';
+        }
         (function (t, e, s, n) {
             var o, a, c;
             (t.SMCX = t.SMCX || []),
@@ -16,7 +19,13 @@ export default function Survey() {
                         'https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd5dajd3XRxSrv_2Bmat8QFk2i2ePP_2BZ28OW_2BNMqm4b_2FjO_2B.js'),
                     a.parentNode.insertBefore(c, a));
         })(window, document, 'script', 'smcx-sdk');
-    }
+
+        return function cleanup() {
+            if (document.querySelector('.smcx-widget')) {
+                document.querySelector('.smcx-widget').style.display = 'none';
+            }
+        };
+    });
 
     return null;
 }
