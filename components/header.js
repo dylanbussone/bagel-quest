@@ -42,6 +42,13 @@ export default function Header() {
                 a:hover {
                     text-decoration: underline;
                 }
+
+                @media (max-width: 900px) {
+                    li {
+                        margin-right: 1rem;
+                        font-size: 1rem;
+                    }
+                }
             `}</style>
         </header>
     );

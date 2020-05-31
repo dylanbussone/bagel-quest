@@ -93,9 +93,7 @@ export default function Vote() {
                     })}
                 </div>
 
-                <button onClick={() => submitVotes({ username, voteData })}>
-                    Submit
-                </button>
+                <button onClick={() => submitVotes({ username, voteData })}>Submit</button>
             </section>
 
             <style jsx>{`
@@ -154,12 +152,33 @@ export default function Vote() {
                 }
 
                 button {
-                    background-color: #4CAF50;
+                    background-color: #4caf50;
                     border: none;
                     color: white;
                     padding: 12px 24px;
                     text-decoration: none;
                     cursor: pointer;
+                }
+
+                @media (max-width: 700px) {
+                    .hr {
+                        width: 100%;
+                    }
+                    textarea {
+                        width: 100%;
+                    }
+                    .vote-section span {
+                        margin-right: 0;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                    }
+                    p.tiny {
+                        margin-left: 0;
+                    }
+                    button {
+                        width: 100%;
+                    }
                 }
             `}</style>
         </main>

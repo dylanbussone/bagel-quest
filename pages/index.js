@@ -9,7 +9,7 @@ export default function Home() {
             <div className="bagel-hero" />
 
             <div className="about">
-                <h4>Hi Friends! & Welcome to Bagel Quest!</h4>
+                <h4>Hi Friends! Welcome to Bagel Quest!</h4>
                 <br />
                 The Seattle Met recently posted an{' '}
                 <a
@@ -45,8 +45,9 @@ export default function Home() {
                 <br />
                 When it comes to cost, I will be charging for the bagels, tipping at the bakeries
                 (#supportlocal) and packaging. In order to pay, please venmo me at @sarah-leviton.
-                The cost is $x.xx for singles and $x.xx for doubles and $x.xx if you answered that you wanted cream cheese, it’s an extra $x.xx.The cost difference comes
-                from the reusable foldaway bags I am purchasing.
+                The cost is $x.xx for singles and $x.xx for doubles and $x.xx if you answered that
+                you wanted cream cheese, it’s an extra $x.xx.The cost difference comes from the
+                reusable foldaway bags I am purchasing.
             </div>
 
             <h2 className="bakeries-title">The Bakeries</h2>
@@ -57,12 +58,37 @@ export default function Home() {
                     max-width: 1200px;
                     margin: 0 auto;
                 }
+                h1 {
+                    font-size: 4rem;
+                }
                 .bagel-hero {
                     background-image: url('/bagel1.svg');
                     background-position: top center;
                     background-repeat: no-repeat;
                     background-size: contain;
                     height: 700px;
+                }
+
+                @media only screen and (max-width: 900px) {
+                    .bagel-hero {
+                        height: 400px;
+                    }
+                    h1 {
+                        font-size: 3rem;
+                    }
+                }
+                @media only screen and (max-width: 600px) {
+                    .bagel-hero {
+                        height: 300px;
+                    }
+                    h1 {
+                        font-size: 2rem;
+                    }
+                }
+                @media only screen and (max-width: 500px) {
+                    .bagel-hero {
+                        height: 200px;
+                    }
                 }
 
                 .about {

@@ -40,13 +40,17 @@ export default function Bakeries() {
                 }
 
                 .bakery img {
-                    max-width: 450px;
+                    width: 450px;
+                    max-width: 100%;
                     border-radius: 4px;
                 }
 
                 @media (max-width: 900px) {
                     .bakeries {
                         grid-template-columns: 1fr;
+                    }
+                    .bakery {
+                        padding: 2rem 0;
                     }
                 }
             `}</style>

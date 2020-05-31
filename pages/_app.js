@@ -35,6 +35,11 @@ export default class App extends NextApp {
                         font-size: 150%;
                         color: #654321;
                     }
+                    @media only screen and (max-width: 600px) {
+                        body {
+                            font-size: 120%;
+                        }
+                    }
 
                     input, textarea {
                         font-family: sans-serif;
@@ -50,10 +55,6 @@ export default class App extends NextApp {
                     main {
                         padding: 2rem;
                         text-align: center;
-                    }
-    
-                    h1.title {
-                        font-size: 4rem;
                     }
 
                     * {
