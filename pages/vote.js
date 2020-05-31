@@ -2,14 +2,19 @@ import Link from 'next/link';
 import fetch from 'node-fetch';
 
 export default function Vote() {
-    const submitVote = async (options) => {
+    const submitVote = async (data) => {
         const response = await fetch('/api/survey', {
             method: 'POST',
-            body: JSON.stringify(options),
+            body: JSON.stringify(data),
             headers: { 'Content-Type': 'application/json' },
         });
         const json = await response.json();
-        console.log('done!', json);
+        console.log('asdf', json);
+        if (json && json.affectedRows === 1) {
+            alert('Donions!');
+        } else {
+            alert('Error, try again or text Sarah and yell at her');
+        }
     };
 
     return (
@@ -19,7 +24,12 @@ export default function Vote() {
                 <a>Home</a>
             </Link>
 
-            <button onClick={() => submitVote({ fakeData: 'big time' })}>Submit</button>
+            <button onClick={() => submitVote({
+                username: 'test',
+                bagelId: '18',
+                score: 3,
+                comment: 'asdfasdfasdf',
+            })}>Submit</button>
 
             <style jsx>{`
                 .vote {

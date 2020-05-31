@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "mysql": "mysql --host=35.247.13.113 --user=root --password"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -13,6 +14,8 @@
     "next": "9.4.3",
     "node-fetch": "^2.6.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "serverless-mysql": "^1.5.4",
+    "sql-template-strings": "^2.2.2"
   }
 }
