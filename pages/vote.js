@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import Router from 'next/router'
+import Router from 'next/router';
 import fetch from 'node-fetch';
 import React, { useState } from 'react';
 
 const submitVotes = async ({ username, voteData }) => {
-    const response = await fetch('/api/survey', {
+    const response = await fetch('/api/vote', {
         method: 'POST',
         body: JSON.stringify({ username, voteData }),
         headers: { 'Content-Type': 'application/json' },
@@ -42,9 +41,6 @@ export default function Vote() {
     return (
         <main className="vote">
             <h1 className="title">Vote</h1>
-            <Link href="/">
-                <a>Home</a>
-            </Link>
 
             <section>
                 <h3 style={{ display: 'inline-block' }}>Your name:</h3>
@@ -62,13 +58,16 @@ export default function Vote() {
                             <div className="vote-section" key={`vote-section-${bagelId}`}>
                                 <h3>Bagel #{bagelId}</h3>
                                 <span>
-                                    <label>Your score:</label>
+                                    <label>
+                                        Your score:
+                                        <p className="tiny">(1 = shitty, 10 = amazing)</p>
+                                    </label>
                                     <input
                                         type="text"
-                                        placeholder="1-5"
+                                        placeholder="1-10"
                                         value={voteData[bagelId].score || ''}
                                         className="small"
-                                        maxLength="1"
+                                        maxLength="2"
                                         onChange={(e) => {
                                             const newVoteData = { ...voteData };
                                             newVoteData[bagelId].score = e.target.value;
@@ -80,6 +79,7 @@ export default function Vote() {
                                     <label>Comments:</label>
                                     <textarea
                                         value={voteData[bagelId].comment || ''}
+                                        placeholder="Appearance, texture, taste..."
                                         onChange={(e) => {
                                             const newVoteData = { ...voteData };
                                             newVoteData[bagelId].comment = e.target.value;
@@ -87,6 +87,7 @@ export default function Vote() {
                                         }}
                                     />
                                 </span>
+                                <div className="hr" />
                             </div>
                         );
                     })}
@@ -105,17 +106,28 @@ export default function Vote() {
                     margin: 2rem 0;
                 }
 
-                input, textarea {
+                input,
+                textarea {
                     margin-left: 1rem;
                     padding: 0.5rem;
+                }
+
+                h3 {
+                    margin-bottom: 1rem;
                 }
 
                 input.small {
                     width: 3rem;
                 }
 
+                p.tiny {
+                    font-size: 50%;
+                    margin-left: 1rem;
+                }
+
                 textarea {
                     height: 4rem;
+                    width: 240px;
                 }
 
                 .vote-sections {
@@ -129,7 +141,15 @@ export default function Vote() {
                 .vote-section span {
                     margin-right: 2rem;
                     display: inline-flex;
-                    align-items: center;
+                    align-items: flex-start;
+                }
+
+                .hr {
+                    height: 1px;
+                    width: 50%;
+                    background: #654321;
+                    opacity: 0.25;
+                    margin: 1rem auto;
                 }
             `}</style>
         </main>

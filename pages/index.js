@@ -1,13 +1,9 @@
-import Link from 'next/link';
 import Bakeries from '../components/bakeries';
 
 export default function Home() {
     return (
         <main>
             <h1 className="title">Bagel Quest 2020</h1>
-            <Link href="/vote">
-                <a>Vote</a>
-            </Link>
 
             <img src="/bagel1.svg" className="bagel-hero" />
 

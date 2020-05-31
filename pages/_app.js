@@ -1,6 +1,7 @@
 import React from 'react';
 import NextApp from 'next/app';
 import Head from 'next/head';
+import Header from '../components/header';
 
 export default class App extends NextApp {
     render() {
@@ -16,6 +17,8 @@ export default class App extends NextApp {
                     />
                     <link rel="icon" href="/favicon.png" />
                 </Head>
+
+                <Header />
 
                 <Component {...pageProps} />
 
@@ -55,6 +58,10 @@ export default class App extends NextApp {
 
                     * {
                         box-sizing: border-box;
+                    }
+
+                    .smcx-widget {
+                        margin: 1rem auto !important;
                     }
                 `}</style>
             </div>
