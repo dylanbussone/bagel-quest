@@ -9,7 +9,7 @@ export default function Home() {
             <div className="bagel-hero" />
 
             <div className="about">
-                <h4>Hi Friends! Welcome to Bagel Quest!</h4>
+                <h4>Hello and welcome to Bagel Quest!</h4>
                 <br />
                 The Seattle Met recently posted an{' '}
                 <a
