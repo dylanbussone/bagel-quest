@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Router, { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import Bakeries from '../components/bakeries';
 
@@ -11,9 +11,9 @@ export default function Home() {
         if (showSuccessMessage) {
             setTimeout(() => {
                 Router.push('/');
-            }, 2000)
+            }, 2000);
         }
-    }, [showSuccessMessage])
+    }, [showSuccessMessage]);
 
     return (
         <main>
@@ -28,6 +28,7 @@ export default function Home() {
                 <a
                     href="https://www.seattlemet.com/eat-and-drink/2020/05/seattle-actually-has-a-bagel-scene-now-macrina-bakery-mt-bagel"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     article
                 </a>{' '}
@@ -66,13 +67,11 @@ export default function Home() {
             <h2 className="bakeries-title">The Bakeries</h2>
             <Bakeries />
 
-            {
-                showSuccessMessage && (
-                    <div className="success-message">
-                        <span>Submitted!</span>
-                    </div>
-                )
-            }
+            {showSuccessMessage && (
+                <div className="success-message">
+                    <span>Submitted!</span>
+                </div>
+            )}
 
             <style jsx>{`
                 main {
@@ -127,7 +126,7 @@ export default function Home() {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: rgba(0,0,0,0.75);
+                    background: rgba(0, 0, 0, 0.75);
                     display: flex;
                     justify-content: center;
                     align-items: center;

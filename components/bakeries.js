@@ -86,12 +86,16 @@ export default function Bakeries() {
                     {bakery.photoCreditName && (
                         <span className="photo-credit">
                             Photo:{' '}
-                            <a href={bakery.photoCreditUrl} target="_blank">
+                            <a
+                                href={bakery.photoCreditUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 {bakery.photoCreditName}
                             </a>
                         </span>
                     )}
-                    <a href={bakery.url || '#'} target="_blank">
+                    <a href={bakery.url || '#'} target="_blank" rel="noopener noreferrer">
                         <span className="name">{bakery.name}</span>
                     </a>
                 </div>
