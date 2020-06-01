@@ -22,13 +22,12 @@ export default function Payment() {
                             <span className="big green">$27</span> per 2 person household
                         </p>
                         <i>
-                            <span className="green">+$12</span> per additional person over 2 in the
-                            same household.
+                            <span className="green">+$12</span> per additional person
                         </i>
                         <br />
                         <i>
                             <span className="green">+$7</span> if you requested Dingfelders cream
-                            cheese.
+                            cheese
                         </i>
                     </p>
                     <p>

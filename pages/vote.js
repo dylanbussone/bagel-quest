@@ -41,9 +41,12 @@ export default function Vote() {
         <main className="vote">
             <h1 className="title">Vote</h1>
 
-            <section>
+            <p>Voting will open June 20th!</p>
+
+            <section className="disabled">
                 <h3 style={{ display: 'inline-block' }}>Your name:</h3>
                 <input
+                    disabled /* TODO undo */
                     type="text"
                     value={username}
                     onChange={(e) => {
@@ -62,6 +65,7 @@ export default function Vote() {
                                         <p className="tiny">(1 = shitty, 10 = amazing)</p>
                                     </label>
                                     <input
+                                        disabled /* TODO undo */
                                         type="text"
                                         placeholder="1-10"
                                         value={voteData[bagelId].score || ''}
@@ -77,6 +81,7 @@ export default function Vote() {
                                 <span>
                                     <label>Comments:</label>
                                     <textarea
+                                        disabled /* TODO undo */
                                         value={voteData[bagelId].comment || ''}
                                         placeholder="Appearance, texture, taste..."
                                         onChange={(e) => {
@@ -92,10 +97,14 @@ export default function Vote() {
                     })}
                 </div>
 
-                <button disabled={disableVote} onClick={() => {
-                    setDisableVote(true);
-                    submitVotes({ username, voteData });
-                }}>
+                <button
+                    disabled={disableVote}
+                    disabled /* TODO undo */
+                    onClick={() => {
+                        setDisableVote(true);
+                        submitVotes({ username, voteData });
+                    }}
+                >
                     Submit
                 </button>
             </section>
@@ -106,6 +115,10 @@ export default function Vote() {
 
                 section {
                     margin: 2rem 0;
+                }
+
+                section.disabled {
+                    opacity: 0.3;
                 }
 
                 input,
