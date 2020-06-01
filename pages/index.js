@@ -18,6 +18,7 @@ export default function Home() {
     return (
         <main>
             <h1 className="title">Bagel Quest 2020</h1>
+            <p className="subtitle">June 20, 2020</p>
 
             <div className="bagel-hero" />
 
@@ -44,24 +45,18 @@ export default function Home() {
                 for tasting!
                 <br />
                 <br />
-                Please proceed to the{' '}
+                Please head to the{' '}
                 <Link href="/delivery-info">
                     <a>Delivery Info</a>
                 </Link>{' '}
-                page and enter your information. If we do not have your information by x/x/2020, we
-                will assume you are not participating and find a replacement.
+                and{' '}
+                <Link href="/payment">
+                    <a>Payment</a>
+                </Link>{' '}
+                pages and enter your information by <b>6/12/20</b>. If not received by that date, we will find a replacement for your spot!
                 <br />
                 <br />
-                Each bag will have a number on it. As you taste, please rate and comment on our
-                voting page. Sunday evening at 5, we will post the results of the survey as well as
-                what bakery each bagel number belonged to (so make sure to keep track).
-                <br />
-                <br />
-                When it comes to cost, I will be charging for the bagels, tipping at the bakeries
-                (#supportlocal) and packaging. In order to pay, please venmo me at @sarah-leviton.
-                The cost is $x.xx for singles and $x.xx for doubles and $x.xx if you answered that
-                you wanted cream cheese, it’s an extra $x.xx.The cost difference comes from the
-                reusable foldaway bags I am purchasing.
+                Each bag will have a number on it. As you taste, please rate and comment on our voting page. Sunday evening at 5pm, we will post the results of the survey along with what bakery each bagel number belonged to (so make sure to keep track).
             </div>
 
             <h2 className="bakeries-title">The Bakeries</h2>
@@ -80,6 +75,11 @@ export default function Home() {
                 }
                 h1 {
                     font-size: 4rem;
+                }
+                .subtitle {
+                    margin: 0;
+                    color: beige;
+                    text-shadow: 1px 1px 1px #654321;
                 }
                 .bagel-hero {
                     background-image: url('/bagel1.svg');

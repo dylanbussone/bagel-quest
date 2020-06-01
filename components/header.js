@@ -17,9 +17,14 @@ export default function Header() {
                         <a>Delivery Info</a>
                     </Link>
                 </li>
+                <li className={router.pathname === '/payment' ? 'active' : ''}>
+                    <Link href="/payment">
+                        <a>Payment</a>
+                    </Link>
+                </li>
                 <li className={router.pathname === '/vote' ? 'active' : ''}>
                     <Link href="/vote">
-                        <a>Bagel Voting</a>
+                        <a>Vote</a>
                     </Link>
                 </li>
             </ul>
