@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function DeliveryInfo() {
     useEffect(() => {
@@ -27,5 +28,24 @@ export default function DeliveryInfo() {
         };
     });
 
-    return null;
+    return (
+        <main>
+            <div>
+                Please fill out the following form by 6/12/20 to make sure you're signed up!
+                <br />
+                <br />
+                When you're finished, head over to the{' '}
+                <Link href="/payment">
+                    <a>Payment</a>
+                </Link>{' '}
+                page as well.
+            </div>
+            <style jsx>{`
+                main {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+            `}</style>
+        </main>
+    );
 }

@@ -27,6 +27,11 @@ export default function Header() {
                         <a>Vote</a>
                     </Link>
                 </li>
+                <li className={router.pathname === '/results' ? 'active' : ''}>
+                    <Link href="/results">
+                        <a>Results</a>
+                    </Link>
+                </li>
             </ul>
 
             <style jsx>{`
