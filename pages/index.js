@@ -1,7 +1,20 @@
+import React, { useEffect } from 'react';
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link';
 import Bakeries from '../components/bakeries';
 
 export default function Home() {
+    const router = useRouter();
+    const showSuccessMessage = router.query.success === 'true';
+
+    useEffect(() => {
+        if (showSuccessMessage) {
+            setTimeout(() => {
+                Router.push('/');
+            }, 2000)
+        }
+    }, [showSuccessMessage])
+
     return (
         <main>
             <h1 className="title">Bagel Quest 2020</h1>
@@ -53,6 +66,14 @@ export default function Home() {
             <h2 className="bakeries-title">The Bakeries</h2>
             <Bakeries />
 
+            {
+                showSuccessMessage && (
+                    <div className="success-message">
+                        <span>Submitted!</span>
+                    </div>
+                )
+            }
+
             <style jsx>{`
                 main {
                     max-width: 1200px;
@@ -98,6 +119,24 @@ export default function Home() {
 
                 .bakeries-title {
                     margin: 5rem 0 2rem;
+                }
+
+                .success-message {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.75);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .success-message span {
+                    background: white;
+                    padding: 1rem 2rem;
+                    color: green;
+                    border-radius: 4px;
                 }
             `}</style>
         </main>

@@ -1,4 +1,3 @@
-import Router from 'next/router';
 import fetch from 'node-fetch';
 import React, { useState } from 'react';
 
@@ -11,8 +10,7 @@ const submitVotes = async ({ username, voteData }) => {
     const json = await response.json();
 
     if (json && json.affectedRows > 0) {
-        alert('Donions!');
-        Router.push('/');
+        document.location.href = '/?success=true';
     } else {
         alert('Error, try again or text Sarah');
     }
@@ -20,6 +18,7 @@ const submitVotes = async ({ username, voteData }) => {
 
 export default function Vote() {
     const [username, setUsername] = useState('');
+    const [disableVote, setDisableVote] = useState(false);
 
     const [voteData, setVoteData] = useState({
         1: { id: 1 },
@@ -93,7 +92,12 @@ export default function Vote() {
                     })}
                 </div>
 
-                <button onClick={() => submitVotes({ username, voteData })}>Submit</button>
+                <button disabled={disableVote} onClick={() => {
+                    setDisableVote(true);
+                    submitVotes({ username, voteData });
+                }}>
+                    Submit
+                </button>
             </section>
 
             <style jsx>{`
