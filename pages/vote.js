@@ -23,20 +23,20 @@ export default function Vote() {
     const [disableVote, setDisableVote] = useState(false);
 
     const [voteData, setVoteData] = useState({
-        1: { id: 1 },
-        2: { id: 2 },
-        3: { id: 3 },
-        4: { id: 4 },
-        5: { id: 5 },
-        6: { id: 6 },
-        7: { id: 7 },
-        8: { id: 8 },
-        9: { id: 9 },
-        10: { id: 10 },
-        11: { id: 11 },
-        12: { id: 12 },
-        13: { id: 13 },
-        14: { id: 14 },
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
+        6: {},
+        7: {},
+        8: {},
+        9: {},
+        10: {},
+        11: {},
+        12: {},
+        13: {},
+        14: {},
     });
 
     return (
