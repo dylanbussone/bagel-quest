@@ -48,6 +48,11 @@ export default function Header() {
                 li {
                     display: inline;
                     margin-right: 2rem;
+                    white-space: nowrap;
+                    font-size: 18px;
+                }
+                li:last-of-type {
+                    margin-right: 0;
                 }
                 a {
                     text-decoration: none;
@@ -63,7 +68,10 @@ export default function Header() {
                 @media (max-width: 900px) {
                     li {
                         margin-right: 1rem;
-                        font-size: 1rem;
+                        font-size: 16px;
+                    }
+                    ul {
+                        padding: 0 1rem;
                     }
                 }
             `}</style>

@@ -113,7 +113,8 @@ export default function Bakeries() {
 
                 .bakery .name {
                     font-size: 110%;
-                    margin: 1rem 0;
+                    margin: 6px 0;
+                    display: block;
                 }
 
                 .bakery .photo-credit {
@@ -131,6 +132,7 @@ export default function Bakeries() {
                 .bakery img {
                     width: 450px;
                     height: 450px;
+                    max-width: 100%;
                     border-radius: 4px;
                 }
 
@@ -140,6 +142,15 @@ export default function Bakeries() {
                     }
                     .bakery {
                         padding: 2rem 0;
+                    }
+                }
+                @media (max-width: 720px) {
+                    .bakeries {
+                        grid-template-columns: 1fr;
+                    }
+                    .bakery img {
+                        height: 280px;
+                        width: 280px;
                     }
                 }
             `}</style>

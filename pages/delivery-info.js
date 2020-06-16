@@ -31,7 +31,7 @@ export default function DeliveryInfo() {
     return (
         <main>
             <div>
-                Please fill out the following form by 6/12/20 to make sure you're signed up!
+                Please fill out the following form to make sure you're signed up!
                 <br />
                 <br />
                 When you're finished, head over to the{' '}

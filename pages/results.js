@@ -14,6 +14,11 @@ export default function Results() {
                 h1 {
                     margin-bottom: 1rem;
                 }
+                @media (max-width: 700px) {
+                    h1.title {
+                        display: none;
+                    }
+                }
             `}</style>
         </main>
     );

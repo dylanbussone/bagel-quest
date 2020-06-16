@@ -27,18 +27,13 @@ export default class App extends NextApp {
                     body {
                         padding: 0;
                         margin: 0;
+                        font-size: 16px;
                     }
 
                     body {
                         background: #b5d3e7;
                         font-family: 'Sniglet', sans-serif;
-                        font-size: 150%;
                         color: #654321;
-                    }
-                    @media only screen and (max-width: 600px) {
-                        body {
-                            font-size: 120%;
-                        }
                     }
 
                     input, textarea {
@@ -63,6 +58,12 @@ export default class App extends NextApp {
 
                     .smcx-widget {
                         margin: 1rem auto !important;
+                    }
+
+                    @media (max-width: 900px) {
+                        main {
+                            padding: 1rem;
+                        }
                     }
                 `}</style>
             </div>

@@ -176,8 +176,10 @@ export default function Vote() {
                     text-decoration: none;
                     cursor: pointer;
                 }
-
                 @media (max-width: 700px) {
+                    h1.title {
+                        display: none;
+                    }
                     .hr {
                         width: 100%;
                     }

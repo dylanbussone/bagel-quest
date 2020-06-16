@@ -74,9 +74,10 @@ export default function Home() {
                     margin: 0 auto;
                 }
                 h1 {
-                    font-size: 4rem;
+                    font-size: 64px;
                 }
                 .subtitle {
+                    font-size: 24px;
                     margin: 0;
                     color: beige;
                     text-shadow: 1px 1px 1px #654321;
@@ -88,13 +89,23 @@ export default function Home() {
                     background-size: contain;
                     height: 700px;
                 }
+                .about h4 {
+                    font-size: 28px;
+                }
 
                 @media only screen and (max-width: 900px) {
                     .bagel-hero {
                         height: 400px;
                     }
                     h1 {
-                        font-size: 3rem;
+                        font-size: 36px;
+                    }
+                    .subtitle {
+                        font-size: 18px;
+                        margin-top: 4px;
+                    }
+                    .about h4 {
+                        font-size: 24px;
                     }
                 }
                 @media only screen and (max-width: 600px) {
@@ -102,7 +113,13 @@ export default function Home() {
                         height: 300px;
                     }
                     h1 {
-                        font-size: 2rem;
+                        font-size: 24px;
+                    }
+                    .subtitle {
+                        font-size: 16px;
+                    }
+                    .about h4 {
+                        font-size: 16px;
                     }
                 }
                 @media only screen and (max-width: 500px) {

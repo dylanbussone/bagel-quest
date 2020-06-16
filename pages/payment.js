@@ -91,18 +91,20 @@ export default function Payment() {
                     padding-right: 1rem;
                 }
                 img {
-                    height: 600px;
+                    max-height: 600px;
+                    width: 100%;
+                    max-width: 480px;
                     border-radius: 8px;
                 }
                 i {
-                    font-size: 80%;
+                    font-size: 85%;
                 }
                 .big {
-                    font-size: 120%;
+                    font-size: 125%;
                     display: inline-block;
                 }
                 .small {
-                    font-size: 80%;
+                    font-size: 85%;
                 }
                 h3 {
                     font-weight: normal;
@@ -112,7 +114,7 @@ export default function Payment() {
                     color: olivedrab;
                 }
                 .photo-credit {
-                    font-size: 70%;
+                    font-size: 75%;
                     display: block;
                 }
                 .photo-credit a {
@@ -121,6 +123,17 @@ export default function Payment() {
                 }
                 .photo-credit a:hover {
                     text-decoration: underline;
+                }
+
+                @media (max-width: 900px) {
+                    img {
+                        height: 420px;
+                        width: 300px;
+                        margin-top: 16px;
+                    }
+                    h1.title {
+                        display: none;
+                    }
                 }
             `}</style>
         </main>
