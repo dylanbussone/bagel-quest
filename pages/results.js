@@ -8,12 +8,14 @@ const bagelMapping = {
 };
 
 export default function Results() {
+    const [loadingBagelVotes, setLoadingBagelVotes] = useState(true);
     const [bagelVotes, setBagelVotes] = useState([]);
 
     useEffect(() => {
         async function fetchBagelVotes() {
             const response = await fetch('/api/results', { method: 'GET' });
             let json = await response.json();
+            setLoadingBagelVotes(false);
             json = json.map((x) => {
                 x.bagelId = x.bagel_id;
                 delete x.bagel_id;
@@ -26,8 +28,6 @@ export default function Results() {
         }
         fetchBagelVotes();
     }, []);
-
-    console.log('bagelVotes', bagelVotes);
 
     const avgScores = bagelVotes
         .reduce((acc, cur) => {
@@ -48,28 +48,31 @@ export default function Results() {
             return x;
         });
 
-    console.log('avgScores', avgScores);
-
     return (
         <main className="results">
             <h1 className="title">Results</h1>
 
-            {bagelVotes.length > 0 ? (
+            {!loadingBagelVotes && (
                 <React.Fragment>
-                    <h2>Final scores:</h2>
-                    <div className="combined-scores">
-                        <BarChart width={1100} height={450} data={avgScores}>
-                            <XAxis dataKey="bagelId" hide="true" />
-                            <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-                            <Tooltip />
-                            <Bar dataKey="score" fill="#8884d8">
-                                <LabelList dataKey="name" position="top" />
-                            </Bar>
-                        </BarChart>
-                    </div>
+                    {bagelVotes.length > 0 ? (
+                        <React.Fragment>
+                            <h2>Final scores:</h2>
+                            <p>Be sure to check back after 5pm for the final results!</p>
+                            <div className="combined-scores">
+                                <BarChart width={1100} height={450} data={avgScores}>
+                                    <XAxis dataKey="bagelId" hide="true" />
+                                    <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+                                    <Tooltip />
+                                    <Bar dataKey="score" fill="#8884d8">
+                                        <LabelList dataKey="name" position="top" />
+                                    </Bar>
+                                </BarChart>
+                            </div>
+                        </React.Fragment>
+                    ) : (
+                        <p>Coming soon</p>
+                    )}
                 </React.Fragment>
-            ) : (
-                <p>Coming soon</p>
             )}
 
             <style jsx>{`
