@@ -48,10 +48,10 @@ export default function Payment() {
                         neighborhoods that I might have forgotten that fall in that range.
                         <br />
                         <br />
-                        <i>
+                        <p>
                             If you live outside of this range and would still like to participate,
                             please reach out and we can arrange for pick up.
-                        </i>
+                        </p>
                     </p>
                 </section>
 
@@ -97,14 +97,14 @@ export default function Payment() {
                     border-radius: 8px;
                 }
                 i {
-                    font-size: 85%;
+                    font-size: 90%;
                 }
                 .big {
                     font-size: 125%;
                     display: inline-block;
                 }
                 .small {
-                    font-size: 85%;
+                    font-size: 90%;
                 }
                 h3 {
                     font-weight: normal;

@@ -55,7 +55,7 @@ export default function Results() {
             <main className="results">
                 <h1 className="title">Results</h1>
 
-                <h2>Total combined scores:</h2>
+                <h2>Final scores:</h2>
                 <div className="combined-scores">
                     <BarChart width={1100} height={450} data={avgScores}>
                         <XAxis dataKey="bagelId" hide="true" />

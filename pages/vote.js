@@ -131,7 +131,7 @@ export default function Vote() {
                 }
 
                 p.tiny {
-                    font-size: 50%;
+                    font-size: 70%;
                     margin-left: 1rem;
                     margin-top: 0;
                 }
