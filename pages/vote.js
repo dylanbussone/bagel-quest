@@ -1,7 +1,8 @@
 import fetch from 'node-fetch';
 import React, { useState } from 'react';
 
-const submitVotes = async ({ username, voteData }) => {
+const submitVotes = async ({ username, voteData, setDisableVote }) => {
+    setDisableVote(true);
     const response = await fetch('/api/vote', {
         method: 'POST',
         body: JSON.stringify({ username, voteData }),
@@ -13,6 +14,7 @@ const submitVotes = async ({ username, voteData }) => {
         document.location.href = '/?success=true';
     } else {
         alert('Error, try again or text Sarah');
+        setDisableVote(false);
     }
 };
 
@@ -21,32 +23,29 @@ export default function Vote() {
     const [disableVote, setDisableVote] = useState(false);
 
     const [voteData, setVoteData] = useState({
-        1: { id: 1 },
-        2: { id: 2 },
-        3: { id: 3 },
-        4: { id: 4 },
-        5: { id: 5 },
-        6: { id: 6 },
-        7: { id: 7 },
-        8: { id: 8 },
-        9: { id: 9 },
-        10: { id: 10 },
-        11: { id: 11 },
-        12: { id: 12 },
-        13: { id: 13 },
-        14: { id: 14 },
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
+        6: {},
+        7: {},
+        8: {},
+        9: {},
+        10: {},
+        11: {},
+        12: {},
+        13: {},
+        14: {},
     });
 
     return (
         <main className="vote">
             <h1 className="title">Vote</h1>
 
-            <p>Voting will open June 20th!</p>
-
-            <section className="disabled">
+            <section>
                 <h3 style={{ display: 'inline-block' }}>Your name:</h3>
                 <input
-                    disabled /* TODO undo */
                     type="text"
                     value={username}
                     onChange={(e) => {
@@ -65,7 +64,6 @@ export default function Vote() {
                                         <p className="tiny">(1 = shitty, 10 = amazing)</p>
                                     </label>
                                     <input
-                                        disabled /* TODO undo */
                                         type="text"
                                         placeholder="1-10"
                                         value={voteData[bagelId].score || ''}
@@ -81,7 +79,6 @@ export default function Vote() {
                                 <span>
                                     <label>Comments:</label>
                                     <textarea
-                                        disabled /* TODO undo */
                                         value={voteData[bagelId].comment || ''}
                                         placeholder="Appearance, texture, taste..."
                                         onChange={(e) => {
@@ -99,10 +96,8 @@ export default function Vote() {
 
                 <button
                     disabled={disableVote}
-                    disabled /* TODO undo */
                     onClick={() => {
-                        setDisableVote(true);
-                        submitVotes({ username, voteData });
+                        submitVotes({ username, voteData, setDisableVote });
                     }}
                 >
                     Submit
@@ -136,7 +131,7 @@ export default function Vote() {
                 }
 
                 p.tiny {
-                    font-size: 50%;
+                    font-size: 70%;
                     margin-left: 1rem;
                     margin-top: 0;
                 }
