@@ -51,21 +51,26 @@ export default function Results() {
     console.log('avgScores', avgScores);
 
     return (
-        bagelVotes.length > 0 && (
-            <main className="results">
-                <h1 className="title">Results</h1>
+        <main className="results">
+            <h1 className="title">Results</h1>
 
-                <h2>Final scores:</h2>
-                <div className="combined-scores">
-                    <BarChart width={1100} height={450} data={avgScores}>
-                        <XAxis dataKey="bagelId" hide="true" />
-                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-                        <Tooltip />
-                        <Bar dataKey="score" fill="#8884d8">
-                            <LabelList dataKey="name" position="top" />
-                        </Bar>
-                    </BarChart>
-                </div>
+            {bagelVotes.length > 0 ? (
+                <React.Fragment>
+                    <h2>Final scores:</h2>
+                    <div className="combined-scores">
+                        <BarChart width={1100} height={450} data={avgScores}>
+                            <XAxis dataKey="bagelId" hide="true" />
+                            <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+                            <Tooltip />
+                            <Bar dataKey="score" fill="#8884d8">
+                                <LabelList dataKey="name" position="top" />
+                            </Bar>
+                        </BarChart>
+                    </div>
+                </React.Fragment>
+            ) : (
+                <p>Coming soon</p>
+            )}
 
             <style jsx>{`
                 main {
@@ -83,6 +88,5 @@ export default function Results() {
                 }
             `}</style>
         </main>
-        )
     );
 }
