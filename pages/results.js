@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
 import { BarChart, XAxis, YAxis, Tooltip, Bar, Label, LabelList } from 'recharts';
+import Router, { useRouter } from 'next/router';
 
 // map of bagelId to the name
 const bagelMapping = {
@@ -10,6 +11,17 @@ const bagelMapping = {
 export default function Results() {
     const [loadingBagelVotes, setLoadingBagelVotes] = useState(true);
     const [bagelVotes, setBagelVotes] = useState([]);
+
+    const router = useRouter();
+    const showSuccessMessage = router.query.success === 'true';
+
+    useEffect(() => {
+        if (showSuccessMessage) {
+            setTimeout(() => {
+                Router.push('/results');
+            }, 2000);
+        }
+    }, [showSuccessMessage]);
 
     useEffect(() => {
         async function fetchBagelVotes() {
@@ -45,6 +57,7 @@ export default function Results() {
         .filter(Boolean)
         .map((x) => {
             x.score = x.score / (bagelVotes.length / 14);
+            x.score = Math.round(x.score * 10) / 10; // round to 1 decimal place
             return x;
         });
 
@@ -56,9 +69,9 @@ export default function Results() {
                 <React.Fragment>
                     {bagelVotes.length > 0 ? (
                         <React.Fragment>
-                            <h2>Final scores:</h2>
                             <p>Be sure to check back after 5pm for the final results!</p>
-                            <div className="combined-scores">
+                            {/* <h2>Final scores:</h2> */}
+                            {/* <div className="combined-scores">
                                 <BarChart width={1100} height={450} data={avgScores}>
                                     <XAxis dataKey="bagelId" hide="true" />
                                     <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
@@ -67,12 +80,18 @@ export default function Results() {
                                         <LabelList dataKey="name" position="top" />
                                     </Bar>
                                 </BarChart>
-                            </div>
+                            </div> */}
                         </React.Fragment>
                     ) : (
                         <p>Coming soon</p>
                     )}
                 </React.Fragment>
+            )}
+
+            {showSuccessMessage && (
+                <div className="success-message">
+                    <span>Submitted!</span>
+                </div>
             )}
 
             <style jsx>{`
@@ -83,6 +102,23 @@ export default function Results() {
                 }
                 h1 {
                     margin-bottom: 1rem;
+                }
+                .success-message {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.75);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .success-message span {
+                    background: white;
+                    padding: 1rem 2rem;
+                    color: green;
+                    border-radius: 4px;
                 }
                 @media (max-width: 700px) {
                     h1.title {

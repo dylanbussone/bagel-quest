@@ -11,7 +11,7 @@ const submitVotes = async ({ username, voteData, setDisableVote }) => {
     const json = await response.json();
 
     if (json && json.affectedRows > 0) {
-        document.location.href = '/?success=true';
+        document.location.href = '/results?success=true';
     } else {
         alert('Error, try again or text Sarah');
         setDisableVote(false);
