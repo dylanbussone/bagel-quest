@@ -70,6 +70,7 @@ export default function Results() {
                     {bagelVotes.length > 0 ? (
                         <React.Fragment>
                             <p>Be sure to check back after 5pm for the final results!</p>
+                            {/* TODO: uncomment when we shipit */}
                             {/* <h2>Final scores:</h2> */}
                             {/* <div className="combined-scores">
                                 <BarChart width={1100} height={450} data={avgScores}>

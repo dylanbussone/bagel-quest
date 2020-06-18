@@ -60,8 +60,14 @@ const bakeries = [
         image: '/seattle-bagel-bakery.PNG',
     },
     {
-        name: 'Shawn’s Cafe & Bakery',
-        image: '/shawns.PNG',
+        name: 'Mt. Bagel',
+        url: 'https://www.mtbagel.com/',
+        image: '/mtbagel.jpg',
+    },
+    {
+        name: 'Loxsmith',
+        url: 'https://www.instagram.com/loxsmithbagels/',
+        image: '/loxsmith.jpg',
     },
     {
         name: 'Westman’s Bagel & Coffee - Capitol Hill',
