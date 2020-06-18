@@ -1,5 +1,20 @@
 import fetch from 'node-fetch';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+// put votes in local storage because it's better than nothing
+const LOCAL_STORAGE_KEY = 'bagelQuestVotes';
+
+const getVotes = () => {
+    if (typeof localStorage !== 'undefined') {
+        return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}');
+    }
+    return {};
+};
+const setVotes = (votes) => {
+    if (typeof localStorage !== 'undefined') {
+        return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(votes));
+    }
+};
 
 const submitVotes = async ({ username, voteData, setDisableVote }) => {
     setDisableVote(true);
@@ -11,6 +26,7 @@ const submitVotes = async ({ username, voteData, setDisableVote }) => {
     const json = await response.json();
 
     if (json && json.affectedRows > 0) {
+        localStorage.setItem('submitted', 'true');
         document.location.href = '/results?success=true';
     } else {
         alert('Error, try again or text Sarah');
@@ -19,25 +35,37 @@ const submitVotes = async ({ username, voteData, setDisableVote }) => {
 };
 
 export default function Vote() {
-    const [username, setUsername] = useState('');
+    const storageData = getVotes();
+    const [wasSubmitted, setWasSubmitted] = useState(false);
+    const [username, setUsername] = useState(storageData.username);
     const [disableVote, setDisableVote] = useState(false);
 
-    const [voteData, setVoteData] = useState({
-        1: {},
-        2: {},
-        3: {},
-        4: {},
-        5: {},
-        6: {},
-        7: {},
-        8: {},
-        9: {},
-        10: {},
-        11: {},
-        12: {},
-        13: {},
-        14: {},
-    });
+    const initialVoteData = {};
+
+    for (var i = 1; i <= 14; i++) {
+        initialVoteData[i] = (storageData.votes && storageData.votes[i]) || {};
+    }
+
+    const [voteData, setVoteData] = useState(initialVoteData);
+    //     1: (initialData && initialData.votes && initialData.votes['1']) || {},
+    //     2: (initialData && initialData.votes && initialData.votes['2']) || {},
+    //     3: (initialData && initialData.votes && initialData.votes['3']) || {},
+    //     4: (initialData && initialData.votes && initialData.votes['4']) || {},
+    //     5: (initialData && initialData.votes && initialData.votes['5']) || {},
+    //     6: (initialData && initialData.votes && initialData.votes['6']) || {},
+    //     7: (initialData && initialData.votes && initialData.votes['7']) || {},
+    //     8: (initialData && initialData.votes && initialData.votes['8']) || {},
+    //     9: (initialData && initialData.votes && initialData.votes['9']) || {},
+    //     10: (initialData && initialData.votes && initialData.votes['10']) || {},
+    //     11: (initialData && initialData.votes && initialData.votes['11']) || {},
+    //     12: (initialData && initialData.votes && initialData.votes['12']) || {},
+    //     13: (initialData && initialData.votes && initialData.votes['13']) || {},
+    //     14: (initialData && initialData.votes && initialData.votes['14']) || {},
+    // });
+
+    useEffect(() => {
+        setWasSubmitted(localStorage.getItem('submitted') === 'true');
+    }, []);
 
     return (
         <main className="vote">
@@ -49,6 +77,10 @@ export default function Vote() {
                     type="text"
                     value={username}
                     onChange={(e) => {
+                        setVotes({
+                            username: e.target.value,
+                            votes: voteData,
+                        });
                         setUsername(e.target.value);
                     }}
                 />
@@ -73,6 +105,10 @@ export default function Vote() {
                                             const newVoteData = { ...voteData };
                                             newVoteData[bagelId].score = e.target.value;
                                             setVoteData(newVoteData);
+                                            setVotes({
+                                                username,
+                                                votes: newVoteData,
+                                            });
                                         }}
                                     />
                                 </span>
@@ -85,6 +121,10 @@ export default function Vote() {
                                             const newVoteData = { ...voteData };
                                             newVoteData[bagelId].comment = e.target.value;
                                             setVoteData(newVoteData);
+                                            setVotes({
+                                                username,
+                                                votes: newVoteData,
+                                            });
                                         }}
                                     />
                                 </span>
@@ -95,12 +135,12 @@ export default function Vote() {
                 </div>
 
                 <button
-                    disabled={disableVote}
+                    disabled={disableVote || wasSubmitted}
                     onClick={() => {
                         submitVotes({ username, voteData, setDisableVote });
                     }}
                 >
-                    Submit
+                    {wasSubmitted ? 'Vote received' : 'Submit'}
                 </button>
             </section>
 

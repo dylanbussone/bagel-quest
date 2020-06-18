@@ -3,6 +3,9 @@ import fetch from 'node-fetch';
 import { BarChart, XAxis, YAxis, Tooltip, Bar, Label, LabelList } from 'recharts';
 import Router, { useRouter } from 'next/router';
 
+// TODO: enable after 5pm
+const SHOW_RESULTS = false;
+
 // map of bagelId to the name
 const bagelMapping = {
     // TODO
@@ -68,21 +71,23 @@ export default function Results() {
             {!loadingBagelVotes && (
                 <React.Fragment>
                     {bagelVotes.length > 0 ? (
-                        <React.Fragment>
+                        SHOW_RESULTS ? (
+                            <React.Fragment>
+                                <h2>Final scores:</h2>
+                                <div className="combined-scores">
+                                    <BarChart width={1100} height={450} data={avgScores}>
+                                        <XAxis dataKey="bagelId" hide="true" />
+                                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+                                        <Tooltip />
+                                        <Bar dataKey="score" fill="#8884d8">
+                                            <LabelList dataKey="name" position="top" />
+                                        </Bar>
+                                    </BarChart>
+                                </div>
+                            </React.Fragment>
+                        ) : (
                             <p>Be sure to check back after 5pm for the final results!</p>
-                            {/* TODO: uncomment when we shipit */}
-                            {/* <h2>Final scores:</h2> */}
-                            {/* <div className="combined-scores">
-                                <BarChart width={1100} height={450} data={avgScores}>
-                                    <XAxis dataKey="bagelId" hide="true" />
-                                    <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-                                    <Tooltip />
-                                    <Bar dataKey="score" fill="#8884d8">
-                                        <LabelList dataKey="name" position="top" />
-                                    </Bar>
-                                </BarChart>
-                            </div> */}
-                        </React.Fragment>
+                        )
                     ) : (
                         <p>Coming soon</p>
                     )}
