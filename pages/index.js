@@ -41,7 +41,7 @@ export default function Home() {
                 <Link href="/payment">
                     <a>Payment</a>
                 </Link>{' '}
-                pages and enter your information by <b>6/12/20</b>. If not received by that date, we will find a replacement for your spot!
+                pages and enter your information.
                 <br />
                 <br />
                 Each bag will have a number on it. As you taste, please rate and comment on our voting page. Sunday evening at 5pm, we will post the results of the survey along with what bakery each bagel number belonged to (so make sure to keep track).
