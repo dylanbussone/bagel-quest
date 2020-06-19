@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
 import { BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 import Router, { useRouter } from 'next/router';
+import { LOCAL_STORAGE_KEY } from './vote';
 
 // TODO: enable after 5pm
 const SHOW_RESULTS = false;
@@ -88,22 +89,46 @@ export default function Results() {
             return x;
         });
 
+    let yourScores;
+    const localStorageVotes =
+        typeof localStorage !== 'undefined' &&
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}').votes;
+    if (localStorageVotes) {
+        yourScores = [...avgScores].map((x) => {
+            x = {...x};
+            if (localStorageVotes[x.bagelId]) {
+                x.score = localStorageVotes[x.bagelId].score;
+            } else {
+                x.score = null;
+            }
+            return x;
+        });
+    }
+
     const chartDimensions = {
-        width: useSmallChart ? 400 : 800,
+        width: useSmallChart ? 450 : 800,
         height: useSmallChart ? 300 : 600,
     };
 
     return (
         <main className="results">
-            <h1 className="title">Results</h1>
-
             {!loadingBagelVotes && (
                 <React.Fragment>
                     {bagelVotes.length > 0 ? (
                         SHOW_RESULTS ? (
                             <React.Fragment>
-                                <h2>Average scores:</h2>
-                                <div className="combined-scores">
+                                <h2>The bagels:</h2>
+                                <div className="bakery-list">
+                                    {Object.keys(bagelMapping).map((b) => (
+                                        <div key={b}>
+                                            <label>Bagel {b}:</label>
+                                            <span>{bagelMapping[b]}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="avg-scores">
+                                    <h2>Average scores:</h2>
                                     <BarChart
                                         width={chartDimensions.width}
                                         height={chartDimensions.height}
@@ -111,16 +136,38 @@ export default function Results() {
                                         margin={{
                                             top: useSmallChart ? -24 : -80,
                                             right: 0,
-                                            left: -20,
+                                            left: 0,
                                             bottom: 0,
                                         }}
                                     >
                                         <XAxis dataKey="label" interval={0} />
-                                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} label="Score" />
+                                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
                                         <Tooltip content={<CustomTooltip />} />
                                         <Bar dataKey="score" fill="#8884d8" />
                                     </BarChart>
                                 </div>
+
+                                {yourScores && (
+                                    <div className="your-scores">
+                                        <h2>Your scores:</h2>
+                                        <BarChart
+                                            width={chartDimensions.width}
+                                            height={chartDimensions.height}
+                                            data={yourScores}
+                                            margin={{
+                                                top: useSmallChart ? -24 : -80,
+                                                right: 0,
+                                                left: 0,
+                                                bottom: 0,
+                                            }}
+                                        >
+                                            <XAxis dataKey="label" interval={0} />
+                                            <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+                                            <Tooltip content={<CustomTooltip labelText="Your score:" />} />
+                                            <Bar dataKey="score" fill="#8884d8" />
+                                        </BarChart>
+                                    </div>
+                                )}
                             </React.Fragment>
                         ) : (
                             <p>Be sure to check back after 5pm for the final results!</p>
@@ -147,9 +194,33 @@ export default function Results() {
                     margin-bottom: 1rem;
                 }
 
-                .combined-scores {
+                .bakery-list {
+                    width: 310px;
+                    margin: 32px auto;
+                }
+
+                .bakery-list > div {
+                    margin: 16px 0;
+                    font-size: 18px;
+                    text-align: left;
+                }
+
+                .bakery-list > div > label {
+                    width: 90px;
+                    display: inline-block;
+                }
+                .bakery-list > div > span {
+                }
+
+                .avg-scores, .your-scores {
+                    margin-top: 32px;
                     display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     justify-content: center;
+                }
+                .avg-scores h2, .your-scores h2 {
+                    margin: 16px;
                 }
 
                 .success-message {
@@ -179,7 +250,7 @@ export default function Results() {
     );
 }
 
-function CustomTooltip({ active, payload }) {
+function CustomTooltip({ active, payload, labelText }) {
     if (active && payload && payload[0]) {
         const bagelId = payload[0].payload.bagelId;
         const bakery = payload[0].payload.bakery;
@@ -191,12 +262,12 @@ function CustomTooltip({ active, payload }) {
                     <span>{bakery}</span>
                 </div>
                 <div>
-                    <label>Avg Score:</label>
+                    <label>{labelText || 'Avg Score:'}</label>
                     <span>{score}</span>
                 </div>
                 <style jsx>{`
                     .custom-tooltip {
-                        background: rgba(255,255,255,0.9);
+                        background: rgba(255, 255, 255, 0.9);
                         padding: 12px;
                     }
                     .custom-tooltip > div {

@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import React, { useState, useEffect } from 'react';
 
 // put votes in local storage because it's better than nothing
-const LOCAL_STORAGE_KEY = 'bagelQuestVotes';
+export const LOCAL_STORAGE_KEY = 'bagelQuestVotes';
 
 const getVotes = () => {
     if (typeof localStorage !== 'undefined') {
