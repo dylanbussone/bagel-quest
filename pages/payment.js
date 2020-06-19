@@ -11,7 +11,7 @@ export default function Payment() {
                     <div>
                         <span className="small">
                             <i>
-                                Cost goes to: 14 bagel quarters per person, tips (#supportlocal),
+                                Cost goes to: 15 bagel quarters per person, tips (#supportlocal),
                                 and biodegradable/reusable packaging.
                             </i>
                         </span>

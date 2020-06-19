@@ -29,7 +29,8 @@ export default async (req, res) => {
             (${username}, 11, ${voteData[11].score}, ${voteData[11].comment}),
             (${username}, 12, ${voteData[12].score}, ${voteData[12].comment}),
             (${username}, 13, ${voteData[13].score}, ${voteData[13].comment}),
-            (${username}, 14, ${voteData[14].score}, ${voteData[14].comment});
+            (${username}, 14, ${voteData[14].score}, ${voteData[14].comment}),
+            (${username}, 15, ${voteData[15].score}, ${voteData[15].comment});
         `);
 
         res.statusCode = 200;

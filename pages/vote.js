@@ -42,26 +42,11 @@ export default function Vote() {
 
     const initialVoteData = {};
 
-    for (var i = 1; i <= 14; i++) {
+    for (var i = 1; i <= 15; i++) {
         initialVoteData[i] = (storageData.votes && storageData.votes[i]) || {};
     }
 
     const [voteData, setVoteData] = useState(initialVoteData);
-    //     1: (initialData && initialData.votes && initialData.votes['1']) || {},
-    //     2: (initialData && initialData.votes && initialData.votes['2']) || {},
-    //     3: (initialData && initialData.votes && initialData.votes['3']) || {},
-    //     4: (initialData && initialData.votes && initialData.votes['4']) || {},
-    //     5: (initialData && initialData.votes && initialData.votes['5']) || {},
-    //     6: (initialData && initialData.votes && initialData.votes['6']) || {},
-    //     7: (initialData && initialData.votes && initialData.votes['7']) || {},
-    //     8: (initialData && initialData.votes && initialData.votes['8']) || {},
-    //     9: (initialData && initialData.votes && initialData.votes['9']) || {},
-    //     10: (initialData && initialData.votes && initialData.votes['10']) || {},
-    //     11: (initialData && initialData.votes && initialData.votes['11']) || {},
-    //     12: (initialData && initialData.votes && initialData.votes['12']) || {},
-    //     13: (initialData && initialData.votes && initialData.votes['13']) || {},
-    //     14: (initialData && initialData.votes && initialData.votes['14']) || {},
-    // });
 
     useEffect(() => {
         setWasSubmitted(localStorage.getItem('submitted') === 'true');
@@ -134,14 +119,18 @@ export default function Vote() {
                     })}
                 </div>
 
-                <button
-                    disabled={disableVote || wasSubmitted}
-                    onClick={() => {
-                        submitVotes({ username, voteData, setDisableVote });
-                    }}
-                >
-                    {wasSubmitted ? 'Vote received' : 'Submit'}
-                </button>
+                {wasSubmitted ? (
+                    <h3>Vote received!</h3>
+                ) : (
+                    <button
+                        disabled={disableVote}
+                        onClick={() => {
+                            submitVotes({ username, voteData, setDisableVote });
+                        }}
+                    >
+                        Submit
+                    </button>
+                )}
             </section>
 
             <style jsx>{`

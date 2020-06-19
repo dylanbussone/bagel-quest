@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
-import { BarChart, XAxis, YAxis, Tooltip, Bar, Label, LabelList } from 'recharts';
+import { BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 import Router, { useRouter } from 'next/router';
 
 // TODO: enable after 5pm
@@ -8,15 +8,36 @@ const SHOW_RESULTS = false;
 
 // map of bagelId to the name
 const bagelMapping = {
-    // TODO
+    1: "Westman's",
+    2: 'Dingfelders',
+    3: 'Mt. Bagel',
+    4: 'Loxsmith',
+    5: "Schmaltzy's Delicatessen",
+    6: 'Rubenstein Bagels',
+    7: 'Seattle Bagel Bakery',
+    8: 'PorkChop & Co',
+    9: 'Macrina',
+    10: 'Zylberschtein’s',
+    11: 'Grateful Bread',
+    12: 'Little Lago',
+    13: 'Bagel asis',
+    14: 'Eltana',
+    15: 'Blazing Bagels',
 };
 
 export default function Results() {
     const [loadingBagelVotes, setLoadingBagelVotes] = useState(true);
     const [bagelVotes, setBagelVotes] = useState([]);
+    const [useSmallChart, setUseSmallChart] = useState(false);
 
     const router = useRouter();
     const showSuccessMessage = router.query.success === 'true';
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.innerWidth < 700) {
+            setUseSmallChart(true);
+        }
+    }, []);
 
     useEffect(() => {
         if (showSuccessMessage) {
@@ -31,19 +52,20 @@ export default function Results() {
             const response = await fetch('/api/results', { method: 'GET' });
             let json = await response.json();
             setLoadingBagelVotes(false);
-            json = json.map((x) => {
-                x.bagelId = x.bagel_id;
-                delete x.bagel_id;
-                x.score = parseInt(x.score, 10) || 0;
-                x.score = Math.max(0, x.score);
-                x.score = Math.min(10, x.score);
-                return x;
-            });
+            json = json
+                .filter((x) => x.score !== null)
+                .map((x) => {
+                    x.bagelId = x.bagel_id;
+                    delete x.bagel_id;
+                    x.score = parseInt(x.score, 10) || 0;
+                    x.score = Math.max(0, x.score);
+                    x.score = Math.min(10, x.score);
+                    return x;
+                });
             setBagelVotes(json);
         }
         fetchBagelVotes();
     }, []);
-
     const avgScores = bagelVotes
         .reduce((acc, cur) => {
             if (acc[cur.bagelId - 1]) {
@@ -51,7 +73,8 @@ export default function Results() {
             } else {
                 acc[cur.bagelId - 1] = {
                     bagelId: cur.bagelId,
-                    name: `Bagel #${cur.bagelId}`,
+                    bakery: bagelMapping[cur.bagelId],
+                    label: `#${cur.bagelId}`,
                     score: cur.score,
                 };
             }
@@ -59,10 +82,16 @@ export default function Results() {
         }, [])
         .filter(Boolean)
         .map((x) => {
-            x.score = x.score / (bagelVotes.length / 14);
+            const numVotes = bagelVotes.filter((bv) => bv.bagelId === x.bagelId).length;
+            x.score = x.score / numVotes;
             x.score = Math.round(x.score * 10) / 10; // round to 1 decimal place
             return x;
         });
+
+    const chartDimensions = {
+        width: useSmallChart ? 400 : 800,
+        height: useSmallChart ? 300 : 600,
+    };
 
     return (
         <main className="results">
@@ -73,15 +102,23 @@ export default function Results() {
                     {bagelVotes.length > 0 ? (
                         SHOW_RESULTS ? (
                             <React.Fragment>
-                                <h2>Final scores:</h2>
+                                <h2>Average scores:</h2>
                                 <div className="combined-scores">
-                                    <BarChart width={1100} height={450} data={avgScores}>
-                                        <XAxis dataKey="bagelId" hide="true" />
-                                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-                                        <Tooltip />
-                                        <Bar dataKey="score" fill="#8884d8">
-                                            <LabelList dataKey="name" position="top" />
-                                        </Bar>
+                                    <BarChart
+                                        width={chartDimensions.width}
+                                        height={chartDimensions.height}
+                                        data={avgScores}
+                                        margin={{
+                                            top: useSmallChart ? -24 : -80,
+                                            right: 0,
+                                            left: -20,
+                                            bottom: 0,
+                                        }}
+                                    >
+                                        <XAxis dataKey="label" interval={0} />
+                                        <YAxis ticks={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} label="Score" />
+                                        <Tooltip content={<CustomTooltip />} />
+                                        <Bar dataKey="score" fill="#8884d8" />
                                     </BarChart>
                                 </div>
                             </React.Fragment>
@@ -109,6 +146,12 @@ export default function Results() {
                 h1 {
                     margin-bottom: 1rem;
                 }
+
+                .combined-scores {
+                    display: flex;
+                    justify-content: center;
+                }
+
                 .success-message {
                     position: fixed;
                     top: 0;
@@ -134,4 +177,39 @@ export default function Results() {
             `}</style>
         </main>
     );
+}
+
+function CustomTooltip({ active, payload }) {
+    if (active && payload && payload[0]) {
+        const bagelId = payload[0].payload.bagelId;
+        const bakery = payload[0].payload.bakery;
+        const score = payload[0].payload.score;
+        return (
+            <div className="custom-tooltip">
+                <div>
+                    <label>#{bagelId}:</label>
+                    <span>{bakery}</span>
+                </div>
+                <div>
+                    <label>Avg Score:</label>
+                    <span>{score}</span>
+                </div>
+                <style jsx>{`
+                    .custom-tooltip {
+                        background: rgba(255,255,255,0.9);
+                        padding: 12px;
+                    }
+                    .custom-tooltip > div {
+                        margin: 8px 0;
+                        text-align: left;
+                    }
+                    .custom-tooltip label {
+                        font-weight: bold;
+                        margin-right: 6px;
+                    }
+                `}</style>
+            </div>
+        );
+    }
+    return null;
 }
