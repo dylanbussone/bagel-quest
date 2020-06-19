@@ -8,7 +8,7 @@ export default function Payment() {
             <div className="split">
                 <section>
                     <h3>Cost:</h3>
-                    <p>
+                    <div>
                         <span className="small">
                             <i>
                                 Cost goes to: 14 bagel quarters per person, tips (#supportlocal),
@@ -29,7 +29,7 @@ export default function Payment() {
                             <span className="green">+$7</span> if you requested Dingfelders cream
                             cheese
                         </i>
-                    </p>
+                    </div>
                     <p>
                         <span className="green">
                             Payment Method: Venmo <span className="big">@sarah-leviton</span>
@@ -39,7 +39,7 @@ export default function Payment() {
                     </p>
                     <br />
                     <h3>Delivery:</h3>
-                    <p className="small">
+                    <div className="small">
                         I am not charging for delivery, but will only be delivering to:
                         <br />
                         <br />
@@ -52,7 +52,7 @@ export default function Payment() {
                             If you live outside of this range and would still like to participate,
                             please reach out and we can arrange for pick up.
                         </p>
-                    </p>
+                    </div>
                 </section>
 
                 <div>

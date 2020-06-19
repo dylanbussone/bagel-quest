@@ -81,6 +81,11 @@ const bakeries = [
         url: 'https://www.zylberschtein.com/',
         image: '/zylberschteins.PNG',
     },
+    {
+        name: 'Eltana',
+        url: 'https://www.eltana.com/',
+        image: '/eltana.jpg',
+    },
 ];
 
 export default function Bakeries() {
