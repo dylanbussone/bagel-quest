@@ -5,7 +5,7 @@ import Router, { useRouter } from 'next/router';
 import { LOCAL_STORAGE_KEY } from './vote';
 
 // TODO: enable after 5pm
-const SHOW_RESULTS = false;
+const SHOW_RESULTS = true;
 
 // map of bagelId to the name
 const bagelMapping = {
