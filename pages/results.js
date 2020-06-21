@@ -21,7 +21,7 @@ const bagelMapping = {
     2: 'Dingfelders',
     3: 'Mt. Bagel',
     4: 'Loxsmith',
-    5: "Schmaltzy's Delicatessen",
+    5: "Schmaltzy's",
     6: 'Rubenstein Bagels',
     7: 'Seattle Bagel Bakery',
     8: 'PorkChop & Co',
