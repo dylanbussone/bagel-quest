@@ -13,7 +13,7 @@ import Router, { useRouter } from 'next/router';
 import { LOCAL_STORAGE_KEY } from './vote';
 
 // TODO: enable after 5pm
-const SHOW_RESULTS = false;
+const SHOW_RESULTS = true;
 
 // map of bagelId to the name
 const bagelMapping = {
@@ -123,21 +123,30 @@ export default function Results() {
                                     ))}
                                 </div> */}
 
-                                <div className="winners">
-                                    <h2>The winners!</h2>
+                                <p>
+                                    Thanks everyone for participating in Bagel Quest! We hope you had a great time tasting the best bagels Seattle has to offer.
+                                    <br />
+                                    We look forward to doing this again next year, where we can hopefully all taste in the same room.
+                                </p>
+
+                                <p>Winners will be announced once we're sure all survey results are in.</p>
+
+                                <p>Without further ado...</p>
+
+                                {/* <div className="winners">
                                     <div>
-                                        <h3>#1: Name</h3>
+                                        <h3>1st place: Name</h3>
                                         <p>Average score: <b>x</b></p>
                                     </div>
                                     <div>
-                                        <h3>#2: Name</h3>
+                                        <h3>2nd place: Name</h3>
                                         <p>Average score: <b>x</b></p>
                                     </div>
                                     <div>
-                                        <h3>#3: Name</h3>
+                                        <h3>3rd place: Name</h3>
                                         <p>Average score: <b>x</b></p>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="avg-scores">
                                     <BarChart
@@ -163,7 +172,7 @@ export default function Results() {
                                         <Bar
                                             dataKey="score"
                                             fill="#8884d8"
-                                            label={(x) => bagelMapping[x.index + 1]}
+                                            label={(x) => `#${x.index + 1}: ${bagelMapping[x.index + 1]}`}
                                         />
                                         <CartesianGrid stroke="rgba(0,0,0,0.1)" />
                                         <CartesianAxis stroke="rgba(0,0,0,0.1)" />
@@ -224,7 +233,7 @@ export default function Results() {
                 }
 
                 .avg-scores {
-                    margin: 64px 0 0;
+                    margin: 32px 0 0;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -263,7 +272,7 @@ function CustomTooltip({ active, payload, usersScores }) {
         const bagelId = payload[0].payload.bagelId;
         const bakery = payload[0].payload.bakery;
         const score = payload[0].payload.score;
-        const usersScore = (usersScores[bagelId] || {}).score;
+        const usersScore = ((usersScores && usersScores[bagelId]) || {}).score;
 
         return (
             <div className="custom-tooltip">
