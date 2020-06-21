@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
-import {
-    BarChart,
-    XAxis,
-    YAxis,
-    Tooltip,
-    Bar,
-    CartesianAxis,
-    CartesianGrid,
-} from 'recharts';
+import { BarChart, XAxis, YAxis, Tooltip, Bar, CartesianAxis, CartesianGrid } from 'recharts';
 import Router, { useRouter } from 'next/router';
 import { LOCAL_STORAGE_KEY } from './vote';
 
@@ -124,12 +116,17 @@ export default function Results() {
                                 </div> */}
 
                                 <p>
-                                    Thanks everyone for participating in Bagel Quest! We hope you had a great time tasting the best bagels Seattle has to offer.
+                                    Thanks everyone for participating in Bagel Quest! We hope you
+                                    had a great time tasting the best bagels Seattle has to offer.
                                     <br />
-                                    We look forward to doing this again next year, where we can hopefully all taste in the same room.
+                                    We look forward to doing this again next year, where we can
+                                    hopefully all taste in the same room.
                                 </p>
 
-                                <p>Winners will be announced once we're sure all survey results are in.</p>
+                                <p>
+                                    Winners will be announced once we're sure all survey results are
+                                    in.
+                                </p>
 
                                 <p>Without further ado...</p>
 
@@ -172,7 +169,9 @@ export default function Results() {
                                         <Bar
                                             dataKey="score"
                                             fill="#8884d8"
-                                            label={(x) => `#${x.index + 1}: ${bagelMapping[x.index + 1]}`}
+                                            label={(x) =>
+                                                `#${x.index + 1}: ${bagelMapping[x.index + 1]}`
+                                            }
                                         />
                                         <CartesianGrid stroke="rgba(0,0,0,0.1)" />
                                         <CartesianAxis stroke="rgba(0,0,0,0.1)" />
@@ -273,6 +272,7 @@ function CustomTooltip({ active, payload, usersScores }) {
         const bakery = payload[0].payload.bakery;
         const score = payload[0].payload.score;
         const usersScore = ((usersScores && usersScores[bagelId]) || {}).score;
+        const usersNotes = ((usersScores && usersScores[bagelId]) || {}).comment;
 
         return (
             <div className="custom-tooltip">
@@ -288,6 +288,12 @@ function CustomTooltip({ active, payload, usersScores }) {
                     <div>
                         <label>Your Score:</label>
                         <span>{usersScore}</span>
+                    </div>
+                )}
+                {usersNotes !== undefined && (
+                    <div>
+                        <label>Your Notes:</label>
+                        <span>{usersNotes}</span>
                     </div>
                 )}
                 <style jsx>{`
