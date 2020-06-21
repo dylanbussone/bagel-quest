@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "mysql": "mysql --host=35.247.13.113 --user=root --password"
+    "mysql": "mysql --host=35.247.13.113 --user=root --password",
+    "dbdump": "mysql -u root -p --database=bagelquest2020 --host=35.247.13.113 --batch -e \"select * from bagel_votes\"  > /Users/dylanb/Downloads/bagel-quest.csv"
   },
   "dependencies": {
     "express": "^4.17.1",
