@@ -98,6 +98,8 @@ export default function Results() {
         height: useSmallChart ? 300 : 600,
     };
 
+    const numVoters = Math.floor(bagelVotes.length / 15);
+
     return (
         <main className="results">
             {!loadingBagelVotes && (
@@ -177,6 +179,8 @@ export default function Results() {
                                         <CartesianAxis stroke="rgba(0,0,0,0.1)" />
                                     </BarChart>
                                 </div>
+
+                                <p>(Based on {numVoters} voters)</p>
                             </React.Fragment>
                         ) : (
                             <p>Be sure to check back after 5pm for the final results!</p>
