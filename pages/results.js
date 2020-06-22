@@ -4,7 +4,6 @@ import { BarChart, XAxis, YAxis, Tooltip, Bar, CartesianAxis, CartesianGrid } fr
 import Router, { useRouter } from 'next/router';
 import { LOCAL_STORAGE_KEY } from './vote';
 
-// TODO: enable after 5pm
 const SHOW_RESULTS = true;
 
 // map of bagelId to the name
@@ -50,7 +49,9 @@ export default function Results() {
 
     useEffect(() => {
         async function fetchBagelVotes() {
-            const response = await fetch('/api/results', { method: 'GET' });
+            // const response = await fetch('/api/results', { method: 'GET' });
+            const response = await fetch('/results.json');
+
             let json = await response.json();
             setLoadingBagelVotes(false);
             json = json
@@ -125,27 +126,27 @@ export default function Results() {
                                     hopefully all taste in the same room.
                                 </p>
 
-                                <p>
+                                {/* <p>
                                     Winners will be announced once we're sure all survey results are
                                     in.
-                                </p>
+                                </p> */}
 
                                 <p>Without further ado...</p>
 
-                                {/* <div className="winners">
+                                <div className="winners">
                                     <div>
-                                        <h3>1st place: Name</h3>
-                                        <p>Average score: <b>x</b></p>
+                                        <h3>1st place: Loxsmith</h3>
+                                        <p>Average score: 6.50</p>
                                     </div>
                                     <div>
-                                        <h3>2nd place: Name</h3>
-                                        <p>Average score: <b>x</b></p>
+                                        <h3>2nd place: Grateful Bread</h3>
+                                        <p>Average score: 6.49</p>
                                     </div>
                                     <div>
-                                        <h3>3rd place: Name</h3>
-                                        <p>Average score: <b>x</b></p>
+                                        <h3>3rd place: Mt. Bagel</h3>
+                                        <p>Average score: 6.41</p>
                                     </div>
-                                </div> */}
+                                </div>
 
                                 <div className="avg-scores">
                                     <BarChart
@@ -163,7 +164,7 @@ export default function Results() {
                                         <YAxis dataKey="bakery" type="category" tick={false} />
                                         <XAxis
                                             type="number"
-                                            ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                                            ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8]}
                                         />
                                         <Tooltip
                                             content={<CustomTooltip usersScores={usersScores} />}

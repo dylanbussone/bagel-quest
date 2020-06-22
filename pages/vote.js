@@ -119,7 +119,9 @@ export default function Vote() {
                     })}
                 </div>
 
-                {wasSubmitted ? (
+                <p>Voting has concluded!</p>
+
+                {/* {wasSubmitted ? (
                     <h3>Vote received!</h3>
                 ) : (
                     <button
@@ -130,7 +132,7 @@ export default function Vote() {
                     >
                         Submit
                     </button>
-                )}
+                )} */}
             </section>
 
             <style jsx>{`

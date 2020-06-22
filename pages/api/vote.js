@@ -2,6 +2,8 @@ import escape from 'sql-template-strings';
 import db from '../../lib/db';
 
 export default async (req, res) => {
+    return; // disable voting
+
     if (req.method === 'POST') {
         const { username, voteData } = req.body || {};
 
