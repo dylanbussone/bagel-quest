@@ -12,10 +12,7 @@ const config: Config = {
         "spin-slow": "spin 7s linear infinite",
       },
       colors: {
-        "darkest-indigo": "#093145",
-        "darkest-alice": "#107896",
-        "darkest-kelly": "#829356",
-        "darkest-orange": "#BA5C12",
+        // "indigo": "#093145",
       },
     },
   },

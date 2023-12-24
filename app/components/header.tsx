@@ -9,7 +9,7 @@ export default async function Header() {
   const user = session?.user;
 
   return (
-    <header className="h-28 px-4 border-b bg-darkest-indigo text-white">
+    <header className="h-28 px-4 border-b bg-gray-800 text-white">
       <div className="max-w-screen-lg mx-auto h-full flex items-center justify-between">
         <div className="flex gap-6">
           <Link href="/" className="hover:underline">
