@@ -1,9 +1,11 @@
+import Image from "next/image";
+
 export default function () {
   return (
-    <>
-      <main className="flex flex-col items-center justify-between p-24">
-        <h1 className="mb-24 text-6xl font-semibold">Bagel Quest</h1>
-      </main>
-    </>
+    <div className="flex flex-col items-center justify-between">
+      <Image src="/bagel-icon-dark.svg" width={200} height={200} alt="bagel" />
+      <h1 className="text-5xl my-10 font-semibold">Bagel Quest</h1>
+      <p>coming soon...</p>
+    </div>
   );
 }
