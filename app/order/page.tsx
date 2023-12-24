@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import SignOut from "@/components/sign-out";
 
 export default async function User() {
   const session = await getServerSession(authOptions);
@@ -13,12 +12,7 @@ export default async function User() {
 
   return (
     <div className="flex justify-center items-center flex-col mt-24">
-      <p className="mb-3 text-md text-center font-semibold">
-        Signed in as {user.name} ({user.email})
-      </p>
-      <p>
-        <SignOut />
-      </p>
+      <p className="text-center">Order page coming soon.</p>
     </div>
   );
 }
