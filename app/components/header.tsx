@@ -9,11 +9,17 @@ export default async function Header() {
   const user = session?.user;
 
   return (
-    <header className="sticky top-0 h-16 px-4 py-3 border-b border-gray-950 bg-gray-800">
+    <header className="h-28 px-4 border-b bg-darkest-indigo text-white">
       <div className="max-w-screen-lg mx-auto h-full flex items-center justify-between">
-        <div className="text-white flex gap-6">
-          <Link href="/">Home</Link>
-          {user && <Link href="/order">Order</Link>}
+        <div className="flex gap-6">
+          <Link href="/" className="hover:underline">
+            Home
+          </Link>
+          {user && (
+            <Link href="/order" className="hover:underline">
+              Order
+            </Link>
+          )}
         </div>
         {user ? (
           <>
@@ -22,9 +28,9 @@ export default async function Header() {
                 <Link href="/user">
                   <Image
                     src={user.image}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
+                    width={60}
+                    height={60}
+                    className="rounded-full opacity-90 hover:opacity-100 transition duration-150 ease-in-out"
                     alt={`profile photo of ${user.name}`}
                     priority
                   />

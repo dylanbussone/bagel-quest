@@ -22,3 +22,8 @@ h3 {
 b {
   font-weight: 600;
 }
+
+.colored-grid > div {
+  padding: 2rem;
+  border-radius: 1rem;
+}
