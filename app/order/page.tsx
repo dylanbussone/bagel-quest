@@ -34,7 +34,7 @@ const items: Item[] = [
     id: "price_1OR0NpCQF0PDqGDIrU1xR4dy",
     name: "Bagel Quest ticket",
     description:
-      "Mandatory, 1 per user. This is to verify that only paid participants can vote. For couples, please purchase tickets separately through your own accounts.",
+      "This is to verify that only paid participants can vote. For couples, please purchase tickets separately through your own accounts.",
     price: 20,
     forceQuantity: true,
     // imageUrl:
@@ -97,12 +97,22 @@ export default function Order() {
       <h1 className="text-3xl mb-12 font-bold">Place your order</h1>
 
       {checkout ? (
-        <Stripe
-          testShmearQuantity={testShmearQuantity}
-          plainShmearQuantity={plainShmearQuantity}
-          novaShmearQuantity={novaShmearQuantity}
-          novaLoxQuantity={novaLoxQuantity}
-        />
+        <>
+          <div className="">
+            <button
+              className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+              onClick={() => setCheckout(false)}
+            >
+              Change selection
+            </button>
+          </div>
+          <Stripe
+            testShmearQuantity={testShmearQuantity}
+            plainShmearQuantity={plainShmearQuantity}
+            novaShmearQuantity={novaShmearQuantity}
+            novaLoxQuantity={novaLoxQuantity}
+          />
+        </>
       ) : (
         <>
           {items.map((item) => {
@@ -136,7 +146,15 @@ export default function Order() {
                       ${item.price}
                     </span>
                   </h2>
-                  <p className="text-sm text-gray-800">{item.description}</p>
+                  <p className="text-sm text-gray-800">
+                    {item.forceQuantity && (
+                      <>
+                        <b>Mandatory, 1 per user.</b>
+                        <br />
+                      </>
+                    )}
+                    {item.description}
+                  </p>
                 </div>
 
                 <div className="flex flex-row items-center justify-center">
@@ -167,7 +185,7 @@ export default function Order() {
           })}
 
           <button
-            className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+            className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
             onClick={() => setCheckout(true)}
           >
             Checkout
