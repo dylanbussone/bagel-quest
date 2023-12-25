@@ -98,14 +98,12 @@ export default function Order() {
 
       {checkout ? (
         <>
-          <div className="">
-            <button
-              className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
-              onClick={() => setCheckout(false)}
-            >
-              Change selection
-            </button>
-          </div>
+          <button
+            className="py-2 px-12 mb-12 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+            onClick={() => setCheckout(false)}
+          >
+            Change selection
+          </button>
           <Stripe
             testShmearQuantity={testShmearQuantity}
             plainShmearQuantity={plainShmearQuantity}
