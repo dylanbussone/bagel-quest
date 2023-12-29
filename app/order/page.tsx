@@ -104,12 +104,13 @@ export default function Order() {
           >
             Change selection
           </button>
-          <Stripe
+          <p>Payment coming soon</p>
+          {/* <Stripe
             testShmearQuantity={testShmearQuantity}
             plainShmearQuantity={plainShmearQuantity}
             novaShmearQuantity={novaShmearQuantity}
             novaLoxQuantity={novaLoxQuantity}
-          />
+          /> */}
         </>
       ) : (
         <>
