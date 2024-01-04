@@ -20,17 +20,18 @@ const items: Item[] = [
   },
   {
     name: "Plain Schmear (8oz)",
-    description: "Sourced locally from Dingfelders Deli.",
-    price: constants.PLAIN_SHMEAR_PRICE,
+    description: "(Optional) Schmear it on ya bagels.",
+    price: constants.PLAIN_SCHMEAR_PRICE,
   },
   {
     name: "Nova Schmear (8oz)",
-    description: "Sourced locally from Dingfelders Deli.",
-    price: constants.NOVA_SHMEAR_PRICE,
+    description: "(Optional) Schmear it on ya bagels.",
+    price: constants.NOVA_SCHMEAR_PRICE,
   },
   {
     name: "Nova Lox (4oz)",
-    description: "Sourced locally from Dingfelders Deli.",
+    description:
+      "(Optional) How do you keep a bagel from getting away? You put Lox on it.",
     price: constants.NOVA_LOX_PRICE,
   },
 ];
@@ -44,8 +45,8 @@ export const OrderForm = ({
 }) => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false); // TODO: get default value from db. do we have a row saved for this user? if so, show some different content (straight to venmo stuff). Maybe give option to change order?
-  const [plainShmearQuantity, setPlainShmearQuantity] = useState(0);
-  const [novaShmearQuantity, setNovaShmearQuantity] = useState(0);
+  const [plainSchmearQuantity, setPlainSchmearQuantity] = useState(0);
+  const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
 
   const handleSelectChange = (itemName: string, value: string) => {
@@ -53,10 +54,10 @@ export const OrderForm = ({
 
     switch (itemName) {
       case "Plain Schmear (8oz)":
-        setPlainShmearQuantity(quantity);
+        setPlainSchmearQuantity(quantity);
         break;
       case "Nova Schmear (8oz)":
-        setNovaShmearQuantity(quantity);
+        setNovaSchmearQuantity(quantity);
         break;
       case "Nova Lox (4oz)":
         setNovaLoxQuantity(quantity);
@@ -81,15 +82,8 @@ export const OrderForm = ({
         </li>
         <li>Packaged in environmentally friendly materials.</li>
         <li>
-          Shmear and lox sourced locally from{" "}
-          <a
-            href="https://dingfelders.com/"
-            target="_blank"
-            className="text-blue-800"
-          >
-            Dingfelders Deli
-          </a>{" "}
-          in Capitol Hill.
+          All schmear and lox are sourced from one of our many local bagel
+          businesses.
         </li>
         <li>
           All profits will be donated to the{" "}
@@ -109,10 +103,10 @@ export const OrderForm = ({
 
         switch (item.name) {
           case "Plain Schmear (8oz)":
-            selectedQuantity = plainShmearQuantity;
+            selectedQuantity = plainSchmearQuantity;
             break;
           case "Nova Schmear (8oz)":
-            selectedQuantity = novaShmearQuantity;
+            selectedQuantity = novaSchmearQuantity;
             break;
           case "Nova Lox (4oz)":
             selectedQuantity = novaLoxQuantity;
@@ -184,8 +178,8 @@ export const OrderForm = ({
 
   const totalPrice =
     constants.BAGEL_QUEST_TICKET_PRICE +
-    plainShmearQuantity * constants.PLAIN_SHMEAR_PRICE +
-    novaShmearQuantity * constants.NOVA_SHMEAR_PRICE +
+    plainSchmearQuantity * constants.PLAIN_SCHMEAR_PRICE +
+    novaSchmearQuantity * constants.NOVA_SCHMEAR_PRICE +
     novaLoxQuantity * constants.NOVA_LOX_PRICE;
 
   const checkoutContent = (
@@ -206,20 +200,20 @@ export const OrderForm = ({
             <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
             <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
           </tr>
-          {plainShmearQuantity > 0 && (
+          {plainSchmearQuantity > 0 && (
             <tr>
-              <td>Plain Shmear</td>
-              <td>{plainShmearQuantity}</td>
-              <td>${constants.PLAIN_SHMEAR_PRICE}</td>
-              <td>${plainShmearQuantity * constants.PLAIN_SHMEAR_PRICE}</td>
+              <td>Plain schmear</td>
+              <td>{plainSchmearQuantity}</td>
+              <td>${constants.PLAIN_SCHMEAR_PRICE}</td>
+              <td>${plainSchmearQuantity * constants.PLAIN_SCHMEAR_PRICE}</td>
             </tr>
           )}
-          {novaShmearQuantity > 0 && (
+          {novaSchmearQuantity > 0 && (
             <tr>
-              <td>Nova Shmear</td>
-              <td>{novaShmearQuantity}</td>
-              <td>${constants.NOVA_SHMEAR_PRICE}</td>
-              <td>${novaShmearQuantity * constants.NOVA_SHMEAR_PRICE}</td>
+              <td>Nova schmear</td>
+              <td>{novaSchmearQuantity}</td>
+              <td>${constants.NOVA_SCHMEAR_PRICE}</td>
+              <td>${novaSchmearQuantity * constants.NOVA_SCHMEAR_PRICE}</td>
             </tr>
           )}
           {novaLoxQuantity > 0 && (
