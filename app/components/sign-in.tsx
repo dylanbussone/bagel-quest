@@ -13,7 +13,7 @@ export const SignIn = ({ callbackUrl = "/", renderAsButton = true }) => {
     </a>
   ) : (
     <a
-      className="underline"
+      className="text-blue-800"
       onClick={() => signIn("google", { callbackUrl })}
       role="button"
     >

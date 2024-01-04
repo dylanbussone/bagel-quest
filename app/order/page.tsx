@@ -110,10 +110,10 @@ export default function Order() {
               <a
                 href="https://dingfelders.com/"
                 target="_blank"
-                className="text-blue-700 hover:underline"
+                className="text-blue-800"
               >
                 Dingfelders Deli
-              </a>
+              </a>{" "}
               in Capitol Hill.
             </li>
             <li>
@@ -121,7 +121,7 @@ export default function Order() {
               <a
                 href="https://westseattlefoodbank.org/"
                 target="_blank"
-                className="text-blue-700 hover:underline"
+                className="text-blue-800"
               >
                 West Seattle Food Bank
               </a>

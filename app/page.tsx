@@ -16,9 +16,8 @@ export default function () {
         />
       </div>
       <div className="mt-6 sm:mb-20">
-        <h2 className="text-2xl text-center mt-8">🥯 Bagel Quest is back 🥯</h2>
-        <h3 className="text-sm text-center my-3">Bigger and Better</h3>
-        <h3 className="text-lg text-center mb-8">2/17/2024</h3>
+        <h2 className="text-2xl text-center mt-8">It's back.</h2>
+        <h3 className="text-xl text-center mt-4 mb-8">🥯 2/17/2024 🥯</h3>
         <p className="my-4">
           <b>Hey Bagel Lovers!</b>
           <span className="mt-2 block">
@@ -41,7 +40,7 @@ export default function () {
                 to become part of the Bagel Quest crew! Once you're signed up,
                 you can head over to the{" "}
                 {/* TODO: for non-logged-in users should open sign in link */}
-                <Link href="/order" className="underline">
+                <Link href="/order" className="text-blue-800">
                   <b>Order page</b>
                 </Link>{" "}
                 to get your ticket.

@@ -61,22 +61,24 @@ export default function Return() {
         </div>
         <br />A confirmation email will be sent to {customerEmail}.<br />
         If you have any questions, please email{" "}
-        <a href="mailto:srleviton@gmail.com" className="underline">
+        <a href="mailto:srleviton@gmail.com" className="text-blue-800">
           srleviton@gmail.com
         </a>
+        .
       </div>
     );
   } else if (status === "error") {
     body = (
       <p>
         There was an error processing your payment. Please{" "}
-        <Link href="/order" className="underline">
+        <Link href="/order" className="text-blue-800">
           try again
         </Link>{" "}
         or email{" "}
-        <a href="mailto:srleviton@gmail.com" className="underline">
+        <a href="mailto:srleviton@gmail.com" className="text-blue-800">
           srleviton@gmail.com
         </a>
+        .
       </p>
     );
   }
