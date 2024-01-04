@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import * as constants from "@/utils/constants";
+import type { DefaultSession } from "next-auth";
 
 type Item = {
   name: string;
@@ -37,11 +39,9 @@ const items: Item[] = [
 ];
 
 export const OrderForm = ({
-  name, // TODO: use for prefilling POST
-  email,
+  user, // TODO: use for prefilling POST email/name
 }: {
-  name?: string;
-  email?: string;
+  user?: DefaultSession["user"];
 }) => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false); // TODO: get default value from db. do we have a row saved for this user? if so, show some different content (straight to venmo stuff). Maybe give option to change order?
@@ -77,8 +77,8 @@ export const OrderForm = ({
     <>
       <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-1/2 gap-4 sm:gap-12 pl-4">
         <li>
-          Each ticket includes a portion of a bagel from 12 different bagel
-          shops (2 bagels-worth in total).
+          Each ticket includes a portion of a bagel from at least 12 shops
+          (about 2 bagels-worth in total).
         </li>
         <li>Packaged in environmentally friendly materials.</li>
         <li>
@@ -167,8 +167,12 @@ export const OrderForm = ({
       <button
         className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
         onClick={() => {
-          setShowCheckout(true);
-          window.scrollTo(0, 0);
+          if (user?.email) {
+            setShowCheckout(true);
+            window.scrollTo(0, 0);
+          } else {
+            signIn("google");
+          }
         }}
       >
         Checkout

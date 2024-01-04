@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import ForceSignIn from "@/components/force-sign-in";
 
 export default async function Vote() {
   const session = await getServerSession(authOptions);
@@ -12,7 +11,6 @@ export default async function Vote() {
         Cast your votes
       </h1>
       <p>Voting opens 2/17</p>
-      <ForceSignIn user={user} />
     </div>
   );
 }
