@@ -123,7 +123,7 @@ export const OrderForm = ({
         return (
           <div
             key={item.name}
-            className="flex flex-row justify-between items-center w-full sm:w-1/2 gap-4 sm:gap-12 py-8 border-t"
+            className="flex flex-row justify-between items-center w-full sm:w-1/2 gap-4 sm:gap-12 py-8 border-t border-gray-300"
           >
             <div className="flex flex-col">
               <h2 className="text-xl font-bold flex items-baseline">

@@ -19,7 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={[
+          inter.className,
+          "bg-gradient-to-b from-white to-slate-100",
+        ].join(" ")}
+      >
         <Header />
         <main className="max-w-screen-lg mx-auto p-4 min-h-screen">
           {children}
