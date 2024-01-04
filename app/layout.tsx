@@ -22,7 +22,7 @@ export default function RootLayout({
       <body
         className={[
           inter.className,
-          "bg-gradient-to-b from-white to-slate-100",
+          "bg-gradient-to-b from-white to-stone-100",
         ].join(" ")}
       >
         <Header />

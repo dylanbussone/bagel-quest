@@ -6,11 +6,11 @@ export default async function Footer() {
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
   return (
-    <footer className="bg-gradient-to-b from-slate-700 to-slate-900 text-white">
+    <footer className="bg-stone-200">
       <div className="flex flex-col gap-5 items-center justify-center py-8">
         <Link href="/" className={footerLinkStyle}>
           <Image
-            src="/bagel-icon-light.svg"
+            src="/bagel-icon-dark.svg"
             width={50}
             height={50}
             alt="bagel"

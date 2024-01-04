@@ -254,9 +254,9 @@ export const OrderForm = ({
         </>
       )}
       {showConfirmation && (
-        <div className="flex flex-col my-8 w-full justify-center items-center">
+        <div className="flex flex-col mt-8 w-full justify-center items-center">
           <p className="mb-6">Your order has been received!</p>
-          <p className="font-semibold">
+          <p className="font-semibold mb-4">
             {" "}
             To complete payment, send ${totalPrice} to{" "}
             <a

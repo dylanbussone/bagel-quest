@@ -12,7 +12,7 @@ export default async function Header() {
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
   return (
-    <header className="h-24 px-4 border-b bg-slate-800 text-white">
+    <header className="h-24 px-4 bg-amber-950 text-white">
       <div className="max-w-screen-lg mx-auto h-full flex items-center justify-between">
         <div className="flex gap-5 sm:gap-8 items-center">
           <Link href="/" className={headerLinkStyle}>
