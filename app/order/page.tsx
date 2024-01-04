@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Stripe } from "@/components/stripe";
 
 type Item = {
   id: string;
@@ -47,7 +45,6 @@ const items: Item[] = [
 
 export default function Order() {
   const [checkout, setCheckout] = useState(false);
-  const [testShmearQuantity, setTestShmearQuantity] = useState(0);
   const [plainShmearQuantity, setPlainShmearQuantity] = useState(0);
   const [novaShmearQuantity, setNovaShmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
@@ -56,9 +53,6 @@ export default function Order() {
     const quantity = parseInt(value);
 
     switch (itemName) {
-      case "TEST SCHMEAR":
-        setTestShmearQuantity(quantity);
-        break;
       case "Plain Schmear (8oz)":
         setPlainShmearQuantity(quantity);
         break;
@@ -90,12 +84,9 @@ export default function Order() {
             Change selection
           </button>
           <p>Payment coming soon</p>
-          {/* <Stripe
-            testShmearQuantity={testShmearQuantity}
-            plainShmearQuantity={plainShmearQuantity}
-            novaShmearQuantity={novaShmearQuantity}
-            novaLoxQuantity={novaLoxQuantity}
-          /> */}
+          Plain shmear: {plainShmearQuantity}
+          Nova shmear: {novaShmearQuantity}
+          Nova lox: {novaLoxQuantity}
         </div>
       ) : (
         <>
@@ -133,9 +124,6 @@ export default function Order() {
             let selectedQuantity = 0;
 
             switch (item.name) {
-              case "TEST SCHMEAR":
-                selectedQuantity = testShmearQuantity;
-                break;
               case "Plain Schmear (8oz)":
                 selectedQuantity = plainShmearQuantity;
                 break;

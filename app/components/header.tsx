@@ -25,11 +25,11 @@ export default async function Header() {
           </Link>
           {user && (
             <>
-              <Link href="/order" className={headerLinkStyle}>
-                Order
-              </Link>
               <Link href="/lineup" className={headerLinkStyle}>
                 Lineup
+              </Link>
+              <Link href="/order" className={headerLinkStyle}>
+                Order
               </Link>
               <Link href="/vote" className={headerLinkStyle}>
                 Vote

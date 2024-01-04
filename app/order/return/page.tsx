@@ -1,34 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Return() {
-  const [status, setStatus] = useState<string | null>(null);
-  const [customerEmail, setCustomerEmail] = useState("");
-  const sessionId = useSearchParams().get("session_id");
-
-  useEffect(() => {
-    fetch(`/api/checkout_sessions?session_id=${sessionId}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setStatus(data.status);
-        setCustomerEmail(data.customer_email);
-      })
-      .catch(() => {
-        setStatus("error");
-      });
-  }, []);
-
-  if (status === "open") {
-    return redirect("/");
-  }
-
+  const status = "complete";
+  const customerEmail = "foo@foo.com";
   let body = null;
 
   if (status === "complete") {
