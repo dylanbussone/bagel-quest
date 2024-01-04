@@ -26,3 +26,8 @@ b {
 ul li {
   margin-bottom: 1rem;
 }
+
+table td, table th {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem;
+}

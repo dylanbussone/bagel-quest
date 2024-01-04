@@ -1,50 +1,49 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import * as constants from "@/utils/constants";
 
 type Item = {
-  id: string;
   name: string;
   description: string;
   price: number;
   forceQuantity?: boolean;
-  imageUrl?: string;
 };
 const items: Item[] = [
   {
-    id: "price_1OR0NpCQF0PDqGDIrU1xR4dy",
     name: "Bagel Quest ticket",
     description:
       "This is to verify that only paid participants can vote. Groups/couples: please purchase tickets individually through your own accounts.",
-    price: 20,
+    price: constants.BAGEL_QUEST_TICKET_PRICE,
     forceQuantity: true,
-    // imageUrl:
   },
   {
-    id: "price_1OR0OqCQF0PDqGDIWCvY3pkz",
     name: "Plain Schmear (8oz)",
     description: "Sourced locally from Dingfelders Deli.",
-    price: 8,
-    // imageUrl:
+    price: constants.PLAIN_SHMEAR_PRICE,
   },
   {
-    id: "price_1OR0PtCQF0PDqGDIOlHhmy5K",
     name: "Nova Schmear (8oz)",
     description: "Sourced locally from Dingfelders Deli.",
-    price: 13,
-    // imageUrl:
+    price: constants.NOVA_SHMEAR_PRICE,
   },
   {
-    id: "price_1OR0R1CQF0PDqGDIjoO9Tkcb",
     name: "Nova Lox (4oz)",
     description: "Sourced locally from Dingfelders Deli.",
-    price: 12,
-    // imageUrl:
+    price: constants.NOVA_LOX_PRICE,
   },
 ];
 
-export const OrderForm = () => {
-  const [checkout, setCheckout] = useState(false);
+export const OrderForm = ({
+  name, // TODO: use for prefilling POST
+  email,
+}: {
+  name?: string;
+  email?: string;
+}) => {
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false); // TODO: get default value from db. do we have a row saved for this user? if so, show some different content (straight to venmo stuff). Maybe give option to change order?
   const [plainShmearQuantity, setPlainShmearQuantity] = useState(0);
   const [novaShmearQuantity, setNovaShmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
@@ -67,24 +66,13 @@ export const OrderForm = () => {
     }
   };
 
-  return checkout ? (
-    <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
-      <p className="mb-8 text-center">
-        You will receive a confirmation email with your bagel pickup information
-        once payment is completed.
-      </p>
-      <button
-        className="py-2 px-12 mb-12 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
-        onClick={() => setCheckout(false)}
-      >
-        Change selection
-      </button>
-      <p>Payment coming soon</p>
-      Plain shmear: {plainShmearQuantity}
-      Nova shmear: {novaShmearQuantity}
-      Nova lox: {novaLoxQuantity}
-    </div>
-  ) : (
+  const handleConfirmation = async () => {
+    // TODO: bagel spinner, await adding row to table for user
+    // then:
+    setShowConfirmation(true);
+  };
+
+  const cartContent = (
     <>
       <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-1/2 gap-4 sm:gap-12 pl-4">
         <li>
@@ -134,7 +122,7 @@ export const OrderForm = () => {
         }
         return (
           <div
-            key={item.id}
+            key={item.name}
             className="flex flex-row justify-between items-center w-full sm:w-1/2 gap-4 sm:gap-12 py-8 border-t"
           >
             <div className="flex flex-col">
@@ -184,10 +172,120 @@ export const OrderForm = () => {
 
       <button
         className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
-        onClick={() => setCheckout(true)}
+        onClick={() => {
+          setShowCheckout(true);
+          window.scrollTo(0, 0);
+        }}
       >
         Checkout
       </button>
+    </>
+  );
+
+  const totalPrice =
+    constants.BAGEL_QUEST_TICKET_PRICE +
+    plainShmearQuantity * constants.PLAIN_SHMEAR_PRICE +
+    novaShmearQuantity * constants.NOVA_SHMEAR_PRICE +
+    novaLoxQuantity * constants.NOVA_LOX_PRICE;
+
+  const checkoutContent = (
+    <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
+      <table className="border-collapse table-auto w-full text-left mb-8">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bagel Quest Ticket</td>
+            <td>1</td>
+            <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
+            <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
+          </tr>
+          {plainShmearQuantity > 0 && (
+            <tr>
+              <td>Plain Shmear</td>
+              <td>{plainShmearQuantity}</td>
+              <td>${constants.PLAIN_SHMEAR_PRICE}</td>
+              <td>${plainShmearQuantity * constants.PLAIN_SHMEAR_PRICE}</td>
+            </tr>
+          )}
+          {novaShmearQuantity > 0 && (
+            <tr>
+              <td>Nova Shmear</td>
+              <td>{novaShmearQuantity}</td>
+              <td>${constants.NOVA_SHMEAR_PRICE}</td>
+              <td>${novaShmearQuantity * constants.NOVA_SHMEAR_PRICE}</td>
+            </tr>
+          )}
+          {novaLoxQuantity > 0 && (
+            <tr>
+              <td>Nova Lox</td>
+              <td>{novaLoxQuantity}</td>
+              <td>${constants.NOVA_LOX_PRICE}</td>
+              <td>${novaLoxQuantity * constants.NOVA_LOX_PRICE}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <p className="text-lg font-semibold">Total: ${totalPrice}</p>
+
+      {!showConfirmation && (
+        <>
+          <div className="flex my-8 gap-8 w-full justify-between items-center flex-col sm:flex-row">
+            <button
+              className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+              onClick={() => setShowCheckout(false)}
+            >
+              Change selection
+            </button>
+            <button
+              className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100"
+              onClick={handleConfirmation}
+            >
+              Confirm selection
+            </button>
+          </div>
+        </>
+      )}
+      {showConfirmation && (
+        <div className="flex flex-col my-8 w-full justify-center items-center">
+          <p className="mb-6">Your order has been received!</p>
+          <p className="font-semibold">
+            {" "}
+            To complete payment, send ${totalPrice} to{" "}
+            <a
+              href="https://venmo.com/u/Dylan-Bussone"
+              target="_blank"
+              className="text-blue-800"
+            >
+              @Dylan-Bussone
+            </a>
+            .
+          </p>
+          <a href="https://venmo.com/u/Dylan-Bussone" target="_blank">
+            <Image src="/venmo.png" width={200} height={200} alt="bagel" />
+          </a>
+        </div>
+        // <p className="mt-8 text-center">
+        //   You will receive a confirmation email with your bagel pickup information
+        //   once payment is completed.
+        // </p>
+      )}
+    </div>
+  );
+
+  return (
+    <>
+      <h1 className="text-3xl mb-12 font-bold">
+        {showConfirmation ? "Your order" : "Place your order"}
+      </h1>
+      {showCheckout ? checkoutContent : cartContent}
     </>
   );
 };

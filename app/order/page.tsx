@@ -9,8 +9,10 @@ export default async function Order() {
 
   return (
     <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
-      <h1 className="text-3xl mb-12 font-bold">Place your order</h1>
-      <OrderForm />
+      <OrderForm
+        name={user?.name ?? undefined}
+        email={user?.email ?? undefined}
+      />
       <ForceSignIn user={user} />
     </div>
   );
