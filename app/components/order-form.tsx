@@ -105,11 +105,11 @@ export const OrderForm = ({
                   <>
                     <b>Mandatory, 1 per user.</b>
                     <br />
-                    <p>
+                    <span>
                       This is to verify that only paid participants can vote.
                       Groups/couples: please purchase tickets individually
                       through your own accounts so you can vote!
-                    </p>
+                    </span>
                   </>
                 )}
                 {product.description}
