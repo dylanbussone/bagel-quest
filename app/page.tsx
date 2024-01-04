@@ -5,8 +5,10 @@ import { SignIn } from "@/components/sign-in";
 export default function () {
   return (
     <>
-      <div className="flex flex-col items-center justify-between sm:mt-16">
-        <h1 className="font-bold">Bagel Quest</h1>
+      <div className="flex flex-col items-center justify-between mt-8 sm:mt-16">
+        <h1 className="font-bold py-4 text-5xl sm:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
+          Bagel Quest
+        </h1>
         <Image
           src="/bagel-icon-dark.svg"
           width={200}
@@ -15,8 +17,8 @@ export default function () {
           className="animate-spin-slow my-6"
         />
       </div>
-      <div className="mt-6 sm:mb-20">
-        <h2 className="text-2xl text-center mt-8">It's back.</h2>
+      <div className="mt-2 sm:mb-20">
+        <h2 className="text-2xl text-center">It's back.</h2>
         <h3 className="text-xl text-center mt-4 mb-8">🥯 2/17/2024 🥯</h3>
         <p className="my-4">
           <b>Hey Bagel Lovers!</b>

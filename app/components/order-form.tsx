@@ -282,7 +282,7 @@ export const OrderForm = ({
 
   return (
     <>
-      <h1 className="text-3xl mb-12 font-bold">
+      <h1 className="text-4xl sm:text-6xl py-4 font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
         {showConfirmation ? "Your order" : "Place your order"}
       </h1>
       {showCheckout ? checkoutContent : cartContent}
