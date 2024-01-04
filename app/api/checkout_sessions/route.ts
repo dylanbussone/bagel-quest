@@ -15,16 +15,6 @@ export async function POST(req: NextRequest) {
     } = data;
 
     const line_items = [
-      // {
-      //   // Test ticket
-      //   price: "price_1OR23RCQF0PDqGDIKg5rRgMQ",
-      //   quantity: 1,
-      // },
-      // {
-      //   // Test shmear
-      //   price: "price_1OR23eCQF0PDqGDIQKhucdNk",
-      //   quantity: testShmearQuantity,
-      // },
       {
         // Bagel Quest ticket
         price: "price_1OR0NpCQF0PDqGDIrU1xR4dy",

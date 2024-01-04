@@ -22,3 +22,7 @@ h3 {
 b {
   font-weight: 600;
 }
+
+ul li {
+  margin-bottom: 1rem;
+}

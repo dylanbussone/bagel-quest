@@ -13,28 +13,11 @@ type Item = {
   imageUrl?: string;
 };
 const items: Item[] = [
-  // {
-  //   id: "price_1OR23RCQF0PDqGDIKg5rRgMQ",
-  //   name: "TEST TICKET",
-  //   description:
-  //     "Mandatory, 1 per user. This is to verify that only paid participants can vote. For couples, please purchase tickets separately through your own accounts.",
-  //   price: 0,
-  //   forceQuantity: true,
-  //   // imageUrl:
-  // },
-  // {
-  //   id: "price_1OR23eCQF0PDqGDIQKhucdNk",
-  //   name: "TEST SCHMEAR",
-  //   description:
-  //     "Plain schmear. Sourced locally from Dingfelders Deli in Capitol Hill",
-  //   price: 0,
-  //   // imageUrl:
-  // },
   {
     id: "price_1OR0NpCQF0PDqGDIrU1xR4dy",
     name: "Bagel Quest ticket",
     description:
-      "This is to verify that only paid participants can vote. For couples, please purchase tickets separately through your own accounts.",
+      "This is to verify that only paid participants can vote. Groups/couples: please purchase tickets individually through your own accounts.",
     price: 20,
     forceQuantity: true,
     // imageUrl:
@@ -42,23 +25,21 @@ const items: Item[] = [
   {
     id: "price_1OR0OqCQF0PDqGDIWCvY3pkz",
     name: "Plain Schmear (8oz)",
-    description:
-      "Plain schmear. Sourced locally from Dingfelders Deli in Capitol Hill",
+    description: "Sourced locally from Dingfelders Deli.",
     price: 8,
     // imageUrl:
   },
   {
     id: "price_1OR0PtCQF0PDqGDIOlHhmy5K",
     name: "Nova Schmear (8oz)",
-    description:
-      "Nova schmear. Sourced locally from Dingfelders Deli in Capitol Hill",
+    description: "Sourced locally from Dingfelders Deli.",
     price: 13,
     // imageUrl:
   },
   {
     id: "price_1OR0R1CQF0PDqGDIjoO9Tkcb",
     name: "Nova Lox (4oz)",
-    description: "Sourced locally from Dingfelders Deli in Capitol Hill",
+    description: "Sourced locally from Dingfelders Deli.",
     price: 12,
     // imageUrl:
   },
@@ -97,7 +78,11 @@ export default function Order() {
       <h1 className="text-3xl mb-12 font-bold">Place your order</h1>
 
       {checkout ? (
-        <>
+        <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
+          <p className="mb-8 text-center">
+            You will receive a confirmation email with your bagel pickup
+            information once payment is completed.
+          </p>
           <button
             className="py-2 px-12 mb-12 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
             onClick={() => setCheckout(false)}
@@ -111,9 +96,39 @@ export default function Order() {
             novaShmearQuantity={novaShmearQuantity}
             novaLoxQuantity={novaLoxQuantity}
           /> */}
-        </>
+        </div>
       ) : (
         <>
+          <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-1/2 gap-4 sm:gap-12 pl-4">
+            <li>
+              Each ticket includes a portion of a bagel from 12 different bagel
+              shops (2 bagels-worth in total).
+            </li>
+            <li>Packaged in environmentally friendly materials.</li>
+            <li>
+              Shmear and lox sourced locally from{" "}
+              <a
+                href="https://dingfelders.com/"
+                target="_blank"
+                className="text-blue-700 hover:underline"
+              >
+                Dingfelders Deli
+              </a>
+              in Capitol Hill.
+            </li>
+            <li>
+              All profits will be donated to the{" "}
+              <a
+                href="https://westseattlefoodbank.org/"
+                target="_blank"
+                className="text-blue-700 hover:underline"
+              >
+                West Seattle Food Bank
+              </a>
+              .
+            </li>
+          </ul>
+
           {items.map((item) => {
             let selectedQuantity = 0;
 
