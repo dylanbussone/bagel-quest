@@ -79,12 +79,12 @@ export default function Lineup() {
               <a href={item.url} target="_blank" className="text-blue-800">
                 {item.name}
               </a>
-              <a href={item.url} target="_blank" className="text-blue-800">
+              <a href={item.url} target="_blank" className="h-20 w-24 relative">
                 <Image
                   src={item.image}
-                  width={100}
-                  height={100}
+                  fill={true}
                   alt={item.name}
+                  loading="lazy"
                 />
               </a>
             </h2>
