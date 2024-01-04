@@ -14,24 +14,24 @@ const items: Item[] = [
   {
     name: "Bagel Quest ticket",
     description:
-      "This is to verify that only paid participants can vote. Groups/couples: please purchase tickets individually through your own accounts.",
+      "This is to verify that only paid participants can vote. Groups/couples: please purchase tickets individually through your own accounts so you can vote!",
     price: constants.BAGEL_QUEST_TICKET_PRICE,
     forceQuantity: true,
   },
   {
-    name: "Plain Schmear (8oz)",
-    description: "(Optional) Schmear it on ya bagels.",
+    name: "Plain Schmear",
+    description: "(Optional) 8oz. Sourced locally from Bean's Bagels.",
     price: constants.PLAIN_SCHMEAR_PRICE,
   },
   {
-    name: "Nova Schmear (8oz)",
-    description: "(Optional) Schmear it on ya bagels.",
+    name: "Nova Schmear",
+    description: "(Optional) 8oz. Sourced locally from Loxsmith.",
     price: constants.NOVA_SCHMEAR_PRICE,
   },
   {
-    name: "Nova Lox (4oz)",
+    name: "Nova Lox",
     description:
-      "(Optional) How do you keep a bagel from getting away? You put Lox on it.",
+      "(Optional) 4oz. Sourced locally from Loxsmith. How do you keep a bagel from getting away? You put Lox on it.",
     price: constants.NOVA_LOX_PRICE,
   },
 ];
@@ -53,13 +53,13 @@ export const OrderForm = ({
     const quantity = parseInt(value);
 
     switch (itemName) {
-      case "Plain Schmear (8oz)":
+      case "Plain Schmear":
         setPlainSchmearQuantity(quantity);
         break;
-      case "Nova Schmear (8oz)":
+      case "Nova Schmear":
         setNovaSchmearQuantity(quantity);
         break;
-      case "Nova Lox (4oz)":
+      case "Nova Lox":
         setNovaLoxQuantity(quantity);
         break;
       default:
@@ -102,13 +102,13 @@ export const OrderForm = ({
         let selectedQuantity = 0;
 
         switch (item.name) {
-          case "Plain Schmear (8oz)":
+          case "Plain Schmear":
             selectedQuantity = plainSchmearQuantity;
             break;
-          case "Nova Schmear (8oz)":
+          case "Nova Schmear":
             selectedQuantity = novaSchmearQuantity;
             break;
-          case "Nova Lox (4oz)":
+          case "Nova Lox":
             selectedQuantity = novaLoxQuantity;
             break;
           default:

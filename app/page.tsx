@@ -57,10 +57,10 @@ export default function () {
           <h2 className="text-3xl font-semibold">🌆 The Lineup</h2>
           <p className="my-4">
             <span className="mt-2 block">
-              We've curated a fantastic lineup of 12 top bagel contenders across
-              Seattle. From classic to creative, each spot brings its A-game. As
-              a Bagel Quest participant, you get to indulge in them all and cast
-              your vote for the ultimate bagel.
+              We've curated a fantastic lineup of the top bagel contenders
+              across Seattle. From classic to creative, each spot brings its
+              A-game. As a Bagel Quest participant, you get to indulge in them
+              all and cast your vote for the ultimate bagel.
             </span>
           </p>
         </div>
@@ -72,10 +72,11 @@ export default function () {
               Pick up your bagels from our home and savor them in the comfort of
               your home.{" "}
               <b>
-                Bagel Pickup will be on February 17th from 9am - 12pm in West
+                Bagel Pickup will be on February 17th from 10am - 1pm in West
                 Seattle
               </b>{" "}
-              (address will be sent following your order).
+              (exact address with confirmation of your order will be sent 1 week
+              before the event).
             </span>
           </p>
         </div>
