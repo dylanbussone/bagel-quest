@@ -1,3 +1,6 @@
+// TODO: probably remove this page.
+// Save the content though and make it dynamic content inside the
+// order page upon successful google form submission?
 "use client";
 
 import Image from "next/image";
