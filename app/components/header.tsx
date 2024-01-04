@@ -14,21 +14,25 @@ export default async function Header() {
   return (
     <header className="h-24 px-4 border-b bg-gray-800 text-white">
       <div className="max-w-screen-lg mx-auto h-full flex items-center justify-between">
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-5 sm:gap-8 items-center">
           <Link href="/" className={headerLinkStyle}>
             <Image
               src="/bagel-icon-light.svg"
               width={50}
               height={50}
               alt="bagel"
-              className="mr-2"
             />
-            <span>Bagel Quest</span>
+            <span className="hidden sm:inline ml-3 font-semibold">
+              Bagel Quest
+            </span>
           </Link>
           {user && (
             <>
               <Link href="/order" className={headerLinkStyle}>
                 Order
+              </Link>
+              <Link href="/lineup" className={headerLinkStyle}>
+                Lineup
               </Link>
               <Link href="/vote" className={headerLinkStyle}>
                 Vote
