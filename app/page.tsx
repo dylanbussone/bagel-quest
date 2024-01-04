@@ -41,7 +41,6 @@ export default function () {
               <span>
                 to become part of the Bagel Quest crew! Once you're signed up,
                 you can head over to the{" "}
-                {/* TODO: for non-logged-in users should open sign in link */}
                 <Link href="/order" className="text-blue-800">
                   <b>Order page</b>
                 </Link>{" "}

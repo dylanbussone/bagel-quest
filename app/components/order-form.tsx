@@ -5,43 +5,14 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import * as constants from "@/utils/constants";
 import type { DefaultSession } from "next-auth";
-
-type Item = {
-  name: string;
-  description: string;
-  price: number;
-  forceQuantity?: boolean;
-};
-const items: Item[] = [
-  {
-    name: "Bagel Quest ticket",
-    description:
-      "This is to verify that only paid participants can vote. Groups/couples: please purchase tickets individually through your own accounts so you can vote!",
-    price: constants.BAGEL_QUEST_TICKET_PRICE,
-    forceQuantity: true,
-  },
-  {
-    name: "Plain Schmear",
-    description: "(Optional) 8oz. Sourced locally from Bean's Bagels.",
-    price: constants.PLAIN_SCHMEAR_PRICE,
-  },
-  {
-    name: "Nova Schmear",
-    description: "(Optional) 8oz. Sourced locally from Loxsmith.",
-    price: constants.NOVA_SCHMEAR_PRICE,
-  },
-  {
-    name: "Nova Lox",
-    description:
-      "(Optional) 4oz. Sourced locally from Loxsmith. How do you keep a bagel from getting away? You put Lox on it.",
-    price: constants.NOVA_LOX_PRICE,
-  },
-];
+import type { Product } from "@prisma/client";
 
 export const OrderForm = ({
   user, // TODO: use for prefilling POST email/name
+  products,
 }: {
   user?: DefaultSession["user"];
+  products: Product[];
 }) => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false); // TODO: get default value from db. do we have a row saved for this user? if so, show some different content (straight to venmo stuff). Maybe give option to change order?
@@ -49,7 +20,7 @@ export const OrderForm = ({
   const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
 
-  const handleSelectChange = (itemName: string, value: string) => {
+  const handleSelectChange = (itemName: string | null, value: string) => {
     const quantity = parseInt(value);
 
     switch (itemName) {
@@ -98,10 +69,10 @@ export const OrderForm = ({
         </li>
       </ul>
 
-      {items.map((item) => {
+      {products.map((product) => {
         let selectedQuantity = 0;
 
-        switch (item.name) {
+        switch (product.name) {
           case "Plain Schmear":
             selectedQuantity = plainSchmearQuantity;
             break;
@@ -114,26 +85,34 @@ export const OrderForm = ({
           default:
             break;
         }
+
+        const forceQuantity = product.name === "Bagel Quest Ticket";
+
         return (
           <div
-            key={item.name}
+            key={product.name}
             className="flex flex-row justify-between items-center w-full sm:w-1/2 gap-4 sm:gap-12 py-8 border-t border-gray-300"
           >
             <div className="flex flex-col">
               <h2 className="text-xl font-bold flex items-baseline">
-                {item.name}
+                {product.name}
                 <span className="text-base pl-4 text-green-900">
-                  ${item.price}
+                  ${product.price}
                 </span>
               </h2>
               <p className="text-sm text-gray-800">
-                {item.forceQuantity && (
+                {forceQuantity && (
                   <>
                     <b>Mandatory, 1 per user.</b>
                     <br />
+                    <p>
+                      This is to verify that only paid participants can vote.
+                      Groups/couples: please purchase tickets individually
+                      through your own accounts so you can vote!
+                    </p>
                   </>
                 )}
-                {item.description}
+                {product.description}
               </p>
             </div>
 
@@ -141,7 +120,7 @@ export const OrderForm = ({
               <label className="pr-2" htmlFor="quantity">
                 <b>Qty</b>
               </label>
-              {item.forceQuantity ? (
+              {forceQuantity ? (
                 <select name="quantity" value={1} disabled>
                   <option value="1">1</option>
                 </select>
@@ -150,7 +129,7 @@ export const OrderForm = ({
                   name="quantity"
                   value={selectedQuantity}
                   onChange={(e) =>
-                    handleSelectChange(item.name, e.target.value)
+                    handleSelectChange(product.name, e.target.value)
                   }
                 >
                   <option value="0">0</option>
