@@ -57,7 +57,7 @@ const lineupItems = [
     width: 200,
   },
   {
-    name: "Kelly's Cannoli",
+    name: "Kelly Cannoli",
     image: "/lineup/kelly.png",
     description:
       "In the heart of Seattle, known for its espresso culture, Kelly Cannoli distinguishes itself by bringing the authentic flavors of the East Coast to the West Coast. Celebrated for its expertly hand-piped cannoli and freshly baked New York-style bagels, Kelly Cannoli offers a delightful taste of the Big Apple in the midst of Seattle's dynamic culinary scene. Whether seeking a sweet indulgence or a savory delight, patrons can savor the essence of East Coast culinary delights at Kelly Cannoli, where the spirit of New York's culinary heritage comes to life.",
