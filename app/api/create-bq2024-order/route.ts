@@ -6,14 +6,13 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     const {
-      user_email,
-      user_name,
+      userEmail,
+      userName,
       orderItems,
-    }: { user_email: string; user_name: string; orderItems: OrderItem[] } =
-      data;
+    }: { userEmail: string; userName: string; orderItems: OrderItem[] } = data;
 
-    if (!user_email) throw new Error("user_email is required");
-    if (!user_name) throw new Error("user_name is required");
+    if (!userEmail) throw new Error("userEmail is required");
+    if (!userName) throw new Error("userName is required");
     if (!orderItems || orderItems.length === 0)
       throw new Error("orderItems are required");
 
@@ -24,8 +23,8 @@ export async function POST(request: Request) {
             title: "bq2024",
           },
         },
-        user_email,
-        user_name,
+        userEmail,
+        userName,
         orderItems: {
           create: orderItems
             .filter((orderItem) => orderItem.quantity > 0)

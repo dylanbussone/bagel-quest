@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import * as constants from "@/utils/constants";
 import type { DefaultSession } from "next-auth";
 import type { Product } from "@prisma/client";
 
@@ -21,7 +20,7 @@ export const OrderForm = ({
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
 
   const BAGEL_QUEST_TICKET = products.filter(
-    (p) => p.name === "Bagel Quest Ticket"
+    (p) => p.name === "Bagel Quest ticket"
   )[0];
   const PLAIN_SCHMEAR = products.filter((p) => p.name === "Plain Schmear")[0];
   const NOVA_SCHMEAR = products.filter((p) => p.name === "Nova Schmear")[0];
@@ -60,8 +59,8 @@ export const OrderForm = ({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        user_email: user?.email,
-        user_name: user?.name,
+        userEmail: user?.email,
+        userName: user?.name,
         orderItems,
       }),
     });
@@ -113,7 +112,7 @@ export const OrderForm = ({
             break;
         }
 
-        const forceQuantity = product.name === "Bagel Quest Ticket";
+        const forceQuantity = product.name === "Bagel Quest ticket";
 
         return (
           <div
@@ -185,10 +184,10 @@ export const OrderForm = ({
   );
 
   const totalPrice =
-    constants.BAGEL_QUEST_TICKET_PRICE +
-    plainSchmearQuantity * constants.PLAIN_SCHMEAR_PRICE +
-    novaSchmearQuantity * constants.NOVA_SCHMEAR_PRICE +
-    novaLoxQuantity * constants.NOVA_LOX_PRICE;
+    BAGEL_QUEST_TICKET.price +
+    plainSchmearQuantity * PLAIN_SCHMEAR.price +
+    novaSchmearQuantity * NOVA_SCHMEAR.price +
+    novaLoxQuantity * NOVA_LOX.price;
 
   const checkoutContent = (
     <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
@@ -203,33 +202,33 @@ export const OrderForm = ({
         </thead>
         <tbody>
           <tr>
-            <td>Bagel Quest Ticket</td>
+            <td>Bagel Quest ticket</td>
             <td>1</td>
-            <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
-            <td>${constants.BAGEL_QUEST_TICKET_PRICE}</td>
+            <td>${BAGEL_QUEST_TICKET.price}</td>
+            <td>${BAGEL_QUEST_TICKET.price}</td>
           </tr>
           {plainSchmearQuantity > 0 && (
             <tr>
               <td>Plain schmear</td>
               <td>{plainSchmearQuantity}</td>
-              <td>${constants.PLAIN_SCHMEAR_PRICE}</td>
-              <td>${plainSchmearQuantity * constants.PLAIN_SCHMEAR_PRICE}</td>
+              <td>${PLAIN_SCHMEAR.price}</td>
+              <td>${plainSchmearQuantity * PLAIN_SCHMEAR.price}</td>
             </tr>
           )}
           {novaSchmearQuantity > 0 && (
             <tr>
               <td>Nova schmear</td>
               <td>{novaSchmearQuantity}</td>
-              <td>${constants.NOVA_SCHMEAR_PRICE}</td>
-              <td>${novaSchmearQuantity * constants.NOVA_SCHMEAR_PRICE}</td>
+              <td>${NOVA_SCHMEAR.price}</td>
+              <td>${novaSchmearQuantity * NOVA_SCHMEAR.price}</td>
             </tr>
           )}
           {novaLoxQuantity > 0 && (
             <tr>
               <td>Nova Lox</td>
               <td>{novaLoxQuantity}</td>
-              <td>${constants.NOVA_LOX_PRICE}</td>
-              <td>${novaLoxQuantity * constants.NOVA_LOX_PRICE}</td>
+              <td>${NOVA_LOX.price}</td>
+              <td>${novaLoxQuantity * NOVA_LOX.price}</td>
             </tr>
           )}
         </tbody>
