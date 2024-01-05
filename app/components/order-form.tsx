@@ -8,7 +8,7 @@ import type { DefaultSession } from "next-auth";
 import type { Product } from "@prisma/client";
 
 export const OrderForm = ({
-  user, // TODO: use for prefilling POST email/name
+  user,
   products,
 }: {
   user?: DefaultSession["user"];
@@ -20,17 +20,24 @@ export const OrderForm = ({
   const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
 
-  const handleSelectChange = (itemName: string | null, value: string) => {
+  const BAGEL_QUEST_TICKET = products.filter(
+    (p) => p.name === "Bagel Quest Ticket"
+  )[0];
+  const PLAIN_SCHMEAR = products.filter((p) => p.name === "Plain Schmear")[0];
+  const NOVA_SCHMEAR = products.filter((p) => p.name === "Nova Schmear")[0];
+  const NOVA_LOX = products.filter((p) => p.name === "Nova Lox")[0];
+
+  const handleSelectChange = (product: Product, value: string) => {
     const quantity = parseInt(value);
 
-    switch (itemName) {
-      case "Plain Schmear":
+    switch (product.id) {
+      case PLAIN_SCHMEAR.id:
         setPlainSchmearQuantity(quantity);
         break;
-      case "Nova Schmear":
+      case NOVA_SCHMEAR.id:
         setNovaSchmearQuantity(quantity);
         break;
-      case "Nova Lox":
+      case NOVA_LOX.id:
         setNovaLoxQuantity(quantity);
         break;
       default:
@@ -39,8 +46,28 @@ export const OrderForm = ({
   };
 
   const handleConfirmation = async () => {
-    // TODO: bagel spinner, await adding row to table for user
-    // then:
+    // TODO: bagel spinner while fetching
+
+    // Create order
+    const orderItems = [
+      { productId: BAGEL_QUEST_TICKET.id, quantity: 1 },
+      { productId: PLAIN_SCHMEAR.id, quantity: plainSchmearQuantity },
+      { productId: NOVA_SCHMEAR.id, quantity: novaSchmearQuantity },
+      { productId: NOVA_LOX.id, quantity: novaLoxQuantity },
+    ];
+
+    const resp = await fetch("/api/create-bq2024-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_email: user?.email,
+        user_name: user?.name,
+        orderItems,
+      }),
+    });
+    const order = await resp.json();
+    console.log("order", order);
+
     setShowConfirmation(true);
   };
 
@@ -72,14 +99,14 @@ export const OrderForm = ({
       {products.map((product) => {
         let selectedQuantity = 0;
 
-        switch (product.name) {
-          case "Plain Schmear":
+        switch (product.id) {
+          case PLAIN_SCHMEAR.id:
             selectedQuantity = plainSchmearQuantity;
             break;
-          case "Nova Schmear":
+          case NOVA_SCHMEAR.id:
             selectedQuantity = novaSchmearQuantity;
             break;
-          case "Nova Lox":
+          case NOVA_LOX.id:
             selectedQuantity = novaLoxQuantity;
             break;
           default:
@@ -128,9 +155,7 @@ export const OrderForm = ({
                 <select
                   name="quantity"
                   value={selectedQuantity}
-                  onChange={(e) =>
-                    handleSelectChange(product.name, e.target.value)
-                  }
+                  onChange={(e) => handleSelectChange(product, e.target.value)}
                 >
                   <option value="0">0</option>
                   <option value="1">1</option>
