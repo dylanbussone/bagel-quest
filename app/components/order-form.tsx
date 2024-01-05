@@ -14,6 +14,8 @@ export const OrderForm = ({
   products: Product[];
 }) => {
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+
   const [plainSchmearQuantity, setPlainSchmearQuantity] = useState(0);
   const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
@@ -44,7 +46,7 @@ export const OrderForm = ({
   };
 
   const handleConfirmation = async () => {
-    // TODO: bagel spinner while fetching
+    setShowSpinner(true);
 
     // Create order
     const orderItems = [
@@ -231,20 +233,29 @@ export const OrderForm = ({
       </table>
 
       <p className="text-lg font-semibold">Total: ${totalPrice}</p>
-      <div className="flex my-8 gap-8 w-full justify-between items-center flex-col sm:flex-row">
+      <div className="flex mt-8 gap-8 w-full justify-between items-center flex-col sm:flex-row">
         <button
-          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100 whitespace-nowrap"
           onClick={() => setShowCheckout(false)}
         >
           Change selection
         </button>
         <button
-          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100"
+          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100 whitespace-nowrap"
           onClick={handleConfirmation}
         >
           Confirm selection
         </button>
       </div>
+      {showSpinner && (
+        <Image
+          src="/bagel-icon-dark.svg"
+          width={50}
+          height={50}
+          alt="bagel"
+          className="animate-spin z-10 my-6"
+        />
+      )}
     </div>
   );
 
