@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "psql_dev": "source ./.env.development.local && psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DATABASE",
+    "psql": "source ./.env.development.local && psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DATABASE",
     "prisma_db_push": "dotenv -e .env.development.local -- npx prisma db push",
     "prisma_studio": "dotenv -e .env.development.local -- npx prisma studio"
   },
