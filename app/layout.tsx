@@ -9,7 +9,23 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Bagel Quest",
   description:
-    "Bagel Quest is a bagel competition based in Seattle Washington.",
+    "Bagel Quest is a bagel competition based in Seattle, Washington.",
+  openGraph: {
+    title: "Bagel Quest",
+    description:
+      "Bagel Quest is a bagel competition based in Seattle, Washington.",
+    url: "https://www.bagel-quest.com",
+    siteName: "Bagel Quest",
+    images: [
+      {
+        url: "https://www.bagel-quest.com/bagel-icon-dark.svg", // Must be an absolute URL
+        width: 250,
+        height: 250,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
