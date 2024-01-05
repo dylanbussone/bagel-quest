@@ -44,7 +44,7 @@ export default function () {
                 <Link href="/order" className="text-blue-800">
                   <b>Order page</b>
                 </Link>{" "}
-                to get your ticket.
+                to claim your ticket.
                 <br />
                 Registration shuts down on <b>February 1st</b>.
               </span>
@@ -56,10 +56,14 @@ export default function () {
           <h2 className="text-3xl font-semibold">🌆 The Lineup</h2>
           <p className="my-4">
             <span className="mt-2 block">
-              We've curated a fantastic lineup of the top bagel contenders
-              across Seattle. From classic to creative, each spot brings its
-              A-game. As a Bagel Quest participant, you get to indulge in them
-              all and cast your vote for the ultimate bagel.
+              We've curated a fantastic{" "}
+              <Link href="/lineup" className="text-blue-800">
+                <b>lineup</b>
+              </Link>{" "}
+              of the top bagel contenders across Seattle. From classic to
+              creative, each spot brings its A-game. As a Bagel Quest
+              participant, you get to indulge in them all and cast your vote for
+              the ultimate bagel.
             </span>
           </p>
         </div>
