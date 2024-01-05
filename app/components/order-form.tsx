@@ -14,7 +14,6 @@ export const OrderForm = ({
   products: Product[];
 }) => {
   const [showCheckout, setShowCheckout] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false); // TODO: get default value from db. do we have a row saved for this user? if so, show some different content (straight to venmo stuff). Maybe give option to change order?
   const [plainSchmearQuantity, setPlainSchmearQuantity] = useState(0);
   const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
@@ -55,7 +54,7 @@ export const OrderForm = ({
       { productId: NOVA_LOX.id, quantity: novaLoxQuantity },
     ];
 
-    const resp = await fetch("/api/create-bq2024-order", {
+    await fetch("/api/create-bq2024-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -64,10 +63,7 @@ export const OrderForm = ({
         orderItems,
       }),
     });
-    const order = await resp.json();
-    console.log("order", order);
-
-    setShowConfirmation(true);
+    window.location.reload();
   };
 
   const cartContent = (
@@ -235,56 +231,27 @@ export const OrderForm = ({
       </table>
 
       <p className="text-lg font-semibold">Total: ${totalPrice}</p>
-
-      {!showConfirmation && (
-        <>
-          <div className="flex my-8 gap-8 w-full justify-between items-center flex-col sm:flex-row">
-            <button
-              className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
-              onClick={() => setShowCheckout(false)}
-            >
-              Change selection
-            </button>
-            <button
-              className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100"
-              onClick={handleConfirmation}
-            >
-              Confirm selection
-            </button>
-          </div>
-        </>
-      )}
-      {showConfirmation && (
-        <div className="flex flex-col mt-8 w-full justify-center items-center">
-          <p className="mb-6">Your order has been received!</p>
-          <p className="font-semibold mb-4">
-            {" "}
-            To complete payment, send ${totalPrice} to{" "}
-            <a
-              href="https://venmo.com/u/Dylan-Bussone"
-              target="_blank"
-              className="text-blue-800"
-            >
-              @Dylan-Bussone
-            </a>
-            .
-          </p>
-          <a href="https://venmo.com/u/Dylan-Bussone" target="_blank">
-            <Image src="/venmo.png" width={200} height={200} alt="bagel" />
-          </a>
-        </div>
-        // <p className="mt-8 text-center">
-        //   You will receive a confirmation email with your bagel pickup information
-        //   once payment is completed.
-        // </p>
-      )}
+      <div className="flex my-8 gap-8 w-full justify-between items-center flex-col sm:flex-row">
+        <button
+          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+          onClick={() => setShowCheckout(false)}
+        >
+          Change selection
+        </button>
+        <button
+          className="w-full sm:w-auto py-2 px-8 font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100"
+          onClick={handleConfirmation}
+        >
+          Confirm selection
+        </button>
+      </div>
     </div>
   );
 
   return (
     <>
       <h1 className="text-4xl sm:text-6xl py-4 font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
-        {showConfirmation ? "Your order" : "Place your order"}
+        Place your order
       </h1>
       {showCheckout ? checkoutContent : cartContent}
     </>

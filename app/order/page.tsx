@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { OrderForm } from "@/components/order-form";
+import { OrderSuccessForm } from "@/components/order-success-form";
 
 export default async function Order() {
   const session = await getServerSession(authOptions);
@@ -14,16 +15,20 @@ export default async function Order() {
 
   // TODO: what if multiple? Can we prevent that by making a combination of (userEmail AND eventId) unique?
   // Then change findFirst to findUnique
-  const userOrder = await prisma.order.findFirst({
-    where: { userEmail: user?.email ?? undefined, eventId: 1 },
-    include: { orderItems: true },
-  });
-
-  console.log("userorder", userOrder);
+  const userOrder =
+    user?.email &&
+    (await prisma.order.findFirst({
+      where: { userEmail: user.email },
+      include: { orderItems: true },
+    }));
 
   return (
     <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
-      <OrderForm user={user} products={bq2024Products} />
+      {userOrder ? (
+        <OrderSuccessForm products={bq2024Products} userOrder={userOrder} />
+      ) : (
+        <OrderForm products={bq2024Products} user={user} />
+      )}
     </div>
   );
 }
