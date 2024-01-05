@@ -6,6 +6,11 @@ import { useState } from "react";
 import type { DefaultSession } from "next-auth";
 import type { Product } from "@prisma/client";
 
+// Map of productId to quantity
+interface ProductQuantities {
+  [key: string]: number;
+}
+
 export const OrderForm = ({
   user,
   products,
@@ -16,46 +21,31 @@ export const OrderForm = ({
   const [showCheckout, setShowCheckout] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
-  // TODO: look into ways to make this dynamic. So no "nova" anywhere except db
-  const [plainSchmearQuantity, setPlainSchmearQuantity] = useState(0);
-  const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
-  const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
-
-  const BAGEL_QUEST_TICKET = products.filter(
-    (p) => p.name === "Bagel Quest ticket"
-  )[0];
-  const PLAIN_SCHMEAR = products.filter((p) => p.name === "Plain Schmear")[0];
-  const NOVA_SCHMEAR = products.filter((p) => p.name === "Nova Schmear")[0];
-  const NOVA_LOX = products.filter((p) => p.name === "Nova Lox")[0];
+  const [productQuantities, setProductQuantities] = useState<ProductQuantities>(
+    {
+      [products.filter((p) => p.name === "Bagel Quest ticket")[0].id]: 1,
+    }
+  );
 
   const handleSelectChange = (product: Product, value: string) => {
     const quantity = parseInt(value);
 
-    switch (product.id) {
-      case PLAIN_SCHMEAR.id:
-        setPlainSchmearQuantity(quantity);
-        break;
-      case NOVA_SCHMEAR.id:
-        setNovaSchmearQuantity(quantity);
-        break;
-      case NOVA_LOX.id:
-        setNovaLoxQuantity(quantity);
-        break;
-      default:
-        break;
-    }
+    setProductQuantities({
+      ...productQuantities,
+      [product.id]: quantity,
+    });
   };
 
   const handleConfirmation = async () => {
     setShowSpinner(true);
 
     // Create order
-    const orderItems = [
-      { productId: BAGEL_QUEST_TICKET.id, quantity: 1 },
-      { productId: PLAIN_SCHMEAR.id, quantity: plainSchmearQuantity },
-      { productId: NOVA_SCHMEAR.id, quantity: novaSchmearQuantity },
-      { productId: NOVA_LOX.id, quantity: novaLoxQuantity },
-    ];
+    const orderItems = Object.keys(productQuantities).map((productId) => {
+      return {
+        productId: parseInt(productId),
+        quantity: productQuantities[productId],
+      };
+    });
 
     await fetch("/api/create-bq2024-order", {
       method: "POST",
@@ -95,22 +85,6 @@ export const OrderForm = ({
       </ul>
 
       {products.map((product) => {
-        let selectedQuantity = 0;
-
-        switch (product.id) {
-          case PLAIN_SCHMEAR.id:
-            selectedQuantity = plainSchmearQuantity;
-            break;
-          case NOVA_SCHMEAR.id:
-            selectedQuantity = novaSchmearQuantity;
-            break;
-          case NOVA_LOX.id:
-            selectedQuantity = novaLoxQuantity;
-            break;
-          default:
-            break;
-        }
-
         const forceQuantity = product.name === "Bagel Quest ticket";
 
         return (
@@ -146,13 +120,13 @@ export const OrderForm = ({
                 <b>Qty</b>
               </label>
               {forceQuantity ? (
-                <select name="quantity" value={1} disabled>
+                <select name={`${product.id}-quantity`} value={1} disabled>
                   <option value="1">1</option>
                 </select>
               ) : (
                 <select
-                  name="quantity"
-                  value={selectedQuantity}
+                  name={`${product.id}-quantity`}
+                  value={productQuantities[product.id]}
                   onChange={(e) => handleSelectChange(product, e.target.value)}
                 >
                   <option value="0">0</option>
@@ -182,11 +156,9 @@ export const OrderForm = ({
     </>
   );
 
-  const totalPrice =
-    BAGEL_QUEST_TICKET.price +
-    plainSchmearQuantity * PLAIN_SCHMEAR.price +
-    novaSchmearQuantity * NOVA_SCHMEAR.price +
-    novaLoxQuantity * NOVA_LOX.price;
+  const totalPrice = products.reduce((acc, product) => {
+    return acc + product.price * (productQuantities[product.id] ?? 0);
+  }, 0);
 
   const checkoutContent = (
     <div className="w-full sm:w-2/3 m-auto flex justify-center items-center flex-col">
@@ -200,36 +172,21 @@ export const OrderForm = ({
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Bagel Quest ticket</td>
-            <td>1</td>
-            <td>${BAGEL_QUEST_TICKET.price}</td>
-            <td>${BAGEL_QUEST_TICKET.price}</td>
-          </tr>
-          {plainSchmearQuantity > 0 && (
-            <tr>
-              <td>Plain schmear</td>
-              <td>{plainSchmearQuantity}</td>
-              <td>${PLAIN_SCHMEAR.price}</td>
-              <td>${plainSchmearQuantity * PLAIN_SCHMEAR.price}</td>
-            </tr>
-          )}
-          {novaSchmearQuantity > 0 && (
-            <tr>
-              <td>Nova schmear</td>
-              <td>{novaSchmearQuantity}</td>
-              <td>${NOVA_SCHMEAR.price}</td>
-              <td>${novaSchmearQuantity * NOVA_SCHMEAR.price}</td>
-            </tr>
-          )}
-          {novaLoxQuantity > 0 && (
-            <tr>
-              <td>Nova Lox</td>
-              <td>{novaLoxQuantity}</td>
-              <td>${NOVA_LOX.price}</td>
-              <td>${novaLoxQuantity * NOVA_LOX.price}</td>
-            </tr>
-          )}
+          {Object.keys(productQuantities).map((productId) => {
+            const quantity = productQuantities[productId];
+            const product = products.filter(
+              (p) => p.id === parseInt(productId)
+            )[0];
+
+            return (
+              <tr key={product.name}>
+                <td>{product.name}</td>
+                <td>{quantity}</td>
+                <td>${product.price}</td>
+                <td>${product.price * quantity}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
