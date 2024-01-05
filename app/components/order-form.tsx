@@ -64,7 +64,7 @@ export const OrderForm = ({
       <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-2/3 gap-4 sm:gap-12 pl-4">
         <li>
           Each ticket includes a portion of a bagel from at least 12 shops
-          (about 2 bagels-worth in total).
+          (about 3 bagels-worth in total).
         </li>
         <li>Packaged in environmentally friendly materials.</li>
         <li>
