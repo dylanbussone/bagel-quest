@@ -16,6 +16,7 @@ export const OrderForm = ({
   const [showCheckout, setShowCheckout] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
+  // TODO: look into ways to make this dynamic. So no "nova" anywhere except db
   const [plainSchmearQuantity, setPlainSchmearQuantity] = useState(0);
   const [novaSchmearQuantity, setNovaSchmearQuantity] = useState(0);
   const [novaLoxQuantity, setNovaLoxQuantity] = useState(0);
@@ -70,7 +71,7 @@ export const OrderForm = ({
 
   const cartContent = (
     <>
-      <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-1/2 gap-4 sm:gap-12 pl-4">
+      <ul className="list-disc mb-2 sm:mb-4 w-full sm:w-2/3 gap-4 sm:gap-12 pl-4">
         <li>
           Each ticket includes a portion of a bagel from at least 12 shops
           (about 2 bagels-worth in total).
@@ -115,7 +116,7 @@ export const OrderForm = ({
         return (
           <div
             key={product.name}
-            className="flex flex-row justify-between items-center w-full sm:w-1/2 gap-4 sm:gap-12 py-8 border-t border-gray-300"
+            className="flex flex-row justify-between items-center w-full sm:w-2/3 gap-4 sm:gap-12 py-8 border-t border-gray-300"
           >
             <div className="flex flex-col">
               <h2 className="text-xl font-bold flex items-baseline">
@@ -166,7 +167,7 @@ export const OrderForm = ({
       })}
 
       <button
-        className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-gray-200 text-black opacity-90 hover:opacity-100"
+        className="py-2 px-12 my-8 w-full sm:w-auto font-medium text-sm leading-snug rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out flex justify-center items-center bg-green-800 text-white opacity-90 hover:opacity-100"
         onClick={() => {
           if (user?.email) {
             setShowCheckout(true);
@@ -188,7 +189,7 @@ export const OrderForm = ({
     novaLoxQuantity * NOVA_LOX.price;
 
   const checkoutContent = (
-    <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
+    <div className="w-full sm:w-2/3 m-auto flex justify-center items-center flex-col">
       <table className="border-collapse table-auto w-full text-left mb-8">
         <thead>
           <tr>
