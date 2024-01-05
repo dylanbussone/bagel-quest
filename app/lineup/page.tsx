@@ -69,7 +69,7 @@ const lineupItems = [
     name: "Bean's Bagels",
     image: "/lineup/bean.png",
     description:
-      "Bean's Bagels, originating from the Burien Farmers Market in 2021, is a delightful haven for bagel enthusiasts. Their perfect blend of crispy and soft textures, along with innovative flavors, creates a memorable culinary experience. Beyond being a bagel store, it's a place where quality craftsmanship and genuine hospitality intersect. LGBTQ+ and women owned, Bean's Bagels not only delights taste buds but also exemplifies inclusivity.",
+      "Bean's Bagels, originating from the Burien Farmers Market in 2021, has become a beloved spot for bagel enthusiasts with its perfect blend of crispy and soft textures, and innovative flavors. Not just a bagel store, Bean's Bagels, proudly LGBTQ+ and women-owned, exemplifies inclusivity while delivering a memorable culinary experience. Excitingly, this spring, they are set to open their first brick-and-mortar location in the Georgetown neighborhood.",
     url: "https://www.facebook.com/beansbagel/",
     height: 100,
     width: 100,
