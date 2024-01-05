@@ -76,8 +76,8 @@ export const OrderSuccessForm = ({
           </a>
         </div>
         <p className="mt-8 text-center">
-          You will receive an email 1 week before the event with all the details
-          you will need. We look forward to seeing you there!
+          You'll receive an email 1 week before the event with all the details
+          you need. Let's bagel!
         </p>
       </div>
     </>
