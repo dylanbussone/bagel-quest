@@ -33,6 +33,7 @@ model Order {
     eventId    Int
     orderItems OrderItem[]
     paid       Float       @default(0)
+    exempt     Boolean     @default(false)
     createdAt  DateTime    @default(now())
     updatedAt  DateTime    @updatedAt
 }

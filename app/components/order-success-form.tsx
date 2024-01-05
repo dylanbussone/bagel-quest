@@ -10,7 +10,7 @@ export const OrderSuccessForm = ({
   products: Product[];
   userOrder: Order & { orderItems: OrderItem[] };
 }) => {
-  const { orderItems, paid } = userOrder;
+  const { orderItems, paid, exempt } = userOrder;
 
   const totalPrice = orderItems.reduce((acc, orderItem) => {
     const product = products?.find(
@@ -59,7 +59,7 @@ export const OrderSuccessForm = ({
         </table>
         <p className="text-lg font-semibold">Total: ${totalPrice}</p>
         <div className="flex flex-col mt-8 w-full justify-center items-center">
-          {paid >= totalPrice ? (
+          {exempt || paid >= totalPrice ? (
             <p className="font-semibold">Payment has been received!</p>
           ) : (
             <>
