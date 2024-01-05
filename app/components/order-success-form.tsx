@@ -10,7 +10,7 @@ export const OrderSuccessForm = ({
   products: Product[];
   userOrder: Order & { orderItems: OrderItem[] };
 }) => {
-  const { orderItems } = userOrder;
+  const { orderItems, paid } = userOrder;
 
   const totalPrice = orderItems.reduce((acc, orderItem) => {
     const product = products?.find(
@@ -59,21 +59,27 @@ export const OrderSuccessForm = ({
         </table>
         <p className="text-lg font-semibold">Total: ${totalPrice}</p>
         <div className="flex flex-col mt-8 w-full justify-center items-center">
-          <p className="font-semibold mb-4">
-            {" "}
-            To complete payment, send ${totalPrice} to{" "}
-            <a
-              href="https://venmo.com/u/Dylan-Bussone"
-              target="_blank"
-              className="text-blue-800"
-            >
-              @Dylan-Bussone
-            </a>
-            .
-          </p>
-          <a href="https://venmo.com/u/Dylan-Bussone" target="_blank">
-            <Image src="/venmo.png" width={200} height={200} alt="bagel" />
-          </a>
+          {paid >= totalPrice ? (
+            <p className="font-semibold">Payment has been received!</p>
+          ) : (
+            <>
+              <p className="font-semibold mb-4">
+                {" "}
+                To complete payment, send ${totalPrice} to{" "}
+                <a
+                  href="https://venmo.com/u/Dylan-Bussone"
+                  target="_blank"
+                  className="text-blue-800"
+                >
+                  @Dylan-Bussone
+                </a>
+                .
+              </p>
+              <a href="https://venmo.com/u/Dylan-Bussone" target="_blank">
+                <Image src="/venmo.png" width={200} height={200} alt="bagel" />
+              </a>
+            </>
+          )}
         </div>
         <p className="mt-8 text-center">
           You'll receive an email 1 week before the event with all the details
