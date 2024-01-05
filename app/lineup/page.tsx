@@ -83,6 +83,15 @@ const lineupItems = [
     height: 100,
     width: 100,
   },
+  {
+    name: "Oxbow",
+    image: "/lineup/oxbow.png",
+    description:
+      "Nestled in Seattle's Montlake neighborhood, just a stone's throw away from the University of Washington (Go Dawgs!) and a few steps from the arboretum, Oxbow is a delightful eatery offering a range of humble yet satisfying options. From bagels with spreads to pizza, coffee, quiche, and more, the menu caters to breakfast and lunch enthusiasts. The airy, open atmosphere creates a welcoming space for locals to gather and enjoy delectable fare in the company of good people. As a sibling establishment to Sea Wolf, Oxbow positions itself as a neighborhood hotspot, inviting patrons to relax and savor quality food in a laid-back setting.",
+    url: "https://www.oxbowmontlake.com/",
+    height: 100,
+    width: 100,
+  },
 ];
 
 export default function Lineup() {
