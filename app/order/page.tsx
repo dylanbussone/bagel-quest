@@ -8,26 +8,31 @@ export default async function Order() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
-  const bq2024Products =
-    (await prisma.event
-      .findUnique({ where: { title: "bq2024" } })
-      .products()) || [];
+  const productPromise = prisma.event
+    .findUnique({ where: { title: "bq2024" } })
+    .products();
 
-  // TODO: what if multiple? Can we prevent that by making a combination of (userEmail AND eventId) unique?
-  // Then change findFirst to findUnique
-  const userOrder =
-    user?.email &&
-    (await prisma.order.findFirst({
-      where: { userEmail: user.email },
-      include: { orderItems: true },
-    }));
+  const userOrderPromise = user?.email
+    ? prisma.order.findFirst({
+        where: { userEmail: user.email },
+        include: { orderItems: true },
+      })
+    : Promise.resolve(null);
+
+  const [bq2024Products, userOrder] = await Promise.all([
+    productPromise,
+    userOrderPromise,
+  ]);
 
   return (
     <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
       {userOrder ? (
-        <OrderSuccessForm products={bq2024Products} userOrder={userOrder} />
+        <OrderSuccessForm
+          products={bq2024Products || []}
+          userOrder={userOrder}
+        />
       ) : (
-        <OrderForm products={bq2024Products} user={user} />
+        <OrderForm products={bq2024Products || []} user={user} />
       )}
     </div>
   );

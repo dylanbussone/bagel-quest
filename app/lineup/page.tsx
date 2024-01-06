@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { isMapIterator } from "util/types";
 
 const lineupItems = [
   {
@@ -98,7 +97,7 @@ export default function Lineup() {
   return (
     <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
       <h1 className="text-4xl sm:text-6xl py-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
-        Your Bagel Lineup
+        Your bagel lineup
       </h1>
       <div className="flex items-center flex-col gap-16 my-16 w-full sm:w-2/3">
         {lineupItems.map((item) => (
