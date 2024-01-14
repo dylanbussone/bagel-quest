@@ -7,6 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.bagel-quest.com"),
   title: "Bagel Quest",
   description:
     "Bagel Quest is a bagel competition based in Seattle, Washington.",
