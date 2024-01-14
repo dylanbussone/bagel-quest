@@ -1,7 +1,7 @@
 export default function Contact() {
   return (
-    <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
-      <h1 className="text-4xl sm:text-6xl py-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
+    <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
+      <h1 className="bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         hey
       </h1>
 

@@ -14,7 +14,7 @@ export const OrderSuccessForm = ({
 
   const totalPrice = orderItems.reduce((acc, orderItem) => {
     const product = products?.find(
-      (product) => product.id === orderItem.productId
+      (product) => product.id === orderItem.productId,
     );
     if (product) {
       return acc + product.price * orderItem.quantity;
@@ -24,13 +24,13 @@ export const OrderSuccessForm = ({
 
   return (
     <>
-      <h1 className="text-4xl sm:text-6xl py-4 font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
+      <h1 className="mb-12 bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         Your order
       </h1>
 
       <p className="mb-6">Thank you for your participation in Bagel Quest!</p>
-      <div className="w-full sm:w-1/2 m-auto flex justify-center items-center flex-col">
-        <table className="border-collapse table-auto w-full text-left mb-8">
+      <div className="m-auto flex w-full flex-col items-center justify-center sm:w-1/2">
+        <table className="mb-8 w-full table-auto border-collapse text-left">
           <thead>
             <tr>
               <th>Item</th>
@@ -42,7 +42,7 @@ export const OrderSuccessForm = ({
           <tbody>
             {orderItems.map((orderItem) => {
               const product = products?.find(
-                (product) => product.id === orderItem.productId
+                (product) => product.id === orderItem.productId,
               );
               return (
                 product && (
@@ -58,12 +58,12 @@ export const OrderSuccessForm = ({
           </tbody>
         </table>
         <p className="text-lg font-semibold">Total: ${totalPrice}</p>
-        <div className="flex flex-col mt-8 w-full justify-center items-center">
+        <div className="mt-8 flex w-full flex-col items-center justify-center">
           {exempt || paid >= totalPrice ? (
             <p className="font-semibold">Payment has been received!</p>
           ) : (
             <>
-              <p className="font-semibold mb-4">
+              <p className="mb-4 font-semibold">
                 {" "}
                 To complete payment, send ${totalPrice} to{" "}
                 <a

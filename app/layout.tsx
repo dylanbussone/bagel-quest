@@ -42,7 +42,7 @@ export default function RootLayout({
         ].join(" ")}
       >
         <Header />
-        <main className="max-w-screen-lg mx-auto p-4 min-h-screen">
+        <main className="mx-auto min-h-screen max-w-screen-lg p-4">
           {children}
         </main>
         <Footer />

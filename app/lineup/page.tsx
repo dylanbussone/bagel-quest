@@ -95,18 +95,18 @@ const lineupItems = [
 
 export default function Lineup() {
   return (
-    <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
-      <h1 className="text-4xl sm:text-6xl py-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
+    <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
+      <h1 className="bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         Your bagel lineup
       </h1>
-      <div className="flex items-center flex-col gap-16 my-16 w-full sm:w-2/3">
+      <div className="my-16 flex w-full flex-col items-center gap-16 sm:w-2/3">
         {lineupItems.map((item) => (
           <div key={item.name}>
-            <h2 className="mb-2 flex flex-col-reverse sm:flex-row gap-4 sm:gap-12 items-baseline justify-between">
+            <h2 className="mb-2 flex flex-col-reverse items-baseline justify-between gap-4 sm:flex-row sm:gap-12">
               <a
                 href={item.url}
                 target="_blank"
-                className="text-blue-800 font-semibold"
+                className="font-semibold text-blue-800"
               >
                 {item.name}
               </a>
@@ -122,7 +122,7 @@ export default function Lineup() {
             <p>{item.description}</p>
           </div>
         ))}
-        <div className="w-full mt-16">
+        <div className="mt-16 w-full">
           <p>More coming soon...</p>
         </div>
       </div>

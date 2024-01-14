@@ -5,8 +5,8 @@ import { SignIn } from "@/components/sign-in";
 export default function () {
   return (
     <>
-      <div className="flex flex-col items-center justify-between mt-8 sm:mt-16">
-        <h1 className="font-bold py-4 text-5xl sm:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-amber-800 to-amber-600">
+      <div className="mt-8 flex flex-col items-center justify-between sm:mt-16">
+        <h1 className="bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-5xl font-bold text-transparent sm:text-8xl">
           Bagel Quest
         </h1>
         <Image
@@ -14,12 +14,12 @@ export default function () {
           width={200}
           height={200}
           alt="bagel"
-          className="animate-spin-slow my-6"
+          className="my-6 animate-spin-slow"
         />
       </div>
       <div className="mt-2 sm:mb-20">
-        <h2 className="text-2xl text-center">It's back.</h2>
-        <h3 className="text-xl text-center mt-4 mb-8">🥯 2/17/2024 🥯</h3>
+        <h2 className="text-center text-2xl">It's back.</h2>
+        <h3 className="mb-8 mt-4 text-center text-xl">🥯 2/17/2024 🥯</h3>
         <p className="my-4">
           <b>Hey Bagel Lovers!</b>
           <span className="mt-2 block">
@@ -32,8 +32,8 @@ export default function () {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-20 mt-8">
-        <div className="border-t border-gray-300 sm:border-none pt-4 sm:pt-0">
+      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-20">
+        <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
           <h2 className="text-3xl font-semibold">👥 Sign Up</h2>
           <p className="my-4">
             <span className="mt-2 block">
@@ -52,7 +52,7 @@ export default function () {
           </p>
         </div>
 
-        <div className="border-t border-gray-300 sm:border-none pt-4 sm:pt-0">
+        <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
           <h2 className="text-3xl font-semibold">🌆 The Lineup</h2>
           <p className="my-4">
             <span className="mt-2 block">
@@ -68,7 +68,7 @@ export default function () {
           </p>
         </div>
 
-        <div className="border-t border-gray-300 sm:border-none pt-4 sm:pt-0">
+        <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
           <h2 className="text-3xl font-semibold">🎉 Bagel Pickup</h2>
           <p className="my-4">
             <span className="mt-2 block">
@@ -84,7 +84,7 @@ export default function () {
           </p>
         </div>
 
-        <div className="border-t border-gray-300 sm:border-none pt-4 sm:pt-0">
+        <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
           <h2 className="text-3xl font-semibold">🗳️ Vote</h2>
           <p className="my-4">
             <span className="mt-2 block">
@@ -96,7 +96,7 @@ export default function () {
           </p>
         </div>
 
-        <div className="border-t border-gray-300 sm:border-none pt-4 sm:pt-0 sm:col-span-2 sm:text-center">
+        <div className="border-t border-gray-300 pt-4 sm:col-span-2 sm:border-none sm:pt-0 sm:text-center">
           <h2 className="text-3xl font-semibold">🏆 Prizes 🏆</h2>
           <p className="my-4">
             <span className="mt-2 block">
@@ -106,7 +106,7 @@ export default function () {
               shops will receive a cash prize:
             </span>
             <br />
-            <span className="flex flex-col sm:items-center gap-2">
+            <span className="flex flex-col gap-2 sm:items-center">
               <span>
                 🥇 First Place: <b>$400</b>
               </span>

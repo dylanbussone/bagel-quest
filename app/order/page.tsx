@@ -25,7 +25,7 @@ export default async function Order() {
   ]);
 
   return (
-    <div className="flex justify-center items-center flex-col mt-8 sm:mt-20">
+    <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
       {userOrder ? (
         <OrderSuccessForm
           products={bq2024Products || []}

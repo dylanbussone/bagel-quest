@@ -7,7 +7,7 @@ export default async function Footer() {
 
   return (
     <footer className="bg-stone-200">
-      <div className="flex flex-col gap-5 items-center justify-center py-8">
+      <div className="flex flex-col items-center justify-center gap-5 py-8">
         <Link href="/" className={footerLinkStyle}>
           <Image
             src="/bagel-icon-dark.svg"

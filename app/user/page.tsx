@@ -8,8 +8,8 @@ export default async function User() {
   const user = session?.user;
 
   return user ? (
-    <div className="flex justify-center items-center flex-col mt-24">
-      <p className="mb-3 text-md text-center font-semibold">
+    <div className="mt-24 flex flex-col items-center justify-center">
+      <p className="text-md mb-3 text-center font-semibold">
         Signed in as {user?.name} ({user?.email})
       </p>
       <p>
@@ -17,7 +17,7 @@ export default async function User() {
       </p>
     </div>
   ) : (
-    <div className="flex justify-center items-center flex-col mt-24">
+    <div className="mt-24 flex flex-col items-center justify-center">
       <SignIn />
     </div>
   );

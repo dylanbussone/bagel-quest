@@ -12,9 +12,9 @@ export default async function Header() {
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
   return (
-    <header className="h-24 px-4 bg-amber-950 text-white">
-      <div className="max-w-screen-lg mx-auto h-full flex items-center justify-between">
-        <div className="flex gap-5 sm:gap-8 items-center">
+    <header className="h-24 bg-amber-950 px-4 text-white">
+      <div className="mx-auto flex h-full max-w-screen-lg items-center justify-between">
+        <div className="flex items-center gap-5 sm:gap-8">
           <Link href="/" className={headerLinkStyle}>
             <Image
               src="/bagel-icon-light.svg"
@@ -42,7 +42,7 @@ export default async function Header() {
                     src={user.image}
                     width={50}
                     height={50}
-                    className="rounded-full opacity-80 hover:opacity-100 transition duration-150 ease-in-out"
+                    className="rounded-full opacity-80 transition duration-150 ease-in-out hover:opacity-100"
                     alt={`profile photo of ${user.name}`}
                     priority
                   />
