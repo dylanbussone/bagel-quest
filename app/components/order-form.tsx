@@ -30,10 +30,16 @@ export const OrderForm = ({
   const handleSelectChange = (product: Product, value: string) => {
     const quantity = parseInt(value);
 
-    setProductQuantities({
-      ...productQuantities,
-      [product.id]: quantity,
-    });
+    if (quantity === 0) {
+      const newProductQuantities = { ...productQuantities };
+      delete newProductQuantities[product.id];
+      setProductQuantities(newProductQuantities);
+    } else {
+      setProductQuantities({
+        ...productQuantities,
+        [product.id]: quantity,
+      });
+    }
   };
 
   const handleConfirmation = async () => {
