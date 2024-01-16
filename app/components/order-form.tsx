@@ -207,6 +207,7 @@ export const OrderForm = ({
         <button
           className="flex w-full items-center justify-center whitespace-nowrap rounded bg-green-800 px-8 py-2 text-sm font-medium leading-snug text-white opacity-90 shadow-md transition duration-150 ease-in-out hover:opacity-100 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg sm:w-auto"
           onClick={handleConfirmation}
+          disabled={showSpinner}
         >
           Confirm selection
         </button>
