@@ -12,7 +12,6 @@ export async function POST(request: Request) {
     }: { userEmail: string; userName: string; orderItems: OrderItem[] } = data;
 
     if (!userEmail) throw new Error("userEmail is required");
-    if (!userName) throw new Error("userName is required");
     if (!orderItems || orderItems.length === 0)
       throw new Error("orderItems are required");
 

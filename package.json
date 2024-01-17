@@ -9,7 +9,9 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "psql": "source ./.env.development.local && psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DATABASE",
+    "pgbackup": "source ./.env.development.local && pg_dump -Fc -v -d $POSTGRES_URL -f ./pg-backup.bak",
     "prisma_db_push": "dotenv -e .env.development.local -- npx prisma db push",
+    "prisma_generate": "dotenv -e .env.development.local -- npx prisma generate",
     "prisma_studio": "dotenv -e .env.development.local -- npx prisma studio"
   },
   "dependencies": {

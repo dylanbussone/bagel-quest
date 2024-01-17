@@ -34,7 +34,7 @@ model Product {
 model Order {
     id         Int         @id @default(autoincrement())
     userEmail  String
-    userName   String
+    userName   String?
     event      Event       @relation(fields: [eventId], references: [id])
     eventId    Int
     orderItems OrderItem[]
