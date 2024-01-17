@@ -56,11 +56,7 @@ export const OrderForm = ({
     await fetch("/api/create-bq2024-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userEmail: user?.email,
-        userName: user?.name,
-        orderItems,
-      }),
+      body: JSON.stringify({ orderItems }),
     });
     window.location.reload();
   };

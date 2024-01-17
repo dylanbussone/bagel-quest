@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import type { OrderItem } from "@prisma/client";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const {
-      userEmail,
-      userName,
-      orderItems,
-    }: { userEmail: string; userName: string; orderItems: OrderItem[] } = data;
+    const session = await getServerSession(authOptions);
+    const user = session?.user;
 
-    if (!userEmail) throw new Error("userEmail is required");
+    const data = await request.json();
+    const { orderItems }: { orderItems: OrderItem[] } = data;
+
+    if (!user?.email) throw new Error("user is required");
     if (!orderItems || orderItems.length === 0)
       throw new Error("orderItems are required");
 
@@ -23,8 +24,8 @@ export async function POST(request: Request) {
             title: "bq2024",
           },
         },
-        userEmail,
-        userName,
+        userEmail: user.email,
+        userName: user.name,
         orderItems: {
           create: orderItems
             .filter((orderItem) => orderItem.quantity > 0)
@@ -36,8 +37,8 @@ export async function POST(request: Request) {
     // Also add to User table
     await prisma.user.create({
       data: {
-        email: userEmail,
-        name: userName,
+        email: user.email,
+        name: user.name,
       },
     });
 
