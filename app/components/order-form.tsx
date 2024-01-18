@@ -210,7 +210,7 @@ export const OrderForm = ({
       </div>
       {showSpinner && (
         <Image
-          src="/bagel-icon-dark.svg"
+          src="/bagel-icon-black.svg"
           width={50}
           height={50}
           alt="bagel"

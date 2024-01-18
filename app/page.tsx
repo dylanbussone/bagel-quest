@@ -10,7 +10,7 @@ export default function () {
           Bagel Quest
         </h1>
         <Image
-          src="/bagel-icon-dark.svg"
+          src="/bagel-icon-black.svg"
           width={200}
           height={200}
           alt="bagel"

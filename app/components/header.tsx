@@ -17,7 +17,7 @@ export default async function Header() {
         <div className="flex items-center gap-5 sm:gap-8">
           <Link href="/" className={headerLinkStyle}>
             <Image
-              src="/bagel-icon-light.svg"
+              src="/bagel-icon-white.svg"
               width={50}
               height={50}
               alt="bagel"

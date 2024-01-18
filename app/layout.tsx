@@ -13,6 +13,28 @@ export const metadata: Metadata = {
   title: "Bagel Quest",
   description:
     "Bagel Quest is a bagel competition based in Seattle, Washington.",
+  icons: [
+    {
+      media: "(prefers-color-scheme: light)",
+      rel: "icon",
+      url: "https://www.bagel-quest.com/bagel-icon-black.svg",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      rel: "icon",
+      url: "https://www.bagel-quest.com/bagel-icon-white.svg",
+    },
+    {
+      media: "(prefers-color-scheme: light)",
+      rel: "apple-touch-icon",
+      url: "https://www.bagel-quest.com/bagel-icon-black.svg",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      rel: "apple-touch-icon",
+      url: "https://www.bagel-quest.com/bagel-icon-white.svg",
+    },
+  ],
   openGraph: {
     title: "Bagel Quest",
     description:
@@ -21,13 +43,26 @@ export const metadata: Metadata = {
     siteName: "Bagel Quest",
     images: [
       {
-        url: "https://www.bagel-quest.com/bagel-icon-dark.svg", // Must be an absolute URL
-        width: 250,
-        height: 250,
+        url: "https://www.bagel-quest.com/bagel-icon-black.svg",
+        width: 200,
+        height: 200,
       },
     ],
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bagel Quest",
+    description:
+      "Bagel Quest is a bagel competition based in Seattle, Washington.",
+    images: [
+      {
+        url: "https://www.bagel-quest.com/bagel-icon-black.svg",
+        width: 200,
+        height: 200,
+      },
+    ],
   },
 };
 
