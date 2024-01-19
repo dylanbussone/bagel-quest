@@ -5,7 +5,7 @@ import { AtCapacity } from "@/components/at-capacity";
 import { OrderForm } from "@/components/order-form";
 import { OrderSuccessForm } from "@/components/order-success-form";
 
-const CAPACITY = 200;
+const CAPACITY = 202;
 
 export default async function Order() {
   const session = await getServerSession(authOptions);

@@ -60,7 +60,6 @@ export async function GET(request: Request) {
       {
         paidOrderCount,
         unpaidOrderCount,
-        capacity: 200,
         unpaidUsers,
       },
       { status: 200 },
