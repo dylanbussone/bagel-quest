@@ -91,6 +91,24 @@ const lineupItems = [
     height: 100,
     width: 100,
   },
+  {
+    name: "Macrina Bakery",
+    image: "/lineup/macrina.jpg",
+    description:
+      "In harmony with the owner's strong belief in the captivating bond between bread and communal sharing, the bakery resonates with Macrina's philosophy. Following a traditional village bakery model, Macrina prioritizes regional and organic ingredients, creating a vibrant tapestry of flavors. The spotlight falls on the signature bread, Macrina Casera, a perfect accompaniment to any meal. The dedicated bakers, driven by their passion for the craft, consistently produce high-quality bread, upholding the timeless tradition of breaking bread with loved ones.",
+    url: "https://macrinabakery.com/",
+    height: 100,
+    width: 100,
+  },
+  {
+    name: "Dingfelder's Delicatessen",
+    image: "/lineup/dingfelders.png",
+    description:
+      "New York native Vance Dingfelder, shaped by his grandmothers' culinary wisdom and raised in the restaurant business by his parents, Naomi and Norman, brings over 30 years of expertise to Nourish Catering. As the driving force behind the brand, Vance meticulously tailors custom menus, sourcing the best Northwest resources for flawless event execution. From appetizers to cocktails, linens to glassware, Vance's commitment is to nourish his clients in mind, body, and soul, creating enduring memories with every event.",
+    url: "https://dingfelders.com/",
+    height: 100,
+    width: 100,
+  },
 ];
 
 export default function Lineup() {
