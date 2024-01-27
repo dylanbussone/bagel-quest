@@ -109,6 +109,15 @@ const lineupItems = [
     height: 100,
     width: 100,
   },
+  {
+    name: "Old Salt Fish and Bagels",
+    image: "/lineup/oldsalt.jpg",
+    description:
+      "Opened in winter 2020, Old Salt Fish and Bagels is the third venture by Joe Sundberg, Rachel Johnson, Patrick Thalasinos, and Chef Liz Kenyon. Specializing in in-house smoked fish sourced from Northwest Bounty, the establishment also offers freshly baked bagels daily, crafted with precision and Shepards grain flour to provide customers with exceptional products.",
+    url: "https://www.oldsaltseattle.com/",
+    height: 100,
+    width: 100,
+  },
 ];
 
 export default function Lineup() {
@@ -140,9 +149,6 @@ export default function Lineup() {
             <p>{item.description}</p>
           </div>
         ))}
-        <div className="mt-16 w-full">
-          <p>More coming soon...</p>
-        </div>
       </div>
     </div>
   );
