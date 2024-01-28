@@ -49,12 +49,12 @@ export const Chart = ({
       {
         label: "Your score",
         data: userVotes.map((userVote) => userVote.score),
-        backgroundColor: "#faa94b",
+        backgroundColor: "#C2655D",
       },
       {
         label: "Total score",
         data: totalVotes.map((totalVote) => totalVote.score),
-        backgroundColor: "#0e6092",
+        backgroundColor: "#87AE73",
       },
     ],
   };

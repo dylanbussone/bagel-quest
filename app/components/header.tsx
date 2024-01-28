@@ -11,6 +11,12 @@ export default async function Header() {
   const headerLinkStyle =
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
+  // TODO: check if user has voted
+  const userHasVoted = false;
+
+  // TODO: after 2/17, make results page public with just total votes
+  const showPublicResultsPage = false;
+
   return (
     <header className="h-24 bg-amber-950 px-4 text-white">
       <div className="mx-auto flex h-full max-w-screen-lg items-center justify-between">
@@ -29,9 +35,15 @@ export default async function Header() {
           <Link href="/order" className={headerLinkStyle}>
             Order
           </Link>
-          <Link href="/vote" className={headerLinkStyle}>
-            Vote
-          </Link>
+          {user && !userHasVoted ? (
+            <Link href="/vote" className={headerLinkStyle}>
+              Vote
+            </Link>
+          ) : showPublicResultsPage ? (
+            <Link href="/results" className={headerLinkStyle}>
+              Results
+            </Link>
+          ) : null}
         </div>
         {user ? (
           <>

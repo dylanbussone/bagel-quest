@@ -5,7 +5,7 @@ export default function Contact() {
         hey
       </h1>
 
-      <p className="text-center">
+      <p className="mt-12 text-center">
         Did we manage to get the attention of the press? Or do you just have a
         question?
         <br />

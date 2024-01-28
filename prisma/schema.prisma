@@ -12,6 +12,7 @@ model User {
     id    Int     @id @default(autoincrement())
     email String  @unique
     name  String?
+    votes Vote[]
 }
 
 model Event {
@@ -19,6 +20,8 @@ model Event {
     title    String    @unique
     orders   Order[]
     products Product[]
+    votes    Vote[]
+    bagels   Bagel[]
 }
 
 model Product {
@@ -28,7 +31,7 @@ model Product {
     price       Float
     event       Event       @relation(fields: [eventId], references: [id])
     eventId     Int
-    OrderItem   OrderItem[]
+    orderItems  OrderItem[]
 }
 
 model Order {
@@ -51,4 +54,24 @@ model OrderItem {
     productId Int
     order     Order?   @relation(fields: [orderId], references: [id])
     orderId   Int
+}
+
+model Vote {
+    id      Int     @id @default(autoincrement())
+    score   Int
+    comment String?
+    user    User    @relation(fields: [userId], references: [id])
+    userId  Int
+    event   Event   @relation(fields: [eventId], references: [id])
+    eventId Int
+    bagel   Bagel   @relation(fields: [bagelId], references: [id])
+    bagelId Int
+}
+
+model Bagel {
+    id      Int    @id @default(autoincrement())
+    name    String @unique
+    votes   Vote[]
+    event   Event  @relation(fields: [eventId], references: [id])
+    eventId Int    @default(1)
 }
