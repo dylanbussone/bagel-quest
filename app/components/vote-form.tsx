@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
   getLocalStorageComments,
@@ -21,6 +22,7 @@ export interface BagelComments {
 export const VoteForm = ({ bagelIds }: { bagelIds: { id: number }[] }) => {
   const [scoreState, setScoreState] = useState<BagelScores>({});
   const [commentState, setCommentState] = useState<BagelComments>({});
+  const [showSpinner, setShowSpinner] = useState(false);
 
   // Update score/comment state with local storage values
   useEffect(() => {
@@ -35,6 +37,26 @@ export const VoteForm = ({ bagelIds }: { bagelIds: { id: number }[] }) => {
   }, []);
 
   const isSubmitDisabled = Object.keys(scoreState).length < bagelIds.length;
+
+  const submitVotes = async () => {
+    setShowSpinner(true);
+    const votes: { bagelId: number; score: number; comment: string }[] = [];
+    for (const bagelId in scoreState) {
+      votes.push({
+        bagelId: parseInt(bagelId),
+        score: scoreState[bagelId],
+        comment: commentState[bagelId],
+      });
+    }
+
+    await fetch("/api/create-vote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ votes }),
+    });
+
+    window.location.reload();
+  };
 
   return (
     <>
@@ -91,14 +113,21 @@ export const VoteForm = ({ bagelIds }: { bagelIds: { id: number }[] }) => {
         <button
           className="my-8 flex w-full items-center justify-center rounded bg-green-800 px-12 py-2 text-sm font-medium leading-snug text-white opacity-90 shadow-md transition duration-150 ease-in-out hover:opacity-100 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg disabled:cursor-not-allowed
           disabled:bg-gray-400 disabled:opacity-90 disabled:shadow-md disabled:hover:opacity-90 disabled:hover:shadow-md disabled:focus:opacity-90 disabled:focus:shadow-md disabled:focus:ring-0 disabled:active:opacity-90 disabled:active:shadow-md disabled:active:ring-0 sm:w-auto"
-          disabled={isSubmitDisabled}
-          onClick={() => {
-            // TODO. api action
-          }}
+          disabled={isSubmitDisabled || showSpinner}
+          onClick={submitVotes}
         >
           Submit votes
         </button>
       </div>
+      {showSpinner && (
+        <Image
+          src="/bagel-icon-black.svg"
+          width={50}
+          height={50}
+          alt="bagel"
+          className="z-10 my-6 animate-spin"
+        />
+      )}
     </>
   );
 };

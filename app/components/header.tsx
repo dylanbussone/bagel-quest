@@ -11,11 +11,28 @@ export default async function Header() {
   const headerLinkStyle =
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
-  // TODO: check if user has voted
-  const userHasVoted = false;
+  const userId = (
+    await prisma.user.findUnique({
+      where: {
+        email: user?.email || "",
+      },
+      select: {
+        id: true,
+      },
+    })
+  )?.id;
 
-  // TODO: after 2/17, make results page public with just total votes
-  const showPublicResultsPage = false;
+  const userHasVoted =
+    userId !== undefined &&
+    (await prisma.vote.findFirst({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    }));
+
+  const showResultsPage = !user || userHasVoted;
 
   return (
     <header className="h-24 bg-amber-950 px-4 text-white">
@@ -32,18 +49,18 @@ export default async function Header() {
           <Link href="/lineup" className={headerLinkStyle}>
             Lineup
           </Link>
-          <Link href="/order" className={headerLinkStyle}>
+          {/* <Link href="/order" className={headerLinkStyle}>
             Order
-          </Link>
-          {user && !userHasVoted ? (
-            <Link href="/vote" className={headerLinkStyle}>
-              Vote
-            </Link>
-          ) : showPublicResultsPage ? (
+          </Link> */}
+          {showResultsPage ? (
             <Link href="/results" className={headerLinkStyle}>
               Results
             </Link>
-          ) : null}
+          ) : (
+            <Link href="/vote" className={headerLinkStyle}>
+              Vote
+            </Link>
+          )}
         </div>
         {user ? (
           <>

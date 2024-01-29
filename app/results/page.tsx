@@ -1,148 +1,92 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { Chart } from "@/app/components/chart";
+import { TastingNotes } from "@/app/components/tasting-notes";
+import prisma from "@/lib/prisma";
 
 export default async function ResultsPage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
-  // TODO: fetch user's votes and combined votes from db
-  // for combined votes, can we do fancy sql query to get avg vote for each bagel shop?
-  const userVotes = [
-    {
-      bagelId: 1,
-      score: 9,
-      comments: "blah blah blah",
+  const userVotes = await prisma.vote.findMany({
+    where: {
+      user: {
+        email: user?.email || "",
+      },
+      event: {
+        id: 1,
+      },
     },
-    {
-      bagelId: 2,
-      score: 2,
-      comments: "blah blah blah",
+    select: {
+      bagelId: true,
+      score: true,
+      comment: true,
     },
-    {
-      bagelId: 3,
-      score: 6,
-      comments: "blah blah blah",
+    orderBy: {
+      bagelId: "asc",
     },
-    {
-      bagelId: 4,
-      score: 8,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 5,
-      score: 7,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 6,
-      score: 10,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 7,
-      score: 6,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 8,
-      score: 2,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 9,
-      score: 3,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 10,
-      score: 4,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 11,
-      score: 8,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 12,
-      score: 5,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 13,
-      score: 8,
-      comments: "blah blah blah",
-    },
-  ];
+  });
 
-  const totalVotes = [
-    {
-      bagelId: 1,
-      score: 8.4,
-      comments: "blah blah blah",
+  // Prisma doesn't allow aggregate queries selected on multiple filters,
+  // which means running 13 queries to get the avg for each bagelId.
+  // It's ridiculously slow.
+
+  // For each bagelId, get average score
+  // const totalVotesPromises = [];
+  // for (let i = 1; i <= 13; i++) {
+  //   totalVotesPromises.push(
+  //     await prisma.vote.aggregate({
+  //       where: {
+  //         event: {
+  //           id: 1,
+  //         },
+  //         bagelId: i,
+  //       },
+  //       _avg: {
+  //         score: true,
+  //       },
+  //     }),
+  //   );
+  // }
+
+  const allVotes = await prisma.vote.findMany({
+    where: {
+      event: {
+        id: 1,
+      },
     },
-    {
-      bagelId: 2,
-      score: 3.5,
-      comments: "blah blah blah",
+    select: {
+      bagelId: true,
+      score: true,
     },
-    {
-      bagelId: 3,
-      score: 6.25,
-      comments: "blah blah blah",
+  });
+
+  const totalVotes = [];
+  for (let i = 1; i <= 13; i++) {
+    const totalVotesForBagel = allVotes.filter((vote) => vote.bagelId === i);
+    const avgScore =
+      totalVotesForBagel.reduce((acc, vote) => acc + vote.score, 0) /
+      totalVotesForBagel.length;
+    totalVotes.push({
+      bagelId: i,
+      score: avgScore,
+    });
+  }
+
+  const bagels = await prisma.bagel.findMany({
+    where: {
+      event: {
+        id: 1,
+      },
     },
-    {
-      bagelId: 4,
-      score: 7,
-      comments: "blah blah blah",
+    select: {
+      id: true,
+      name: true,
     },
-    {
-      bagelId: 5,
-      score: 6.9,
-      comments: "blah blah blah",
+    orderBy: {
+      id: "asc",
     },
-    {
-      bagelId: 6,
-      score: 8.0,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 7,
-      score: 6.25,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 8,
-      score: 3.75,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 9,
-      score: 8.6,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 10,
-      score: 5.5,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 11,
-      score: 8.0,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 12,
-      score: 6.2,
-      comments: "blah blah blah",
-    },
-    {
-      bagelId: 13,
-      score: 9.0,
-      comments: "blah blah blah",
-    },
-  ];
+  });
 
   return (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
@@ -150,18 +94,15 @@ export default async function ResultsPage() {
         Results
       </h1>
 
-      <Chart userVotes={userVotes} totalVotes={totalVotes} />
+      <Chart userVotes={userVotes} totalVotes={totalVotes} bagels={bagels} />
 
-      <div className="mt-10 w-full text-left">
-        <h2 className="mb-6 text-3xl font-semibold">Your tasting notes</h2>
-        {userVotes.map(({ bagelId, comments, score }) => (
-          <div key={bagelId} className="my-12">
-            <h3 className="text-xl font-semibold">Bagel #{bagelId} - Eltana</h3>
-            <p className="text-sm">Your score: {score}</p>
-            <p className="text-lg">{comments}</p>
-          </div>
-        ))}
-      </div>
+      {/* TODO: top 3 total scores (winners) */}
+
+      {userVotes.length > 0 && (
+        <div className="mt-10 w-full text-left">
+          <TastingNotes userVotes={userVotes} bagels={bagels} />
+        </div>
+      )}
     </div>
   );
 }
