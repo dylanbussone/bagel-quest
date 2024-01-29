@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SignIn } from "@/components/sign-in";
+import { AtCapacityInline } from "./components/at-capacity-inline";
 
 export default function () {
   return (
@@ -35,21 +35,7 @@ export default function () {
       <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-20">
         <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
           <h2 className="text-3xl font-semibold">👥 Sign Up</h2>
-          <p className="my-4">
-            <span className="mt-2 block">
-              <SignIn renderAsButton={false} />{" "}
-              <span>
-                to become part of the Bagel Quest crew! Once you're signed up,
-                you can head over to the{" "}
-                <Link href="/order" className="text-blue-800">
-                  <b>Order page</b>
-                </Link>{" "}
-                to claim your ticket.
-                <br />
-                Registration shuts down on <b>February 1st</b>.
-              </span>
-            </span>
-          </p>
+          <AtCapacityInline />
         </div>
 
         <div className="border-t border-gray-300 pt-4 sm:border-none sm:pt-0">
