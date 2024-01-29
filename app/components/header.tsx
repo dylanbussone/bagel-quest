@@ -33,7 +33,9 @@ export default async function Header() {
       },
     }));
 
-  const showResultsPage = !user || userHasVoted;
+  // TODO: Change on 2/17 for public results page
+  // const showResultsPage = !user || userHasVoted;
+  const showResultsPage = userHasVoted;
 
   return (
     <header className="h-24 bg-amber-950 px-4 text-white">

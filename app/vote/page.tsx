@@ -30,7 +30,9 @@ export default async function VotePage() {
       },
     }));
 
-  if (!user || userHasVoted) redirect("/results");
+  // TODO: Change on 2/17 for public results page
+  // if (!user || userHasVoted) redirect("/results");
+  if (userHasVoted) redirect("/results");
 
   const bagels = await prisma.bagel.findMany({
     orderBy: { id: "asc" },
