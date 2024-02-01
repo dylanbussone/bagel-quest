@@ -52,9 +52,9 @@ export default async function Header() {
           <Link href="/lineup" className={headerLinkStyle}>
             Lineup
           </Link>
-          {/* <Link href="/order" className={headerLinkStyle}>
+          <Link href="/order" className={headerLinkStyle}>
             Order
-          </Link> */}
+          </Link>
           {showResultsPage ? (
             <Link href="/results" className={headerLinkStyle}>
               Results
