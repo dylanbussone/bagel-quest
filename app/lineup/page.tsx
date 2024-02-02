@@ -14,7 +14,7 @@ const lineupItems = [
     name: "Aaron's Bagels",
     image: "/lineup/aaron.png",
     description:
-      "Aaron's Bagels, located in Seattle, prides itself on crafting delicious hand-rolled, boiled, and baked bagels, inspired by the iconic flavors of New York City but with a unique Pacific Northwest twist using local ingredients. The business is currently engaged in bagel home deliveries and supplies numerous cafes with their delectable bagels and schmear. With a mission to transform Seattle into a bagel city, the passionate team of Ballard locals at Aaron's Bagels is dedicated to creating the best bagel experience in the city.",
+      "Aaron's Bagels, located in Seattle, prides itself on crafting delicious boiled and baked bagels, inspired by the iconic flavors of New York City but with a unique Pacific Northwest twist using local ingredients. The business is currently engaged in bagel home deliveries and supplies numerous cafes with their delectable bagels and schmear. With a mission to transform Seattle into a bagel city, the passionate team of Ballard locals at Aaron's Bagels is dedicated to creating the best bagel experience in the city.",
     url: "https://www.aaronsbagels.com/",
     height: 100,
     width: 100,
