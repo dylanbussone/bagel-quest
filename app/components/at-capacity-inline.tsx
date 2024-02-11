@@ -26,7 +26,7 @@ export const AtCapacityInline = () => {
   };
 
   return (
-    <p className="my-4">
+    <div className="my-4">
       <h4 className="py-4 font-semibold">Oh, bagels!</h4>
       We're sorry, but Bagel Quest 2024 is at capacity.
       <br />
@@ -53,6 +53,6 @@ export const AtCapacityInline = () => {
           </>
         )}
       </span>
-    </p>
+    </div>
   );
 };

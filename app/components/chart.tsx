@@ -31,7 +31,7 @@ export const Chart = ({
                 Your score: {data.userScore}/10
               </div>
               <div
-                className="h-4 bg-[#C2655D]"
+                className="h-4 rounded-md border border-[#bb3c31] bg-[#C2655D]"
                 style={{ width: (data.userScore / 10) * 100 + "%" }}
               ></div>
             </div>
@@ -40,7 +40,7 @@ export const Chart = ({
             Total: {data.totalScore}/10
           </div>
           <div
-            className="h-4 bg-[#87AE73]"
+            className="h-4 rounded-md border border-[#56ac2a] bg-[#87AE73]"
             style={{ width: (data.totalScore / 10) * 100 + "%" }}
           ></div>
         </div>

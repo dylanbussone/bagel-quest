@@ -9,16 +9,18 @@ export default async function VotePage() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
-  const userId = (
-    await prisma.user.findUnique({
-      where: {
-        email: user?.email || "",
-      },
-      select: {
-        id: true,
-      },
-    })
-  )?.id;
+  const userId = user?.email
+    ? (
+        await prisma.user.findUnique({
+          where: {
+            email: user.email,
+          },
+          select: {
+            id: true,
+          },
+        })
+      )?.id ?? undefined
+    : undefined;
 
   const userHasVoted =
     userId !== undefined &&
@@ -30,9 +32,7 @@ export default async function VotePage() {
       },
     }));
 
-  // TODO: Change on 2/17 for public results page
-  // if (!user || userHasVoted) redirect("/results");
-  if (userHasVoted) redirect("/results");
+  if (!user || userHasVoted) redirect("/results");
 
   const bagels = await prisma.bagel.findMany({
     orderBy: { id: "asc" },
@@ -44,8 +44,10 @@ export default async function VotePage() {
     select: { id: true },
   });
 
-  // Remove on 2/17
-  return (
+  // TODO: set false on 2/17
+  const isBeforeVoting = true;
+
+  return isBeforeVoting ? (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
       <h1 className="mb-12 bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         Cast your votes
@@ -53,9 +55,7 @@ export default async function VotePage() {
 
       <p>Voting opens 2/17</p>
     </div>
-  );
-
-  return (
+  ) : (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
       <h1 className="mb-12 bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         Cast your votes

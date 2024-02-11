@@ -33,9 +33,7 @@ export default async function Header() {
       },
     }));
 
-  // TODO: Change on 2/17 for public results page
-  // const showResultsPage = !user || userHasVoted;
-  const showResultsPage = userHasVoted;
+  const showVotePage = user && !userHasVoted;
 
   return (
     <header className="h-24 bg-amber-950 px-4 text-white">
@@ -55,13 +53,13 @@ export default async function Header() {
           <Link href="/order" className={headerLinkStyle}>
             Order
           </Link>
-          {showResultsPage ? (
-            <Link href="/results" className={headerLinkStyle}>
-              Results
-            </Link>
-          ) : (
+          {showVotePage ? (
             <Link href="/vote" className={headerLinkStyle}>
               Vote
+            </Link>
+          ) : (
+            <Link href="/results" className={headerLinkStyle}>
+              Results
             </Link>
           )}
         </div>

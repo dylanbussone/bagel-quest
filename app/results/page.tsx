@@ -64,9 +64,10 @@ export default async function ResultsPage() {
   const totalVotes = [];
   for (let i = 1; i <= 13; i++) {
     const totalVotesForBagel = allVotes.filter((vote) => vote.bagelId === i);
-    const avgScore =
+    let avgScore =
       totalVotesForBagel.reduce((acc, vote) => acc + vote.score, 0) /
       totalVotesForBagel.length;
+    avgScore = Math.round(avgScore * 100) / 100;
     totalVotes.push({
       bagelId: i,
       score: avgScore,
@@ -91,18 +92,25 @@ export default async function ResultsPage() {
   return (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
       <h1 className="mb-12 bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
-        Results
+        2024 Winners
       </h1>
 
-      <Chart userVotes={userVotes} totalVotes={totalVotes} bagels={bagels} />
+      <p>Results open 2/17</p>
 
-      {/* TODO: top 3 total scores (winners) */}
+      {/* TODO: show winners when voting closes */}
+      {/* <div className="my-8 flex w-full flex-col gap-4 border-b pb-4">
+        <h2>🥇 Foo 🥇</h2>
+        <h2>🥈 Foo 🥈</h2>
+        <h2>🥉 Foo 🥉</h2>
+      </div> */}
 
-      {userVotes.length > 0 && (
+      {/* TODO: uncomment on 2/17 */}
+      {/* <Chart userVotes={userVotes} totalVotes={totalVotes} bagels={bagels} /> */}
+      {/* {userVotes.length > 0 && (
         <div className="mt-10 w-full text-left">
           <TastingNotes userVotes={userVotes} bagels={bagels} />
         </div>
-      )}
+      )} */}
     </div>
   );
 }
