@@ -18,6 +18,9 @@ export const Chart = ({
     )?.score,
   }));
 
+  // TODO: set true on 2/17 after winners
+  const showTotalScore = false;
+
   return (
     <div className="w-full">
       {chartData.map((data) => (
@@ -36,13 +39,17 @@ export const Chart = ({
               ></div>
             </div>
           )}
-          <div className="text-sm text-gray-500">
-            Total: {data.totalScore}/10
-          </div>
-          <div
-            className="h-4 rounded-md border border-[#56ac2a] bg-[#87AE73]"
-            style={{ width: (data.totalScore / 10) * 100 + "%" }}
-          ></div>
+          {showTotalScore && (
+            <>
+              <div className="text-sm text-gray-500">
+                Total: {data.totalScore}/10
+              </div>
+              <div
+                className="h-4 rounded-md border border-[#56ac2a] bg-[#87AE73]"
+                style={{ width: (data.totalScore / 10) * 100 + "%" }}
+              ></div>
+            </>
+          )}
         </div>
       ))}
     </div>

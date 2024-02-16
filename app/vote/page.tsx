@@ -44,7 +44,7 @@ export default async function VotePage() {
     select: { id: true },
   });
 
-  // TODO: set false on 2/17
+  // TODO: set false FIRST THING on 2/17
   const isBeforeVoting = true;
 
   return isBeforeVoting ? (

@@ -89,28 +89,47 @@ export default async function ResultsPage() {
     },
   });
 
+  // TODO: set true on 2/17
+  const isResultsPageOpen = false;
+  // TODO: set true after voting
+  const showWinners = false;
+
   return (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
       <h1 className="mb-12 bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text py-4 text-4xl font-bold text-transparent sm:text-6xl">
         2024 Winners
       </h1>
 
-      <p>Results open 2/17</p>
+      {isResultsPageOpen ? (
+        <>
+          {showWinners ? (
+            <div className="my-8 flex w-full flex-col gap-4 border-b pb-4">
+              {/* TODO: update with winners */}
+              <h2>🥇 Foo 🥇</h2>
+              <h2>🥈 Foo 🥈</h2>
+              <h2>🥉 Foo 🥉</h2>
+            </div>
+          ) : (
+            <h4 className="mb-8 font-semibold">
+              Check back at 4pm when winners are announced to see the total
+              results
+            </h4>
+          )}
 
-      {/* TODO: show winners when voting closes */}
-      {/* <div className="my-8 flex w-full flex-col gap-4 border-b pb-4">
-        <h2>🥇 Foo 🥇</h2>
-        <h2>🥈 Foo 🥈</h2>
-        <h2>🥉 Foo 🥉</h2>
-      </div> */}
-
-      {/* TODO: uncomment on 2/17 */}
-      {/* <Chart userVotes={userVotes} totalVotes={totalVotes} bagels={bagels} /> */}
-      {/* {userVotes.length > 0 && (
-        <div className="mt-10 w-full text-left">
-          <TastingNotes userVotes={userVotes} bagels={bagels} />
-        </div>
-      )} */}
+          <Chart
+            userVotes={userVotes}
+            totalVotes={totalVotes}
+            bagels={bagels}
+          />
+          {userVotes.length > 0 && (
+            <div className="mt-10 w-full text-left">
+              <TastingNotes userVotes={userVotes} bagels={bagels} />
+            </div>
+          )}
+        </>
+      ) : (
+        <p>Results open 2/17</p>
+      )}
     </div>
   );
 }
