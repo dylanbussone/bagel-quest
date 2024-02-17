@@ -89,8 +89,7 @@ export default async function ResultsPage() {
     },
   });
 
-  // TODO: set true on 2/17
-  const isResultsPageOpen = false;
+  const isResultsPageOpen = true;
   // TODO: set true after voting
   const showWinners = false;
 

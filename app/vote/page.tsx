@@ -44,8 +44,7 @@ export default async function VotePage() {
     select: { id: true },
   });
 
-  // TODO: set false FIRST THING on 2/17
-  const isBeforeVoting = true;
+  const isBeforeVoting = false;
 
   return isBeforeVoting ? (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
