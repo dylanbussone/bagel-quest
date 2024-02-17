@@ -58,9 +58,10 @@ export default async function Header() {
               Vote
             </Link>
           ) : (
-            <Link href="/results" className={headerLinkStyle}>
-              Results
-            </Link>
+            // <Link href="/results" className={headerLinkStyle}>
+            //   Results
+            // </Link>
+            ""
           )}
         </div>
         {user ? (
