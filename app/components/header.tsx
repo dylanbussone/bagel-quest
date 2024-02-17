@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
@@ -12,28 +12,28 @@ export default async function Header() {
   const headerLinkStyle =
     "opacity-80 hover:opacity-100 transition duration-150 ease-in-out flex items-center";
 
-  const userId = (
-    await prisma.user.findUnique({
-      where: {
-        email: user?.email || "",
-      },
-      select: {
-        id: true,
-      },
-    })
-  )?.id;
+  // const userId = (
+  //   await prisma.user.findUnique({
+  //     where: {
+  //       email: user?.email || "",
+  //     },
+  //     select: {
+  //       id: true,
+  //     },
+  //   })
+  // )?.id;
 
-  const userHasVoted =
-    userId !== undefined &&
-    (await prisma.vote.findFirst({
-      where: {
-        user: {
-          id: userId,
-        },
-      },
-    }));
+  // const userHasVoted =
+  //   userId !== undefined &&
+  //   (await prisma.vote.findFirst({
+  //     where: {
+  //       user: {
+  //         id: userId,
+  //       },
+  //     },
+  //   }));
 
-  const showVotePage = user && !userHasVoted;
+  const showVotePage = false; //user && !userHasVoted;
 
   return (
     <header className="h-24 bg-amber-950 px-4 text-white">
@@ -58,10 +58,9 @@ export default async function Header() {
               Vote
             </Link>
           ) : (
-            // <Link href="/results" className={headerLinkStyle}>
-            //   Results
-            // </Link>
-            ""
+            <Link href="/results" className={headerLinkStyle}>
+              Results
+            </Link>
           )}
         </div>
         {user ? (

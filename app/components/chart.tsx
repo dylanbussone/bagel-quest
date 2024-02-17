@@ -18,8 +18,7 @@ export const Chart = ({
     )?.score,
   }));
 
-  // TODO: set true on 2/17 after winners
-  const showTotalScore = false;
+  const showTotalScore = true;
 
   return (
     <div className="w-full">

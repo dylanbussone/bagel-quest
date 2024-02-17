@@ -90,8 +90,7 @@ export default async function ResultsPage() {
   });
 
   const isResultsPageOpen = true;
-  // TODO: set true after voting
-  const showWinners = false;
+  const showWinners = true;
 
   return (
     <div className="mt-8 flex flex-col items-center justify-center sm:mt-20">
@@ -102,11 +101,12 @@ export default async function ResultsPage() {
       {isResultsPageOpen ? (
         <>
           {showWinners ? (
-            <div className="my-8 flex w-full flex-col gap-4 border-b pb-4">
-              {/* TODO: update with winners */}
-              <h2>🥇 Foo 🥇</h2>
-              <h2>🥈 Foo 🥈</h2>
-              <h2>🥉 Foo 🥉</h2>
+            <div className="mb-8 flex w-full flex-col gap-4 border-b pb-4">
+              <h2>1st: Hey Bagel 🥇</h2>
+              <h2>2nd: Bean's Bagels 🥈</h2>
+              <h2>3rd: Grateful Bread 🥉</h2>
+              <h2>4th: Little Market</h2>
+              <h2>5th: Rachel's Bagels</h2>
             </div>
           ) : (
             <h4 className="mb-8 font-semibold">
