@@ -8,14 +8,7 @@ export default async function Footer() {
   return (
     <footer className="bg-stone-200">
       <div className="flex flex-col items-center justify-center gap-5 py-8">
-        <Link href="/" className={footerLinkStyle}>
-          <Image
-            src="/bagel-icon-black.svg"
-            width={50}
-            height={50}
-            alt="bagel"
-          />
-        </Link>
+        <Image src="/bagel-icon-black.svg" width={50} height={50} alt="bagel" />
         <Link href="/contact" className={footerLinkStyle}>
           Contact
         </Link>
